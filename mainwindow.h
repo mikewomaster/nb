@@ -77,7 +77,7 @@
 #define ACTION
 #define ADMIN
 // #define LORA
-#define UtilityVersion "SCB111-NB v1.1.2"
+#define UtilityVersion "SCB111-NB v1.1.3"
 QT_BEGIN_NAMESPACE
 
 class QModbusClient;
@@ -185,7 +185,9 @@ private:
     void chgrdbtn();
     void logicalRuleViewInit();
     void nbEnableRead();
-
+    void sslFile();
+    void sslImportFile(quint8);
+    void sslFileRead(quint8);
 public slots:
     void on_connectButton_clicked();
 
@@ -425,6 +427,14 @@ private slots:
     void plmnReadReady();
     void on_plmnRead_clicked();
     void on_plmnWrite_clicked();
+    void on_sslModeCheck_clicked();
+    void on_sslModeSet_clicked();
+    void on_rootCASelect_clicked();
+    void on_rootCAImport_clicked();
+    void on_cfSelect_clicked();
+    void on_cfImport_clicked();
+    void on_keyFileSelect_clicked();
+    void on_keyFileImport_clicked();
 
 private:
     QModbusReply *lastRequest;
@@ -446,17 +456,17 @@ private:
     bool sensorFlag;
     sensor_edit* m_sensor_dialog;
  public:
-     Ui::MainWindow *ui;
-     QModbusClient *modbusDevice;
-     QSerialPort *m_serial;
-     unsigned char m_login_flag;
-     unsigned char m_login_flag_2;
-     bool sensor_edit_flag;
-     bool obis_edit_flag;
-     QList<Dlms> dlmsRecordList;
-     QList<sen> sensorRecordList;
-     dlmsModel *m_pdlmsModel;
-     ymodem *m_ymodem;
+    Ui::MainWindow *ui;
+    QModbusClient *modbusDevice;
+    QSerialPort *m_serial;
+    unsigned char m_login_flag;
+    unsigned char m_login_flag_2;
+    bool sensor_edit_flag;
+    bool obis_edit_flag;
+    QList<Dlms> dlmsRecordList;
+    QList<sen> sensorRecordList;
+    dlmsModel *m_pdlmsModel;
+    ymodem *m_ymodem;
 };
 
 #endif // MAINWINDOW_H

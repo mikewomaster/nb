@@ -42,7 +42,8 @@ SOURCES += main.cpp\
     loginruledialog.cpp \
     bucket.cpp \
     ymodem.cpp \
-    mbuslog.cpp
+    mbuslog.cpp \
+    ssl.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -73,7 +74,8 @@ HEADERS  += mainwindow.h \
     logicalrulemodel.h \
     loginruledialog.h \
     bucket.h \
-    ymodem.h
+    ymodem.h \
+    ssl.h
 
 FORMS    += mainwindow.ui \
          settingsdialog.ui \
