@@ -77,7 +77,7 @@
 #define ACTION
 #define ADMIN
 // #define LORA
-#define UtilityVersion "SCB111-NB v1.1.3"
+#define UtilityVersion "SCB111-NB v1.1.4"
 QT_BEGIN_NAMESPACE
 
 class QModbusClient;
@@ -427,6 +427,7 @@ private slots:
     void plmnReadReady();
     void on_plmnRead_clicked();
     void on_plmnWrite_clicked();
+    void sslModelReadReady();
     void on_sslModeCheck_clicked();
     void on_sslModeSet_clicked();
     void on_rootCASelect_clicked();

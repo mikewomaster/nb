@@ -39,15 +39,18 @@ void sensor_edit::on_sensorAddPushButton_clicked()
          return;
      }
 
-     if (ui->sensorLLE->text().toInt() < 1 || ui->sensorLLE->text().toInt() > 10) {
-         QMessageBox::information(NULL, "Error", "Please set Length number between 1 and 10.");
-         return;
-     }
+     /*
+         if (ui->sensorLLE->text().toInt() < 1 || ui->sensorLLE->text().toInt() > 10) {
+             QMessageBox::information(NULL, "Error", "Please set Length number between 1 and 10.");
+             return;
+         }
+     */
 
      w->sensorRecordList[seq].type = ui->sensorTypeLE->text();
      w->sensorRecordList[seq].id = ui->sensorSlaveId->text().toShort();
      w->sensorRecordList[seq].reg_addr = ui->sensorPLCAddress->text().toInt();
-     w->sensorRecordList[seq].len = ui->sensorLLE->text().toInt();
+     // w->sensorRecordList[seq].len = ui->sensorLLE->text().toInt();
+     w->sensorRecordList[seq].len = 0;
      w->sensorRecordList[seq].value = "null";
      w->sensor_edit_flag = true;
      close();

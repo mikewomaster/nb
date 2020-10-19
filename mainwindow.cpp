@@ -323,6 +323,10 @@ MainWindow::MainWindow(QWidget *parent)
     m_pModel->updateData(recordList);
 
     serialAlarmInit();
+
+    ui->tabWidget->setStyleSheet("QTabBar::tab:disabled {width: 0; color: transparent;}");
+    ui->tabWidget_2->setStyleSheet("QTabBar::tab:disabled {width: 0; color: transparent;}");
+    update();
 }
 
 MainWindow::~MainWindow()

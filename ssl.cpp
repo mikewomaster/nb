@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QIODevice>
 #include <QFileDialog>
+#include <QMessageBox>
 #include <QDebug>
 
 #include "ui_mainwindow.h"
@@ -15,14 +16,19 @@ static QStringList fileNames;
 static QStringList fileName;
 static QByteArray fileByteArray;
 
+void MainWindow::sslModelReadReady()
+{
+    handle_read_ready(ui->sslComBox);
+}
+
 void MainWindow::on_sslModeCheck_clicked()
 {
-
+    handle_read(SSLMODUBSADDR, sslModelReadReady);
 }
 
 void MainWindow::on_sslModeSet_clicked()
 {
-
+    handle_write(ui->sslComBox, SSLMODUBSADDR);
 }
 
 void MainWindow::sslFileRead(quint8 type)
@@ -45,6 +51,7 @@ void MainWindow::sslFileRead(quint8 type)
     fileByteArray[2] = 0xcc;
     fileByteArray[3] = type;
     fileByteArray.append(ba);
+    fileByteArray.append("endwowow");
 }
 
 void MainWindow::sslImportFile(quint8 type)
@@ -84,14 +91,30 @@ void MainWindow::sslImportFile(quint8 type)
     statusBar()->clearMessage();
 
     sslFileRead(type);
-    int ret = m_serial->write(fileByteArray);
-    /*
-        if (ret == 4) {
+
+    int times = fileByteArray.size() / 64;
+    int remains = fileByteArray.size() % 64;
+    int i = 0;
+
+    for (i = 0; i < times; i++) {
+        int ret = m_serial->write(fileByteArray.mid(64*i, 64));
+
+        if (ret == 64) {
+            // qDebug() << fileByteArray.mid(64*i, 64);
             // QMessageBox::information(this, tr("OK"), "write cmd ok");
         }else {
             // QMessageBox::information(this, tr("fail"), "write fail");
         }
-    */
+        _sleep(100);
+    }
+
+    int ret = m_serial->write(fileByteArray.mid(64*times, remains));
+    if (ret == remains) {
+        // qDebug() << fileByteArray.mid(64*times, remains);
+        QMessageBox::information(this, tr("OK"), "Certification Transmit Done.");
+    } else {
+        // QMessageBox::information(this, tr("fail"), "write fail");
+    }
     _sleep(100);
 
     m_serial->close();
@@ -101,16 +124,19 @@ void MainWindow::sslImportFile(quint8 type)
 void MainWindow::on_rootCAImport_clicked()
 {
     sslImportFile(0x01);
+    ui->rootCALabel->clear();
 }
 
 void MainWindow::on_cfImport_clicked()
 {
     sslImportFile(0x02);
+    ui->cfLabel->clear();
 }
 
 void MainWindow::on_keyFileImport_clicked()
 {
     sslImportFile(0x03);
+    ui->keyFileLabel->clear();
 }
 
 void MainWindow::sslFile()
