@@ -14,6 +14,7 @@ class sensor_edit : public QDialog
 public:
     explicit sensor_edit(QWidget *parent = 0);
     ~sensor_edit();
+    void updateDateFromMainWindow();
     int seq;
 private slots:
     void on_sensorAddPushButton_clicked();

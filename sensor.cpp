@@ -50,7 +50,7 @@ QVariant sensor::headerData(int section, Qt::Orientation orientation, int role) 
                     return QStringLiteral("Modbus Slave ID");
 
                 if (section == SENSORREGADDR)
-                    return QStringLiteral("Start Address");
+                    return QStringLiteral("Address");
 
                 if (section == SENSORLENGTH)
                     return QStringLiteral("Value");

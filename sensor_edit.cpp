@@ -16,6 +16,16 @@ sensor_edit::~sensor_edit()
     delete ui;
 }
 
+void sensor_edit::updateDateFromMainWindow()
+{
+    MainWindow *w = (MainWindow*) parentWidget();
+    ui->sensorTypeLE->setText(w->sensorRecordList[seq].type);
+    ui->sensorSlaveId->setText(QString::number(w->sensorRecordList[seq].id));
+    ui->sensorPLCAddress->setText(QString::number(w->sensorRecordList[seq].reg_addr));
+    ui->sensorLLE->setText("0");
+}
+
+
 void sensor_edit::on_sensorAddPushButton_clicked()
 {
      MainWindow *w = (MainWindow*) parentWidget();
@@ -30,7 +40,7 @@ void sensor_edit::on_sensorAddPushButton_clicked()
      }
 
      if (ui->sensorTypeLE->text().length() > 8) {
-         QMessageBox::information(NULL, "Error", "Please set RTU number with maximum 8 word.");
+         QMessageBox::information(NULL, "Error", "Please set RTU number with maximum 8 words.");
          return;
      }
 

@@ -22,6 +22,9 @@
 #define mqttPassWordAddress (4576 - 1)
 #define mqttPassWordEntries 8
 
+#define mqttRtuTimeOutAddress (4584 - 1)
+#define mqttRTUTimeOutEntries 1
+
 #define mqttStatusAddress (5501 - 1)
 #define mqttStatusEntries 1
 

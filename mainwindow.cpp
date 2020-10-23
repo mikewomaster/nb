@@ -95,7 +95,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_settingsDialog = new SettingsDialog(this);
     m_logdialog = new logdialog(this);
     m_system = new systemDialog(this);
-    m_sensor_dialog = new sensor_edit(this);
+    // m_sensor_dialog = new sensor_edit(this);
     m_obis_edit_dialog = new obis_edit(this);
 
     initActions();
@@ -155,6 +155,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabWidget_2->setTabEnabled(7, false);
     ui->tabWidget_2->setTabEnabled(8, false);
     ui->tabWidget_2->setTabEnabled(9, false);
+    ui->tabWidget_2->setTabEnabled(12, false);
 #endif
 
     ui->groupBox_13->hide();
@@ -788,7 +789,7 @@ void MainWindow::writeSingleHoldingRegister(QModbusDataUnit &writeUnit_)
                 reply->deleteLater();
             });
         } else {
-            // broadcast replies return immediately
+            // broadcast replies return immediatel
             reply->deleteLater();
         }
     } else {

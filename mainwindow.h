@@ -77,7 +77,7 @@
 #define ACTION
 #define ADMIN
 // #define LORA
-#define UtilityVersion "SCB111-NB v1.1.4"
+#define UtilityVersion "SCB111-NB v1.5.0"
 QT_BEGIN_NAMESPACE
 
 class QModbusClient;
@@ -436,6 +436,9 @@ private slots:
     void on_cfImport_clicked();
     void on_keyFileSelect_clicked();
     void on_keyFileImport_clicked();
+    void rtuTimeoutReadReady();
+    void on_rtuTimeOutRead_clicked();
+    void on_rtuTimeOutWrite_clicked();
 
 private:
     QModbusReply *lastRequest;

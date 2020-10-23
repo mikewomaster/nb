@@ -1,4 +1,5 @@
 #include "sensor.h"
+#include "mqtt.h"
 #include "mainwindow.h"
 #include <QAbstractTableModel>
 #include <QMessageBox>
@@ -196,6 +197,8 @@ void MainWindow::on_sensorUpdatePushButton_clicked()
     if (!modbusDevice)
         return;
     statusBar()->clearMessage();
+    on_sensorClearPushButton_clicked();
+    _sleep(1000);
 
     ui->sensorUpdatePushButton->setEnabled(false);
     // MAGIC NUMBER: 2 times, each 10 structs, with 7 units, total 70 units
@@ -301,8 +304,11 @@ void MainWindow::sensEdit()
     if (!modbusDevice)
         return;
 
+    m_sensor_dialog = new sensor_edit(this);
+
     QModbusDataUnit writeUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, RTUSENSORADDR + term*RTUSENSORNUM, RTUSENSORNUM);
     m_sensor_dialog->seq = term;
+    m_sensor_dialog->updateDateFromMainWindow();
     m_sensor_dialog->show();
     m_sensor_dialog->setWindowTitle("Sensor Setting");
 
@@ -361,6 +367,8 @@ void MainWindow::sensEdit()
     }
     m_sensorModel->updateData(sensorRecordList);
     sensor_edit_flag = false;
+
+    delete(m_sensor_dialog);
 }
 
 void MainWindow::sensDelete()
@@ -982,4 +990,19 @@ void MainWindow::chgrdbtn()
     } else {
         statusBar()->showMessage(tr("Read error: ") + modbusDevice->errorString(), 5000);
     }
+}
+
+void MainWindow::rtuTimeoutReadReady()
+{
+    handle_read_ready(ui->rtuTimeOutLineEdit);
+}
+
+void MainWindow::on_rtuTimeOutRead_clicked()
+{
+    handle_read(mqttRtuTimeOutAddress, &rtuTimeoutReadReady);
+}
+
+void MainWindow::on_rtuTimeOutWrite_clicked()
+{
+    handle_write(ui->rtuTimeOutLineEdit, mqttRtuTimeOutAddress);
 }

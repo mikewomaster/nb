@@ -14,7 +14,7 @@ void MainWindow::handle_write(QLineEdit* l, quint16 add)
 
     QModbusDataUnit writeUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, add, AdjustEntries);
     quint16 currentOutputValue =  l->text().toInt();
-
+    qDebug() << add;
     writeUnit.setValue(0, currentOutputValue);
     writeSingleHoldingRegister(writeUnit);
 }
@@ -121,11 +121,12 @@ void MainWindow::handle_read_ready(QLineEdit* le)
     if (reply->error() == QModbusDevice::NoError) {
         const QModbusDataUnit unit = reply->result();
         short entry = unit.value(0);
+        qDebug() << entry;
         if (le == ui->nbStatusLineEdit) {
             nbStatusFill(entry, ui->nbStatusLineEdit);
-        }else if (le == ui->mqttStatusLineEdit){
+        } else if (le == ui->mqttStatusLineEdit){
             mqttStatusFill(entry, ui->mqttStatusLineEdit);
-        }else{
+        } else {
               le->setText(QString::number(entry));
         }
         statusBar()->showMessage(tr("OK!"));
@@ -148,7 +149,6 @@ void MainWindow::handle_read(int addr, void (MainWindow::*fp)())
     statusBar()->clearMessage();
 
     QModbusDataUnit readUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, addr, AdjustEntries);
-
     if (auto *reply = modbusDevice->sendReadRequest(readUnit, ui->serverEdit->value())) {
         if (!reply->isFinished())
             connect(reply, &QModbusReply::finished, this, fp);
