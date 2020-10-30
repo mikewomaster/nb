@@ -103,8 +103,8 @@ void MainWindow::on_sensorAddPushButton_clicked()
     }
 
     int i = 0;
-    for (i = 0; i < 50; i++){
-        if (sensorRecordList[i].type == ""){
+    for (i = 0; i < 20; i++) {
+        if (sensorRecordList[i].type == "") {
             int term = i;
             sensorAddModbus(unit, term);
             unit.seq = i;
@@ -112,6 +112,8 @@ void MainWindow::on_sensorAddPushButton_clicked()
             break;
         }
     }
+    if (i == 20)
+        QMessageBox::information(nullptr, "Warn", "Maximum 20 Modbus RTU Supported");
 
     m_sensorModel->updateData(sensorRecordList);
     ui->sensorTableView->setRowHidden(i, false);
@@ -119,7 +121,7 @@ void MainWindow::on_sensorAddPushButton_clicked()
 
 void MainWindow::on_sensorClearPushButton_clicked()
 {
-    for (int i =0; i < 50; i++) {
+    for (int i =0; i < 20; i++) {
         sensorRecordList[i].type = "";
         sensorRecordList[i].type_ = 0;
         sensorRecordList[i].id = 0;
@@ -445,7 +447,7 @@ void MainWindow::sensor_view_model()
 
     sensorRecordList.clear();
     sen record;
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 20; i++) {
         record.id = 0;
         record.reg_addr = 0;
         record.type_ = 0;

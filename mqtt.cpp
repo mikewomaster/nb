@@ -199,23 +199,23 @@ void MainWindow::on_idWrite_2_clicked()
 
 void MainWindow::on_tcpApply_clicked()
 {
-    if (ui->tcpServerLineEdit->text() != "") {
-        nb_handle_write(ui->tcpServerLineEdit, mqttIPAddress, mqttIPEntries);
+     if (ui->tcpServerLineEdit->text() != "") {
+        nb_handle_write(ui->tcpServerLineEdit, TCPIPAddress, TCPIPEntries);
         _sleep(2000);
-    }
+     }
 
     if (ui->tcpPortLineEdit->text() != "") {
-        handle_write(ui->tcpPortLineEdit, mqttPortAddress);
+        handle_write(ui->tcpPortLineEdit, TCPPortAddress);
         _sleep(2000);
     }
 }
 
 void MainWindow::on_tcpReload_clicked()
 {
-    handle_read(mqttIPAddress, mqttIPEntries, &tcpSrvReadReady);
+    handle_read(TCPIPAddress, TCPIPEntries, &tcpSrvReadReady);
     _sleep(2000);
 
-    handle_read(mqttPortAddress, &tcpPortReadReady);
+    handle_read(TCPPortAddress, &tcpPortReadReady);
     _sleep(2000);
 }
 

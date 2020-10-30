@@ -47,10 +47,10 @@ QVariant sensor::headerData(int section, Qt::Orientation orientation, int role) 
                     return QStringLiteral("RTU Name");
 
                 if (section == SENSORID)
-                    return QStringLiteral("Modbus Slave ID");
+                    return QStringLiteral("RTU Slave ID");
 
                 if (section == SENSORREGADDR)
-                    return QStringLiteral("Address");
+                    return QStringLiteral("Reg Address");
 
                 if (section == SENSORLENGTH)
                     return QStringLiteral("Value");

@@ -28,4 +28,10 @@
 #define mqttStatusAddress (5501 - 1)
 #define mqttStatusEntries 1
 
+#define TCPIPAddress (661 - 1)
+#define TCPIPEntries 16
+
+#define TCPPortAddress (677 - 1)
+#define TCPPortEntries 1
+
 #endif // MQTT_H
