@@ -3950,7 +3950,7 @@
      </sizepolicy>
     </property>
     <property name="currentIndex">
-     <number>10</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="LoraNet_3">
      <property name="enabled">
@@ -4339,7 +4339,7 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>30</y>
+            <y>40</y>
             <width>151</width>
             <height>16</height>
            </rect>

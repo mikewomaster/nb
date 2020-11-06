@@ -222,7 +222,6 @@ void MainWindow::on_tcpReload_clicked()
 void MainWindow::on_mqttApply_clicked()
 {
     ui->mqttApply->setEnabled(false);
-
     if (ui->srvLineEdit->text() != ""){
         emit on_srvWrite_clicked();
         _sleep(2000);

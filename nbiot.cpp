@@ -15,9 +15,6 @@ void MainWindow::nb_handle_write(QLineEdit* le, int addr, int entry)
 
     QVector<quint16> values;
 
-    if (le == ui->idLineEdit)
-        qDebug() << values.size();
-
     int i = 0;
     for (i = 0; i < str.size(); i++) {
         if ((i+1) % 2 == 0) {
@@ -39,9 +36,6 @@ void MainWindow::nb_handle_write(QLineEdit* le, int addr, int entry)
             values.push_back(0x0000);
         }
     }
-
-    if (le == ui->idLineEdit)
-        qDebug() << values.size();
 
     if (!modbusDevice)
         return;

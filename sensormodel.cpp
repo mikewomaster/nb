@@ -72,7 +72,7 @@ void MainWindow::on_sensorAddPushButton_clicked()
     sen unit;
     unit.type = ui->sensorTypeLineEdit->text();
     if (unit.type.length() > 8) {
-        QMessageBox::information(NULL, "Error", "Please set RTU name with maximum 8 bytes.");
+        QMessageBox::information(NULL, "Error", "Please set RTU name with maximum 8 characters.");
         return;
     }
 
