@@ -54,7 +54,7 @@ void MainWindow::mbusReadDeviceReadReady()
         QString stringPrimary;
         if (temp_2 == 0) {
             stringPrimary = "Primary";
-        }else {
+        } else {
             stringPrimary = "Seconodary";
         }
         QStandardItem *primaryMode = new QStandardItem(stringPrimary);
@@ -78,7 +78,7 @@ void MainWindow::mbusReadDeviceReadReady()
 
         // append version
         temp_2 = unit.value(8) >> 8;
-        QStandardItem *ver = new QStandardItem(QString::number(temp_2, 16).toUpper());
+        QStandardItem *ver = new QStandardItem(QString::number(temp_2, 10).toUpper());
         item.append(ver);
         storageItems.push_back(ver);
 
@@ -151,7 +151,7 @@ void MainWindow::mbusReadValueReadReady()
                         storageItems.push_back(scale);
                         item.append(scale);
             */
-            temp_2 = unit.value(i*10 +0) & 0x00ff;
+            temp_2 = unit.value(i*10 + 0) & 0x00ff;
             int vif = temp_2;
             double value_in = temp_8, value_out;
             char *unit_str, *quantity_str;

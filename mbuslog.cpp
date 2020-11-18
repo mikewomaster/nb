@@ -42,8 +42,8 @@ void MainWindow::parseEventLog(QString fileName)
 
         quint8 mbusMode = dataAll.at(0);
         quint8 mbusAddress = (uchar) dataAll.at(1);
-        if (!mbusAddress)
-            continue;
+        // if (!mbusAddress)
+            // continue;
 
          // FIX ME: id
          // if (mbusAddress != ui->mbusReqEdit->text().toInt()) {
@@ -51,8 +51,8 @@ void MainWindow::parseEventLog(QString fileName)
              // break;
          // }
 
-        if (mbusAddress == 0 || mbusAddress == 0xff)
-            break;
+        // if (mbusAddress == 0 || mbusAddress == 0xff)
+            // break;
 
         quint64 mbusId = (uchar) dataAll.at(11);
         mbusId = (mbusId << 8) + (uchar)dataAll.at(10);
