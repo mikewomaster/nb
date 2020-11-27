@@ -3950,7 +3950,7 @@
      </sizepolicy>
     </property>
     <property name="currentIndex">
-     <number>15</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="LoraNet_3">
      <property name="enabled">
@@ -3978,79 +3978,10 @@
        <string>Serial Parameters</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_9">
-       <item row="0" column="2">
-        <widget class="QComboBox" name="s_baudCombo_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>10</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="editable">
-          <bool>false</bool>
-         </property>
-         <property name="currentText">
-          <string>9600</string>
-         </property>
-         <item>
-          <property name="text">
-           <string>9600</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>4800</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>2400</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>1200</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="5" column="4">
-        <widget class="QLineEdit" name="mbusPrimaryEdit">
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_73">
          <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="7">
-        <widget class="QComboBox" name="s_stopBitsCombo_2">
-         <item>
-          <property name="text">
-           <string>1</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>2</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="0" column="7">
-        <widget class="QComboBox" name="s_dataBitsCombo_2">
-         <property name="currentText">
-          <string>8</string>
-         </property>
-         <item>
-          <property name="text">
-           <string>8</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="1" column="5" colspan="2">
-        <widget class="QLabel" name="label_76">
-         <property name="text">
-          <string>Serial Stop Bits:</string>
+          <string>Serial Parity:</string>
          </property>
         </widget>
        </item>
@@ -4080,13 +4011,6 @@
          </item>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_73">
-         <property name="text">
-          <string>Serial Parity:</string>
-         </property>
-        </widget>
-       </item>
        <item row="5" column="7">
         <widget class="QPushButton" name="serialBtnRead_2">
          <property name="text">
@@ -4110,10 +4034,16 @@
          </property>
         </spacer>
        </item>
-       <item row="5" column="6">
-        <widget class="QPushButton" name="serialBtn_2">
+       <item row="0" column="0" colspan="2">
+        <widget class="QLabel" name="label_77">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text">
-          <string>Apply</string>
+          <string>Serial BaudRate:</string>
          </property>
         </widget>
        </item>
@@ -4233,6 +4163,13 @@
          </item>
         </widget>
        </item>
+       <item row="5" column="6">
+        <widget class="QPushButton" name="serialBtn_2">
+         <property name="text">
+          <string>Apply</string>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="4">
         <spacer name="horizontalSpacer_15">
          <property name="orientation">
@@ -4248,19 +4185,6 @@
           </size>
          </property>
         </spacer>
-       </item>
-       <item row="0" column="0" colspan="2">
-        <widget class="QLabel" name="label_77">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Serial BaudRate:</string>
-         </property>
-        </widget>
        </item>
        <item row="0" column="8">
         <spacer name="horizontalSpacer_14">
@@ -4293,6 +4217,82 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="0" column="2">
+        <widget class="QComboBox" name="s_baudCombo_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>10</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="editable">
+          <bool>false</bool>
+         </property>
+         <property name="currentText">
+          <string>9600</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>9600</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>4800</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>2400</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>1200</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="5" column="4">
+        <widget class="QLineEdit" name="mbusPrimaryEdit">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="7">
+        <widget class="QComboBox" name="s_stopBitsCombo_2">
+         <item>
+          <property name="text">
+           <string>1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>2</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="5" colspan="2">
+        <widget class="QLabel" name="label_76">
+         <property name="text">
+          <string>Serial Stop Bits:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="7">
+        <widget class="QComboBox" name="s_dataBitsCombo_2">
+         <property name="currentText">
+          <string>8</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>8</string>
+          </property>
+         </item>
+        </widget>
        </item>
        <item row="5" column="0" colspan="2">
         <widget class="QGroupBox" name="groupBox_13">
