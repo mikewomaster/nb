@@ -3950,7 +3950,7 @@
      </sizepolicy>
     </property>
     <property name="currentIndex">
-     <number>12</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="LoraNet_3">
      <property name="enabled">
@@ -4117,7 +4117,7 @@
           <bool>false</bool>
          </property>
          <property name="currentText">
-          <string>2400</string>
+          <string>9600</string>
          </property>
          <item>
           <property name="text">
@@ -4734,13 +4734,13 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>570</x>
         <y>0</y>
-        <width>51</width>
-        <height>21</height>
+        <width>174</width>
+        <height>227</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_19">
@@ -6088,8 +6088,13 @@
         <bool>false</bool>
        </property>
        <property name="currentText">
-        <string>DIEHL</string>
+        <string>DME</string>
        </property>
+       <item>
+        <property name="text">
+         <string>DME</string>
+        </property>
+       </item>
        <item>
         <property name="text">
          <string>DIEHL</string>
