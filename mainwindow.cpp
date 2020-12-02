@@ -114,17 +114,17 @@ MainWindow::MainWindow(QWidget *parent)
         ui->portComboBox->addItem(info.portName());
     }
 
-    m_Model->setHorizontalHeaderItem(0, new QStandardItem(QObject::tr("Address")));
-    m_Model->setHorizontalHeaderItem(1, new QStandardItem(QObject::tr("Mode")));
-    m_Model->setHorizontalHeaderItem(2, new QStandardItem(QObject::tr("SerialNumber ")));
-    m_Model->setHorizontalHeaderItem(3, new QStandardItem(QObject::tr("Manu")));
-    m_Model->setHorizontalHeaderItem(4, new QStandardItem(QObject::tr("Version")));
-    m_Model->setHorizontalHeaderItem(5, new QStandardItem(QObject::tr("Medium")));
+    m_Model->setHorizontalHeaderItem(0, new QStandardItem(QObject::tr("Serial Number")));
+    m_Model->setHorizontalHeaderItem(1, new QStandardItem(QObject::tr("Customer Serial Number")));
+    m_Model->setHorizontalHeaderItem(2, new QStandardItem(QObject::tr("Total Volume")));
+    m_Model->setHorizontalHeaderItem(3, new QStandardItem(QObject::tr("Reverse Volume")));
+    m_Model->setHorizontalHeaderItem(4, new QStandardItem(QObject::tr("Current Flow Rate")));
+    m_Model->setHorizontalHeaderItem(5, new QStandardItem(QObject::tr("Water-temp")));
     // m_Model->setHorizontalHeaderItem(6, new QStandardItem(QObject::tr("Type")));
-    m_Model->setHorizontalHeaderItem(6, new QStandardItem(QObject::tr("Value")));
-    m_Model->setHorizontalHeaderItem(7, new QStandardItem(QObject::tr("Unit")));
+    m_Model->setHorizontalHeaderItem(6, new QStandardItem(QObject::tr("Ext-temp")));
+    m_Model->setHorizontalHeaderItem(7, new QStandardItem(QObject::tr("Remaining Battery Life")));
     // m_Model->setHorizontalHeaderItem(8, new QStandardItem(QObject::tr("Scale")));
-    m_Model->setHorizontalHeaderItem(8, new QStandardItem(QObject::tr("Description")));
+    m_Model->setHorizontalHeaderItem(8, new QStandardItem(QObject::tr("Operation Hours")));
     m_Model->setHorizontalHeaderItem(9, new QStandardItem(QObject::tr("TimeStamp  ")));
 
     ui->connectType->hide();
@@ -152,9 +152,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabWidget_2->setTabEnabled(8, false);
 */
     ui->tabWidget_2->setTabEnabled(3, false);
+    ui->tabWidget_2->setTabEnabled(5, false);
     ui->tabWidget_2->setTabEnabled(7, false);
     ui->tabWidget_2->setTabEnabled(8, false);
     ui->tabWidget_2->setTabEnabled(9, false);
+    ui->tabWidget_2->setTabEnabled(10, false);
+    ui->tabWidget_2->setTabEnabled(11, false);
     ui->tabWidget_2->setTabEnabled(12, false);
 #endif
 
@@ -214,6 +217,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->plmnRead->hide();
     ui->plmnWrite->hide();
     ui->mbusReadOutEdit->hide();
+
+    // hide for mbus product
+    ui->nbEnableRadioButton->hide();
+    ui->nbmodelCombox->hide();
+    ui->nbModelLabel->hide();
 #ifdef TEST_DATA
     QList<QStandardItem *> item;
     item.append(new QStandardItem(QObject::tr("Always")));

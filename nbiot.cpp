@@ -363,3 +363,17 @@ void MainWindow::on_plmnRead_clicked()
 {
     handle_read(NBPLMNAddress, NBPLMNEntries, &plmnReadReady);
 }
+
+void MainWindow::on_cellularEnableButton_clicked()
+{
+    if (ui->nbEnableRadioButton->isChecked()) {
+        ui->nbEnableRadioButton->setChecked(false);
+        ui->cellularEnableButton->setText("Connect");
+    }
+    else {
+        ui->nbEnableRadioButton->setChecked(true);
+        ui->cellularEnableButton->setText("Disconnect");
+    }
+
+    on_nbEnableRadioButton_clicked();
+}
