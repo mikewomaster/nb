@@ -222,6 +222,14 @@ MainWindow::MainWindow(QWidget *parent)
     ui->nbEnableRadioButton->hide();
     ui->nbmodelCombox->hide();
     ui->nbModelLabel->hide();
+    ui->groupBox_22->hide();
+    ui->label_135->hide();
+    ui->mqttPasswordLineEdit_2->hide();
+    ui->label_105->hide();
+    ui->label_107->hide();
+    ui->mbusPrimaryAddressEdit_12->hide();
+    ui->mbusDeviceMode_12->hide();
+    ui->pushButton_8->hide();
 #ifdef TEST_DATA
     QList<QStandardItem *> item;
     item.append(new QStandardItem(QObject::tr("Always")));

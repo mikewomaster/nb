@@ -4435,10 +4435,10 @@
      <widget class="QGroupBox" name="groupBox_18">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>0</x>
         <y>10</y>
-        <width>511</width>
-        <height>501</height>
+        <width>971</width>
+        <height>491</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -4463,6 +4463,75 @@
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
       </property>
       <layout class="QGridLayout" name="gridLayout_14">
+       <item row="11" column="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_15">
+         <item>
+          <widget class="QPushButton" name="cellularEnableButton">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>85</width>
+             <height>27</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>85</width>
+             <height>27</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Connect</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="nbApply">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Apply</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="11" column="3">
+        <widget class="QPushButton" name="nbReload">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Reload</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QLabel" name="plmnlabel">
+         <property name="text">
+          <string>PLMN:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="nbModelLabel">
+         <property name="text">
+          <string>IOT Mode:</string>
+         </property>
+        </widget>
+       </item>
        <item row="1" column="2">
         <widget class="QComboBox" name="nbmodelCombox">
          <property name="sizePolicy">
@@ -4506,13 +4575,6 @@
          </item>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QLabel" name="nbModelLabel">
-         <property name="text">
-          <string>IOT Mode:</string>
-         </property>
-        </widget>
-       </item>
        <item row="7" column="2">
         <widget class="QLineEdit" name="plmnLineEdit">
          <property name="sizePolicy">
@@ -4526,26 +4588,13 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="1">
-        <widget class="QLabel" name="plmnlabel">
-         <property name="text">
-          <string>PLMN:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QLineEdit" name="apnLineEdit">
+       <item row="4" column="2">
+        <widget class="QLineEdit" name="userLineEdit">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>201</width>
-           <height>0</height>
-          </size>
          </property>
          <property name="text">
           <string/>
@@ -4579,32 +4628,29 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="2">
-        <widget class="QLineEdit" name="userLineEdit">
+       <item row="2" column="2">
+        <widget class="QLineEdit" name="apnLineEdit">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>201</width>
+           <height>0</height>
+          </size>
          </property>
          <property name="text">
           <string/>
          </property>
         </widget>
        </item>
-       <item row="9" column="2">
-        <widget class="QLineEdit" name="nbStatusLineEdit">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
+       <item row="6" column="1">
+        <widget class="QLabel" name="label_115">
          <property name="text">
-          <string/>
+          <string>Password:</string>
          </property>
         </widget>
        </item>
@@ -4621,19 +4667,6 @@
          </property>
         </widget>
        </item>
-       <item row="11" column="3">
-        <widget class="QPushButton" name="nbApply">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Apply</string>
-         </property>
-        </widget>
-       </item>
        <item row="8" column="1">
         <widget class="QLabel" name="label_124">
          <property name="text">
@@ -4641,23 +4674,19 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="1">
-        <widget class="QLabel" name="label_115">
-         <property name="text">
-          <string>Password:</string>
+       <item row="9" column="2">
+        <widget class="QLineEdit" name="nbStatusLineEdit">
+         <property name="enabled">
+          <bool>false</bool>
          </property>
-        </widget>
-       </item>
-       <item row="11" column="4">
-        <widget class="QPushButton" name="nbReload">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Reload</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -4687,50 +4716,18 @@
          </property>
         </widget>
        </item>
-       <item row="11" column="2">
-        <layout class="QHBoxLayout" name="horizontalLayout_15">
-         <item>
-          <spacer name="horizontalSpacer_29">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>121</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="cellularEnableButton">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>85</width>
-             <height>27</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>85</width>
-             <height>27</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Connect</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+       <item row="6" column="3">
+        <spacer name="horizontalSpacer_29">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -4869,10 +4866,10 @@
      <widget class="QGroupBox" name="groupBox_22">
       <property name="geometry">
        <rect>
-        <x>540</x>
+        <x>580</x>
         <y>10</y>
-        <width>451</width>
-        <height>501</height>
+        <width>411</width>
+        <height>311</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -5881,7 +5878,7 @@
        <property name="geometry">
         <rect>
          <x>420</x>
-         <y>120</y>
+         <y>80</y>
          <width>201</width>
          <height>28</height>
         </rect>
@@ -5908,8 +5905,8 @@
       <widget class="QWidget" name="layoutWidget_2">
        <property name="geometry">
         <rect>
-         <x>320</x>
-         <y>360</y>
+         <x>330</x>
+         <y>310</y>
          <width>282</width>
          <height>29</height>
         </rect>
@@ -5941,27 +5938,14 @@
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_8">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>Comm. Test</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
       <widget class="QLabel" name="label_100">
        <property name="geometry">
         <rect>
          <x>320</x>
-         <y>120</y>
-         <width>170</width>
+         <y>80</y>
+         <width>91</width>
          <height>29</height>
         </rect>
        </property>
@@ -6001,7 +5985,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>180</y>
+         <y>160</y>
          <width>261</width>
          <height>29</height>
         </rect>
@@ -6020,8 +6004,8 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>300</y>
-         <width>170</width>
+         <y>240</y>
+         <width>111</width>
          <height>29</height>
         </rect>
        </property>
@@ -6038,8 +6022,8 @@
       <widget class="QLineEdit" name="mbusTimestampEdit">
        <property name="geometry">
         <rect>
-         <x>320</x>
-         <y>300</y>
+         <x>150</x>
+         <y>240</y>
          <width>200</width>
          <height>28</height>
         </rect>
@@ -6072,8 +6056,8 @@
        </property>
        <property name="geometry">
         <rect>
-         <x>150</x>
-         <y>60</y>
+         <x>790</x>
+         <y>350</y>
          <width>119</width>
          <height>27</height>
         </rect>
@@ -6104,8 +6088,8 @@
       <widget class="QLabel" name="label_105">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>60</y>
+         <x>660</x>
+         <y>350</y>
          <width>120</width>
          <height>19</height>
         </rect>
@@ -6123,8 +6107,8 @@
       <widget class="QLabel" name="label_107">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>240</y>
+         <x>630</x>
+         <y>410</y>
          <width>191</width>
          <height>29</height>
         </rect>
@@ -6142,8 +6126,8 @@
       <widget class="QLineEdit" name="mbusPrimaryAddressEdit_12">
        <property name="geometry">
         <rect>
-         <x>320</x>
-         <y>240</y>
+         <x>850</x>
+         <y>400</y>
          <width>200</width>
          <height>28</height>
         </rect>
@@ -6180,9 +6164,9 @@
        <property name="geometry">
         <rect>
          <x>150</x>
-         <y>120</y>
+         <y>80</y>
          <width>119</width>
-         <height>27</height>
+         <height>31</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -6212,9 +6196,9 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>120</y>
+         <y>80</y>
          <width>120</width>
-         <height>19</height>
+         <height>31</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -6230,8 +6214,8 @@
       <widget class="QComboBox" name="mbusReadOutComboBox">
        <property name="geometry">
         <rect>
-         <x>320</x>
-         <y>181</y>
+         <x>290</x>
+         <y>160</y>
          <width>71</width>
          <height>27</height>
         </rect>
@@ -6260,6 +6244,25 @@
          <string>60</string>
         </property>
        </item>
+      </widget>
+      <widget class="QPushButton" name="pushButton_8">
+       <property name="geometry">
+        <rect>
+         <x>810</x>
+         <y>300</y>
+         <width>108</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Comm. Test</string>
+       </property>
       </widget>
      </widget>
     </widget>
