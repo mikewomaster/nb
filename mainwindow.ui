@@ -3975,7 +3975,7 @@
        </rect>
       </property>
       <property name="title">
-       <string>Parameters</string>
+       <string>Serial Parameters</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_9">
        <item row="5" column="0" colspan="2">
@@ -4536,7 +4536,7 @@
        <item row="2" column="2">
         <widget class="QLineEdit" name="apnLineEdit">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -4699,7 +4699,7 @@
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>121</width>
+             <width>80</width>
              <height>20</height>
             </size>
            </property>
@@ -4715,20 +4715,33 @@
            </property>
            <property name="minimumSize">
             <size>
-             <width>85</width>
+             <width>120</width>
              <height>27</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>85</width>
+             <width>120</width>
              <height>27</height>
             </size>
            </property>
            <property name="text">
-            <string>Connect</string>
+            <string>Conn. Test</string>
            </property>
           </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_30">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </item>
@@ -4907,7 +4920,7 @@
        <item row="6" column="0">
         <widget class="QLabel" name="label_142">
          <property name="text">
-          <string>RSSI (dbM):</string>
+          <string>RSSI (dBm):</string>
          </property>
         </widget>
        </item>
@@ -4942,7 +4955,7 @@
        <item row="3" column="0">
         <widget class="QLabel" name="label_148">
          <property name="text">
-          <string>IMST:</string>
+          <string>IMSI:</string>
          </property>
         </widget>
        </item>
@@ -5910,7 +5923,7 @@
         <rect>
          <x>320</x>
          <y>360</y>
-         <width>282</width>
+         <width>368</width>
          <height>29</height>
         </rect>
        </property>
@@ -5951,6 +5964,19 @@
           </property>
           <property name="text">
            <string>Comm. Test</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="mbusSetReload_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Start</string>
           </property>
          </widget>
         </item>

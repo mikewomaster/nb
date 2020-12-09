@@ -222,6 +222,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->nbEnableRadioButton->hide();
     ui->nbmodelCombox->hide();
     ui->nbModelLabel->hide();
+    ui->label_98->hide();
+    ui->mbusTimestampEdit->hide();
 #ifdef TEST_DATA
     QList<QStandardItem *> item;
     item.append(new QStandardItem(QObject::tr("Always")));
