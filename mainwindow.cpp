@@ -151,14 +151,20 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabWidget_2->setTabEnabled(7, false);
     ui->tabWidget_2->setTabEnabled(8, false);
 */
+    ui->tabWidget_2->setTabEnabled(1, false);
     ui->tabWidget_2->setTabEnabled(3, false);
+    ui->tabWidget_2->setTabEnabled(4, false);
     ui->tabWidget_2->setTabEnabled(5, false);
+    ui->tabWidget_2->setTabEnabled(6, false);
     ui->tabWidget_2->setTabEnabled(7, false);
     ui->tabWidget_2->setTabEnabled(8, false);
     ui->tabWidget_2->setTabEnabled(9, false);
     ui->tabWidget_2->setTabEnabled(10, false);
     ui->tabWidget_2->setTabEnabled(11, false);
     ui->tabWidget_2->setTabEnabled(12, false);
+    ui->tabWidget_2->setTabEnabled(14, false);
+    ui->tabWidget_2->setTabEnabled(16, false);
+
 #endif
 
     ui->groupBox_13->hide();
