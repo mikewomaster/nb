@@ -313,7 +313,8 @@ void MainWindow::mbusReadoutReadReady()
             ui->mbusReadOutComboBox->setCurrentIndex(2);
         else if (index == 60)
             ui->mbusReadOutComboBox->setCurrentIndex(3);
-
+        else
+            ui->mbusReadOutComboBox->setCurrentText(QString::number(index));
 
         statusBar()->showMessage(tr("OK!"));
     } else if (reply->error() == QModbusDevice::ProtocolError) {
