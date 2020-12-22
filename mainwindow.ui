@@ -7896,7 +7896,7 @@
       <property name="title">
        <string>LED Control</string>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>11</x>
@@ -8584,7 +8584,7 @@
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>40</y>
+         <y>20</y>
          <width>821</width>
          <height>451</height>
         </rect>
@@ -9195,7 +9195,7 @@
             </size>
            </property>
            <property name="text">
-            <string>s</string>
+            <string>%</string>
            </property>
           </widget>
          </item>
