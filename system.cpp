@@ -38,8 +38,8 @@ systemDialog::systemDialog(QWidget *parent) :
 
     ui->systemApply->setEnabled(false);
 #endif
-    ui->widget->setVisible(false);
-    this->setFixedSize(395, 175);
+    // ui->widget->setVisible(false);
+    // this->setFixedSize(395, 175);
 }
 
 systemDialog::~systemDialog()
@@ -360,7 +360,7 @@ void systemDialog::on_SNRead_clicked()
 
 void systemDialog::on_pushButton_clicked()
 {
-    // return;
+    return;
 
     if (ui->pushButton->text() == ">>>") {
         this->setFixedSize(395,311);
