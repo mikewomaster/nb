@@ -4451,14 +4451,14 @@
         </widget>
        </item>
        <item row="4" column="0">
-        <widget class="QLabel" name="label_145">
+        <widget class="QLabel" name="label_1451">
          <property name="text">
           <string>PLMN:</string>
          </property>
         </widget>
        </item>
        <item row="1" column="2">
-        <widget class="QLineEdit" name="lineEdit_2"/>
+        <widget class="QLineEdit" name="providerLineEdit"/>
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="label_148">
@@ -4475,19 +4475,19 @@
         </widget>
        </item>
        <item row="6" column="2">
-        <widget class="QLineEdit" name="lineEdit_7"/>
+        <widget class="QLineEdit" name="nbRssiLineEdit"/>
        </item>
        <item row="3" column="2">
-        <widget class="QLineEdit" name="lineEdit_4"/>
+        <widget class="QLineEdit" name="imsiLineEdit"/>
        </item>
        <item row="5" column="2">
-        <widget class="QLineEdit" name="lineEdit_6"/>
+        <widget class="QLineEdit" name="bandLineEdit"/>
        </item>
        <item row="2" column="2">
-        <widget class="QLineEdit" name="lineEdit_3"/>
+        <widget class="QLineEdit" name="imeiLineEdit"/>
        </item>
        <item row="4" column="2">
-        <widget class="QLineEdit" name="lineEdit_5"/>
+        <widget class="QLineEdit" name="plmnLineEdit_2"/>
        </item>
        <item row="0" column="0">
         <widget class="QLabel" name="label_108">
@@ -4497,7 +4497,7 @@
         </widget>
        </item>
        <item row="7" column="2">
-        <widget class="QLineEdit" name="lineEdit_8"/>
+        <widget class="QLineEdit" name="simStatusLineEdit"/>
        </item>
        <item row="10" column="1">
         <spacer name="horizontalSpacer_21">
@@ -4513,10 +4513,10 @@
         </spacer>
        </item>
        <item row="0" column="2">
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="regisLineEdit"/>
        </item>
        <item row="10" column="2">
-        <widget class="QPushButton" name="pushButton_9">
+        <widget class="QPushButton" name="nbRefreshButton">
          <property name="maximumSize">
           <size>
            <width>100</width>
@@ -5081,7 +5081,7 @@
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
       </property>
       <layout class="QGridLayout" name="gridLayout_11">
-       <item row="4" column="1">
+       <item row="5" column="1">
         <widget class="QLabel" name="label_133">
          <property name="text">
           <string>User Name:</string>
@@ -5095,10 +5095,23 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="1">
+       <item row="8" column="1">
         <widget class="QLabel" name="label_120">
          <property name="text">
           <string>Status:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QLineEdit" name="idLineEdit">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string/>
          </property>
         </widget>
        </item>
@@ -5109,14 +5122,7 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="11">
-        <widget class="QPushButton" name="portRead">
-         <property name="text">
-          <string>Read</string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="2">
+       <item row="8" column="2">
         <widget class="QLineEdit" name="mqttStatusLineEdit">
          <property name="enabled">
           <bool>false</bool>
@@ -5132,30 +5138,31 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
+       <item row="4" column="1">
         <widget class="QLabel" name="label_117">
          <property name="text">
           <string>Client ID:</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="2">
-        <widget class="QLineEdit" name="idLineEdit">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
+       <item row="1" column="11">
+        <widget class="QPushButton" name="portRead">
          <property name="text">
-          <string/>
+          <string>Read</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="11">
-        <widget class="QPushButton" name="srvRead">
+       <item row="0" column="12">
+        <widget class="QPushButton" name="srvWrite">
          <property name="text">
-          <string>Read</string>
+          <string>Write</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="label_110">
+         <property name="text">
+          <string>Port:</string>
          </property>
         </widget>
        </item>
@@ -5178,14 +5185,7 @@
        <item row="2" column="1">
         <widget class="QLabel" name="label_109">
          <property name="text">
-          <string>Topic:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLabel" name="label_110">
-         <property name="text">
-          <string>Port:</string>
+          <string>Publish Topic:</string>
          </property>
         </widget>
        </item>
@@ -5208,10 +5208,37 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="12">
-        <widget class="QPushButton" name="srvWrite">
+       <item row="0" column="11">
+        <widget class="QPushButton" name="srvRead">
+         <property name="text">
+          <string>Read</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="label_118">
+         <property name="text">
+          <string>IOT Server:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="12">
+        <widget class="QPushButton" name="idWrite">
          <property name="text">
           <string>Write</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="4">
+        <widget class="QPushButton" name="mqttReload">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Reload</string>
          </property>
         </widget>
        </item>
@@ -5235,67 +5262,14 @@
          </property>
         </widget>
        </item>
-       <item row="8" column="4">
-        <widget class="QPushButton" name="mqttReload">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Reload</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLabel" name="label_118">
-         <property name="text">
-          <string>IOT Server:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="12">
-        <widget class="QPushButton" name="idWrite">
-         <property name="text">
-          <string>Write</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="11">
+       <item row="4" column="11">
         <widget class="QPushButton" name="idRead">
          <property name="text">
           <string>Read</string>
          </property>
         </widget>
        </item>
-       <item row="8" column="3">
-        <widget class="QPushButton" name="mqttApply">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Apply</string>
-         </property>
-        </widget>
-       </item>
        <item row="5" column="2">
-        <widget class="QLineEdit" name="mqttPasswordLineEdit">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="2">
         <widget class="QLineEdit" name="mqttUserNameLineEdit">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -5308,7 +5282,33 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="11">
+       <item row="9" column="3">
+        <widget class="QPushButton" name="mqttApply">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Apply</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2">
+        <widget class="QLineEdit" name="mqttPasswordLineEdit">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="11">
         <widget class="QPushButton" name="mqttStatusRead">
          <property name="text">
           <string>Read</string>
@@ -5328,24 +5328,7 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
-        <widget class="QLabel" name="label_134">
-         <property name="text">
-          <string>Password:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="12">
-        <widget class="QPushButton" name="pidButtonWrite_8">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Write</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="2">
+       <item row="7" column="2">
         <widget class="QLineEdit" name="mqttPasswordLineEdit_2">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -5358,14 +5341,44 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="1">
+       <item row="7" column="1">
         <widget class="QLabel" name="label_135">
          <property name="text">
           <string>Publish Interval (Min):</string>
          </property>
         </widget>
        </item>
-       <item row="8" column="2">
+       <item row="8" column="12">
+        <widget class="QPushButton" name="pidButtonWrite_8">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Write</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLabel" name="label_134">
+         <property name="text">
+          <string>Password:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="4">
+        <widget class="QPushButton" name="mqttCheck">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string> Check</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="2">
         <layout class="QHBoxLayout" name="horizontalLayout_24">
          <item>
           <spacer name="horizontalSpacer_35">
@@ -5381,7 +5394,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="mqttApply_2">
+          <widget class="QPushButton" name="mqttServerConnBtn">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -5395,16 +5408,23 @@
          </item>
         </layout>
        </item>
-       <item row="7" column="4">
-        <widget class="QPushButton" name="mqttApply_4">
+       <item row="3" column="1">
+        <widget class="QLabel" name="label_174">
+         <property name="text">
+          <string>Subscribe Topic:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLineEdit" name="subTopicLineEdit">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
          <property name="text">
-          <string> Check</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -7906,6 +7926,37 @@
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_25">
+        <item row="5" column="1">
+         <layout class="QHBoxLayout" name="horizontalLayout_17">
+          <item>
+           <spacer name="horizontalSpacer_52">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="ledControlAutoCheck">
+            <property name="text">
+             <string>Check</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="ledControlAutoApply">
+            <property name="text">
+             <string> Apply</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
         <item row="0" column="0">
          <widget class="QLabel" name="label_105">
           <property name="minimumSize">
@@ -7919,82 +7970,6 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
-         <layout class="QHBoxLayout" name="horizontalLayout_52">
-          <item>
-           <widget class="QComboBox" name="comboBox">
-            <property name="minimumSize">
-             <size>
-              <width>80</width>
-              <height>0</height>
-             </size>
-            </property>
-            <item>
-             <property name="text">
-              <string>1-10V</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>DALI</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_46">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Fixed</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="lineEdit_16">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>80</width>
-              <height>16777215</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_97">
-            <property name="text">
-             <string>%</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_44">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </item>
         <item row="2" column="0">
          <widget class="QLabel" name="label_107">
           <property name="minimumSize">
@@ -8004,28 +7979,41 @@
            </size>
           </property>
           <property name="text">
-           <string>Auto-On:</string>
+           <string>Auto:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_135">
+          <property name="minimumSize">
+           <size>
+            <width>300</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Turn On Time:</string>
           </property>
          </widget>
         </item>
         <item row="2" column="1">
          <layout class="QHBoxLayout" name="horizontalLayout_50">
           <item>
-           <widget class="QComboBox" name="comboBox_3">
-            <item>
-             <property name="text">
-              <string>On</string>
-             </property>
-            </item>
+           <widget class="QComboBox" name="ledControlAutoCombox">
             <item>
              <property name="text">
               <string>Off</string>
              </property>
             </item>
+            <item>
+             <property name="text">
+              <string>On</string>
+             </property>
+            </item>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_162">
+           <widget class="QLabel" name="label_1621">
             <property name="text">
              <string>100% (10V Output)</string>
             </property>
@@ -8046,23 +8034,10 @@
           </item>
          </layout>
         </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_135">
-          <property name="minimumSize">
-           <size>
-            <width>300</width>
-            <height>50</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Turn On Time:</string>
-          </property>
-         </widget>
-        </item>
         <item row="3" column="1">
          <layout class="QHBoxLayout" name="horizontalLayout_15">
           <item>
-           <widget class="QComboBox" name="comboBox_4">
+           <widget class="QComboBox" name="ledControlOnHour">
             <property name="minimumSize">
              <size>
               <width>55</width>
@@ -8075,9 +8050,127 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="editable">
+             <bool>true</bool>
+            </property>
+            <item>
+             <property name="text">
+              <string>0</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>4</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>5</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>6</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>7</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>8</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>9</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>10</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>11</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>12</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>13</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>14</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>15</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>16</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>17</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>18</string>
+             </property>
+            </item>
             <item>
              <property name="text">
               <string>19</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>20</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>21</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>22</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>23</string>
              </property>
             </item>
            </widget>
@@ -8096,7 +8189,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_5">
+           <widget class="QComboBox" name="ledControlOnMin">
             <property name="minimumSize">
              <size>
               <width>55</width>
@@ -8115,9 +8208,37 @@
               <height>0</height>
              </size>
             </property>
+            <property name="editable">
+             <bool>true</bool>
+            </property>
+            <item>
+             <property name="text">
+              <string>0</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>10</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>20</string>
+             </property>
+            </item>
             <item>
              <property name="text">
               <string>30</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>40</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>50</string>
              </property>
             </item>
            </widget>
@@ -8153,7 +8274,7 @@
         <item row="4" column="1">
          <layout class="QHBoxLayout" name="horizontalLayout_16">
           <item>
-           <widget class="QComboBox" name="comboBox_7">
+           <widget class="QComboBox" name="ledControlOffHour">
             <property name="minimumSize">
              <size>
               <width>55</width>
@@ -8166,9 +8287,127 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="editable">
+             <bool>true</bool>
+            </property>
+            <item>
+             <property name="text">
+              <string>0</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>4</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>5</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>6</string>
+             </property>
+            </item>
             <item>
              <property name="text">
               <string>7</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>8</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>9</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>10</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>11</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>12</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>13</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>14</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>15</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>16</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>17</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>18</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>19</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>20</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>21</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>22</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>23</string>
              </property>
             </item>
            </widget>
@@ -8187,7 +8426,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_6">
+           <widget class="QComboBox" name="ledControlOffMin">
             <property name="minimumSize">
              <size>
               <width>55</width>
@@ -8206,9 +8445,37 @@
               <height>0</height>
              </size>
             </property>
+            <property name="editable">
+             <bool>true</bool>
+            </property>
+            <item>
+             <property name="text">
+              <string>0</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>10</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>20</string>
+             </property>
+            </item>
             <item>
              <property name="text">
               <string>30</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>40</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>50</string>
              </property>
             </item>
            </widget>
@@ -8228,29 +8495,21 @@
           </item>
          </layout>
         </item>
-        <item row="5" column="1">
-         <layout class="QHBoxLayout" name="horizontalLayout_17">
-          <item>
-           <spacer name="horizontalSpacer_52">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_15">
-            <property name="text">
-             <string>Check</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+        <item row="1" column="1">
+         <spacer name="verticalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>100</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item row="6" column="1">
          <spacer name="verticalSpacer_8">
@@ -8268,21 +8527,95 @@
           </property>
          </spacer>
         </item>
-        <item row="1" column="1">
-         <spacer name="verticalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Expanding</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>100</height>
-           </size>
-          </property>
-         </spacer>
+        <item row="0" column="1">
+         <layout class="QHBoxLayout" name="horizontalLayout_52">
+          <item>
+           <widget class="QComboBox" name="ledControlComboBox">
+            <property name="minimumSize">
+             <size>
+              <width>80</width>
+              <height>0</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>1-10V</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>DALI</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_46">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="ledControlPercentLineEdit">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_97">
+            <property name="text">
+             <string>%</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_441">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="ledControlTypeCheck">
+            <property name="text">
+             <string>Check</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="ledControlTypeApply">
+            <property name="text">
+             <string> Apply</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -8619,7 +8952,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_11"/>
+           <widget class="QLineEdit" name="energyPLineEdit"/>
           </item>
           <item>
            <widget class="QLabel" name="label_160">
@@ -8646,7 +8979,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_9"/>
+           <widget class="QLineEdit" name="energyVRmsLineEdit"/>
           </item>
           <item>
            <widget class="QLabel" name="label_156">
@@ -8671,14 +9004,14 @@
          </spacer>
         </item>
         <item row="2" column="3">
-         <widget class="QPushButton" name="pushButton_26">
+         <widget class="QPushButton" name="energyPPushButton">
           <property name="text">
            <string>Check</string>
           </property>
          </widget>
         </item>
         <item row="3" column="3">
-         <widget class="QPushButton" name="pushButton_35">
+         <widget class="QPushButton" name="energyVRMSPushButton">
           <property name="text">
            <string>Check</string>
           </property>
@@ -8700,7 +9033,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_10"/>
+           <widget class="QLineEdit" name="energyCRmsLineEdit"/>
           </item>
           <item>
            <widget class="QLabel" name="label_158">
@@ -8738,21 +9071,21 @@
          </spacer>
         </item>
         <item row="4" column="3">
-         <widget class="QPushButton" name="pushButton_36">
+         <widget class="QPushButton" name="energyCRMSPushButton">
           <property name="text">
            <string>Check</string>
           </property>
          </widget>
         </item>
         <item row="5" column="3">
-         <widget class="QPushButton" name="pushButton_37">
+         <widget class="QPushButton" name="energyPFPushButton">
           <property name="text">
            <string>Check</string>
           </property>
          </widget>
         </item>
         <item row="0" column="3">
-         <widget class="QPushButton" name="pushButton_25">
+         <widget class="QPushButton" name="energyVPushButton">
           <property name="text">
            <string>Check</string>
           </property>
@@ -8774,7 +9107,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_8"/>
+           <widget class="QLineEdit" name="energyPFLineEdit"/>
           </item>
           <item>
            <widget class="QLabel" name="label_154">
@@ -8814,7 +9147,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_6"/>
+           <widget class="QLineEdit" name="energyVLineEdit"/>
           </item>
           <item>
            <widget class="QLabel" name="label_150">
@@ -8839,7 +9172,7 @@
          </spacer>
         </item>
         <item row="1" column="3">
-         <widget class="QPushButton" name="pushButton_38">
+         <widget class="QPushButton" name="energyCPushButton">
           <property name="text">
            <string>Check</string>
           </property>
@@ -8861,7 +9194,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_7"/>
+           <widget class="QLineEdit" name="energyCLineEdit"/>
           </item>
           <item>
            <widget class="QLabel" name="label_152">
@@ -8873,7 +9206,7 @@
          </layout>
         </item>
         <item row="6" column="3">
-         <widget class="QPushButton" name="pushButton_19">
+         <widget class="QPushButton" name="energyACCheckPushButton">
           <property name="text">
            <string>Check</string>
           </property>
@@ -8914,7 +9247,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_12">
+           <widget class="QLineEdit" name="energyACLineEdit">
             <property name="maximumSize">
              <size>
               <width>210</width>
@@ -8933,7 +9266,7 @@
          </layout>
         </item>
         <item row="6" column="2">
-         <widget class="QPushButton" name="pushButton_20">
+         <widget class="QPushButton" name="energyACApplyPushButton">
           <property name="text">
            <string>  Apply</string>
           </property>

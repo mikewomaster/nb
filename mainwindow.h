@@ -164,12 +164,18 @@ private:
     void handle_write(QComboBox* , quint16);
     void handle_write(QRadioButton* ,quint16);
     void handle_write(QModbusDataUnit);
+
     void handle_read(int addr, void (MainWindow::*fp)());
     void handle_read(int addr, int entry, void (MainWindow::*fp)());
+
     void handle_read_ready(QLineEdit* );
     void handle_read_ready(QComboBox* );
+    void handle_read_ready(QComboBox* ,QLineEdit* );
+    void handle_read_ready(QComboBox* ,QComboBox* );
+
     void nb_handle_write(QLineEdit*, int, int);
     void nb_handle_read_ready(QLineEdit* );
+
     void nbStatusFill(short, QLineEdit*);
     void mqttStatusFill(short, QLineEdit*);
     void serialAlarmInit();
@@ -188,6 +194,7 @@ private:
     void sslFile();
     void sslImportFile(quint8);
     void sslFileRead(quint8);
+    void prepareSendModbusUnit(int, int, quint16);
 public slots:
     void on_connectButton_clicked();
 
@@ -337,6 +344,7 @@ private slots:
     void on_srvRead_clicked();
     void on_topicWrite_clicked();
     void topicReadReady();
+    void subTopicReadReady();
     void on_topicRead_clicked();
     void on_portWrite_clicked();
     void portReadReady();
@@ -439,8 +447,41 @@ private slots:
     void rtuTimeoutReadReady();
     void on_rtuTimeOutRead_clicked();
     void on_rtuTimeOutWrite_clicked();
-
     void on_cellularEnableButton_clicked();
+    void on_nbRefreshButton_clicked();
+    void registReadReady();
+    void providerReadReady();
+    void imeiReadReady();
+    void imsiReadReady();
+    void plmn2ReadReady();
+    void bandReadReady();
+    void rssiReadReady();
+    void simStatusReadReady();
+    void on_mqttServerConnBtn_clicked();
+    void on_mqttCheck_clicked();
+    void on_ledControlTypeCheck_clicked();
+    void on_ledControlTypeApply_clicked();
+    void on_ledControlAutoCheck_clicked();
+    void on_ledControlAutoApply_clicked();
+    void ledControlTypeReadReady();
+    void ledControlAutoReadReady();
+    void ledControlOnReadReady();
+    void ledControlOffReadReady();
+    void energyVReadReady();
+    void on_energyVPushButton_clicked();
+    void energyCReadReady();
+    void on_energyCPushButton_clicked();
+    void energyPReadReady();
+    void on_energyPPushButton_clicked();
+    void energyVRMSPReadReady();
+    void on_energyVRMSPushButton_clicked();
+    void energyCRMSReadReady();
+    void on_energyCRMSPushButton_clicked();
+    void energyPFReadReady();
+    void on_energyPFPushButton_clicked();
+    void energyACReadReady();
+    void on_energyACCheckPushButton_clicked();
+    void on_energyACApplyPushButton_clicked();
 
 private:
     QModbusReply *lastRequest;

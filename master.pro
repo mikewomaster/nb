@@ -43,7 +43,10 @@ SOURCES += main.cpp\
     bucket.cpp \
     ymodem.cpp \
     mbuslog.cpp \
-    ssl.cpp
+    ssl.cpp \
+    ledcontrol.cpp \
+    utilitytool.cpp \
+    sl102.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -75,7 +78,9 @@ HEADERS  += mainwindow.h \
     loginruledialog.h \
     bucket.h \
     ymodem.h \
-    ssl.h
+    ssl.h \
+    ledcontrol.h \
+    sl102.h
 
 FORMS    += mainwindow.ui \
          settingsdialog.ui \

@@ -34,4 +34,10 @@
 #define TCPPortAddress (677 - 1)
 #define TCPPortEntries 1
 
+#define MQTTSubTopicAddress (4584 - 1)
+#define MQTTSubTopicEntries 32
+
+#define MQTTServerConnectAddress (4616 - 1)
+#define MQTTServerConnectEntries 1
+
 #endif // MQTT_H

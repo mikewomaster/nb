@@ -150,38 +150,6 @@ void MainWindow::on_passwordRead_clicked()
     handle_read(NBPwdAddress, NBPwdEntries, &passwordReadReady);
 }
 
-// status
-void MainWindow::on_nbStatusWrite_clicked()
-{
-    handle_write(ui->nbStatusLineEdit, NBStatusAddress);
-}
-
-void MainWindow::statusReadReady()
-{
-    handle_read_ready(ui->nbStatusLineEdit);
-}
-
-void MainWindow::on_nbStatusRead_clicked()
-{
-    handle_read(NBStatusAddress, &statusReadReady);
-}
-
-// ip
-void MainWindow::on_ipWrite_clicked()
-{
-    nb_handle_write(ui->ipLineEdit, NBIPAddress, NBIPEntries);
-}
-
-void MainWindow::ipReadReady()
-{
-    nb_handle_read_ready(ui->ipLineEdit);
-}
-
-void MainWindow::on_ipRead_clicked()
-{
-    handle_read(NBIPAddress, NBIPEntries, &ipReadReady);
-}
-
 void MainWindow::handle_read_ready(QComboBox* cb)
 {
     auto reply = qobject_cast<QModbusReply *>(sender());
@@ -192,6 +160,62 @@ void MainWindow::handle_read_ready(QComboBox* cb)
         const QModbusDataUnit unit = reply->result();
         int entry = unit.value(0);
         cb->setCurrentIndex(entry);
+        statusBar()->showMessage(tr("OK!"));
+    } else if (reply->error() == QModbusDevice::ProtocolError) {
+        statusBar()->showMessage(tr("Read response error: %1 (Mobus exception: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->rawResult().exceptionCode(), -1, 16), 5000);
+    } else {
+        statusBar()->showMessage(tr("Read response error: %1 (code: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->error(), -1, 16), 5000);
+    }
+    reply->deleteLater();
+}
+
+void MainWindow::handle_read_ready(QComboBox *cb, QLineEdit *le)
+{
+    auto reply = qobject_cast<QModbusReply *>(sender());
+    if (!reply)
+        return;
+
+    if (reply->error() == QModbusDevice::NoError) {
+        const QModbusDataUnit unit = reply->result();
+        ushort entry = unit.value(0);
+        uchar valueOne = entry >> 8;
+        uchar valueTwo = entry && 0x00ff;
+
+        cb->setCurrentIndex(valueOne);
+        le->setText(QString::number(valueTwo));
+
+        statusBar()->showMessage(tr("OK!"));
+    } else if (reply->error() == QModbusDevice::ProtocolError) {
+        statusBar()->showMessage(tr("Read response error: %1 (Mobus exception: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->rawResult().exceptionCode(), -1, 16), 5000);
+    } else {
+        statusBar()->showMessage(tr("Read response error: %1 (code: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->error(), -1, 16), 5000);
+    }
+    reply->deleteLater();
+}
+
+void MainWindow::handle_read_ready(QComboBox *cb, QComboBox *cb2)
+{
+    auto reply = qobject_cast<QModbusReply *>(sender());
+    if (!reply)
+        return;
+
+    if (reply->error() == QModbusDevice::NoError) {
+        const QModbusDataUnit unit = reply->result();
+        ushort entry = unit.value(0);
+        uchar valueOne = entry >> 8;
+        uchar valueTwo = entry && 0x00ff;
+
+        cb->setCurrentIndex(valueOne);
+        cb2->setCurrentIndex(valueTwo);
+
         statusBar()->showMessage(tr("OK!"));
     } else if (reply->error() == QModbusDevice::ProtocolError) {
         statusBar()->showMessage(tr("Read response error: %1 (Mobus exception: 0x%2)").
@@ -280,10 +304,6 @@ void MainWindow::on_nbReload_clicked()
     _sleep(2000);
     emit on_passwordRead_clicked();
     _sleep(2000);
-    emit on_ipRead_clicked();
-    _sleep(2000);
-    emit on_nbStatusRead_clicked();
-    _sleep(2000);
     emit on_plmnRead_clicked();
     _sleep(2000);
 
@@ -366,14 +386,126 @@ void MainWindow::on_plmnRead_clicked()
 
 void MainWindow::on_cellularEnableButton_clicked()
 {
-    if (ui->nbEnableRadioButton->isChecked()) {
-        ui->nbEnableRadioButton->setChecked(false);
-        ui->cellularEnableButton->setText("Connect");
-    }
-    else {
-        ui->nbEnableRadioButton->setChecked(true);
-        ui->cellularEnableButton->setText("Disconnect");
-    }
+    QModbusDataUnit writeUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, NBConnTestAddress, NBConnTestEntries);
+    writeUnit.setValue(0, 1);
 
-    on_nbEnableRadioButton_clicked();
+    handle_write(writeUnit);
+}
+
+/*
+ * Refresh Button
+ * Function
+*/
+
+// status
+void MainWindow::on_nbStatusWrite_clicked()
+{
+    handle_write(ui->nbStatusLineEdit, NBStatusAddress);
+}
+
+void MainWindow::statusReadReady()
+{
+    handle_read_ready(ui->nbStatusLineEdit);
+}
+
+void MainWindow::on_nbStatusRead_clicked()
+{
+    handle_read(NBStatusAddress, &statusReadReady);
+}
+
+
+// ip
+void MainWindow::on_ipWrite_clicked()
+{
+    nb_handle_write(ui->ipLineEdit, NBIPAddress, NBIPEntries);
+}
+
+void MainWindow::ipReadReady()
+{
+    nb_handle_read_ready(ui->ipLineEdit);
+}
+
+void MainWindow::on_ipRead_clicked()
+{
+    handle_read(NBIPAddress, NBIPEntries, &ipReadReady);
+}
+
+// hook function to deal with Modbus
+void MainWindow::registReadReady()
+{
+    nb_handle_read_ready(ui->regisLineEdit);
+}
+
+void MainWindow::providerReadReady()
+{
+    nb_handle_read_ready(ui->providerLineEdit);
+}
+
+void MainWindow::imeiReadReady()
+{
+    nb_handle_read_ready(ui->imeiLineEdit);
+}
+
+void MainWindow::imsiReadReady()
+{
+    nb_handle_read_ready(ui->imsiLineEdit);
+}
+
+void MainWindow::plmn2ReadReady()
+{
+    nb_handle_read_ready(ui->plmnLineEdit_2);
+}
+
+void MainWindow::bandReadReady()
+{
+    nb_handle_read_ready(ui->bandLineEdit);
+}
+
+void MainWindow::rssiReadReady()
+{
+    nb_handle_read_ready(ui->nbRssiLineEdit);
+}
+
+void MainWindow::simStatusReadReady()
+{
+    // fix
+    // for parser Later
+    handle_read_ready(ui->simStatusLineEdit);
+}
+
+void MainWindow::on_nbRefreshButton_clicked()
+{
+    ui->nbRefreshButton->setEnabled(false);
+
+    handle_read(NBRegistrationAddress, EightEntries, &registReadReady);
+    _sleep(2000);
+
+    handle_read(NBProviderAddress, EightEntries, &providerReadReady);
+    _sleep(2000);
+
+    handle_read(NBIMEIAddress, EightEntries, &imeiReadReady);
+    _sleep(2000);
+
+    handle_read(NBIMSIAddress, EightEntries, &imsiReadReady);
+    _sleep(2000);
+
+    handle_read(NBPLMNAddress2, EightEntries, &plmn2ReadReady);
+    _sleep(2000);
+
+    handle_read(NBBANDAddress, EightEntries, &bandReadReady);
+    _sleep(2000);
+
+    handle_read(NBRSSIAddress, EightEntries, &rssiReadReady);
+    _sleep(2000);
+
+    handle_read(NBSIMStatus, &simStatusReadReady);
+    _sleep(2000);
+
+    emit on_ipRead_clicked();
+    _sleep(2000);
+
+    emit on_nbStatusRead_clicked();
+    _sleep(2000);
+
+    ui->nbRefreshButton->setEnabled(true);
 }

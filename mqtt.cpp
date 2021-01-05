@@ -61,6 +61,12 @@ void MainWindow::topicReadReady()
     nb_handle_read_ready(ui->topicLineEdit);
 }
 
+// subtopic
+void MainWindow::subTopicReadReady()
+{
+    nb_handle_read_ready(ui->subTopicLineEdit);
+}
+
 void MainWindow::on_topicRead_clicked()
 {
     handle_read(mqttTopicAddress, mqttTopicEntreis, &topicReadReady);
@@ -237,6 +243,9 @@ void MainWindow::on_mqttApply_clicked()
         _sleep(2000);
     }
 
+    nb_handle_write(ui->subTopicLineEdit, MQTTSubTopicAddress, MQTTSubTopicEntries);
+     _sleep(2000);
+
     emit on_idWrite_clicked();
     _sleep(2000);
 
@@ -265,6 +274,8 @@ void MainWindow::on_mqttReload_clicked()
     _sleep(2000);
     on_topicRead_clicked();
     _sleep(2000);
+    handle_read(MQTTSubTopicAddress, MQTTSubTopicEntries, &topicReadReady);
+    _sleep(2000);
     on_idRead_clicked();
     _sleep(2000);
     handle_read(mqttUserAddress, mqttUserEntries, &mqttUserNameReadReady);
@@ -274,8 +285,21 @@ void MainWindow::on_mqttReload_clicked()
     _sleep(2000);
     on_intervalRead_clicked();
 #endif
-    _sleep(2000);
-    on_mqttStatusRead_clicked();
+
 
     ui->mqttReload->setEnabled(true);
+}
+
+void MainWindow::on_mqttServerConnBtn_clicked()
+{
+    QModbusDataUnit writeUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, MQTTServerConnectAddress, MQTTServerConnectEntries);
+    writeUnit.setValue(0, 1);
+
+    handle_write(writeUnit);
+}
+
+
+void MainWindow::on_mqttCheck_clicked()
+{
+    on_mqttStatusRead_clicked();
 }
