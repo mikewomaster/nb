@@ -360,7 +360,7 @@ void systemDialog::on_SNRead_clicked()
 
 void systemDialog::on_pushButton_clicked()
 {
-    return;
+    // return;
 
     if (ui->pushButton->text() == ">>>") {
         this->setFixedSize(395,311);

@@ -274,7 +274,7 @@ void MainWindow::on_mqttReload_clicked()
     _sleep(2000);
     on_topicRead_clicked();
     _sleep(2000);
-    handle_read(MQTTSubTopicAddress, MQTTSubTopicEntries, &topicReadReady);
+    handle_read(MQTTSubTopicAddress, MQTTSubTopicEntries, &subTopicReadReady);
     _sleep(2000);
     on_idRead_clicked();
     _sleep(2000);

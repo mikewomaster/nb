@@ -110,45 +110,55 @@ void MainWindow::on_ledControlSlider_sliderReleased()
 /////////////////////////////////////////////////
 void MainWindow::cmsTSReadReady()
 {
+    handle_read_ready(ui->cmsTSLineEdit, 1);
+}
 
+void MainWindow::cmsACKReadReady()
+{
+    nb_handle_read_ready(ui->cmsACKLineEdit);
+}
+
+void MainWindow::cmsRVReadReady()
+{
+    nb_handle_read_ready(ui->cmsReturnLineEdit);
+}
+
+void MainWindow::cmsDimmingReadReady()
+{
+    handle_read_ready(ui->cmsDimmingLineEdit);
+}
+
+void MainWindow::cmsDelayReadReady()
+{
+    handle_read_ready(ui->cmsDelayLineEdit);
+}
+
+void MainWindow::cmsPeriodReadReady()
+{
+    handle_read_ready(ui->cmsPeriodLineEdit);
 }
 
 void MainWindow::on_cmsCheckPushButton_clicked()
 {
+    ui->cmsCheckPushButton->setEnabled(false);
+
     handle_read(cmsTSAddress, Entry2, &cmsTSReadReady);
     _sleep(2000);
 
+    handle_read(cmsACKAddress, Entry16, &cmsACKReadReady);
+    _sleep(2000);
 
+    handle_read(cmsRVAddress, Entry16, &cmsRVReadReady);
+    _sleep(2000);
 
+    handle_read(cmsDimmingAddress, &cmsDimmingReadReady);
+    _sleep(2000);
 
+    handle_read(cmsDelayAddress, &cmsDelayReadReady);
+    _sleep(2000);
+
+    handle_read(cmsPeriodAddress, &cmsPeriodReadReady);
+    _sleep(2000);
+
+    ui->cmsCheckPushButton->setEnabled(true);
 }
-
-
-/*
-void MainWindow::mbusTimeStampReadReady()
-{
-
-}
-
-void MainWindow::on_mbusTSRead_clicked()
-{
-    if (!modbusDevice)
-        return;
-    statusBar()->clearMessage();
-
-    int multiplyTerm = ui->mbusRegister->currentIndex();
-    quint16 ADDR = mbusTimeStampBase + 20 * multiplyTerm;
-
-    QModbusDataUnit readUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, ADDR, mbusTimeStampMapEntries);
-
-    if (auto *reply = modbusDevice->sendReadRequest(readUnit, ui->serverEdit->value())) {
-        if (!reply->isFinished())
-            connect(reply, &QModbusReply::finished, this, &MainWindow::mbusTimeStampReadReady);
-        else
-            delete reply; // broadcast replies return immediately
-    } else {
-        statusBar()->showMessage(tr("Read error: ") + modbusDevice->errorString(), 5000);
-    }
-}
-
-*/

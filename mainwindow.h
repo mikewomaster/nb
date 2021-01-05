@@ -486,9 +486,12 @@ private slots:
     void on_ledControlOn_clicked();
     void on_ledControlOff_clicked();
     void on_ledControlSlider_sliderReleased();
-
     void cmsTSReadReady();
-
+    void cmsACKReadReady();
+    void cmsRVReadReady();
+    void cmsDimmingReadReady();
+    void cmsDelayReadReady();
+    void cmsPeriodReadReady();
     void on_cmsCheckPushButton_clicked();
 
 private:

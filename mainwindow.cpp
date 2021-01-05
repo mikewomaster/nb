@@ -730,13 +730,11 @@ void MainWindow::on_connectButton_clicked()
             m_login_flag_2 = 0;
             sensorFlag = false;
      } else {
-#if 0
         logindialog log(this);
         log.show();
 
-
-        loginRuleDialog ruleDialog(this);
-        ruleDialog.show();
+        // loginRuleDialog ruleDialog(this);
+        // ruleDialog.show();
         // init
         m_login_flag_2 = 0;
 
@@ -746,7 +744,7 @@ void MainWindow::on_connectButton_clicked()
                 return;
             _sleep(1500);
         }
-#endif
+
         if (!modbusDevice)
             modbusDevice = new QModbusRtuSerialMaster();
 
