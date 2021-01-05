@@ -243,12 +243,12 @@
        </property>
        <item>
         <property name="text">
-         <string>Low</string>
+         <string>High</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>High</string>
+         <string>Low</string>
         </property>
        </item>
       </widget>

@@ -154,8 +154,9 @@ void systemDialog::on_systemReload_clicked()
     ui->systemReload->setEnabled(false);
     ui->passwordLineEdit->clear();
     ui->usernameLineEdit->clear();
-    handle_read(UsernameAddress, UsernameEntries, usernameReadReady);
-    handle_read(PasswordAddress, PasswordEntries, passwordReadReady);
+    quint8 additionAddr = ui->sysPrivilegeComBox->currentIndex()*8;
+    handle_read(UsernameAddress + additionAddr, UsernameEntries, usernameReadReady);
+    handle_read(PasswordAddress + additionAddr, PasswordEntries, passwordReadReady);
     CommanHelper::sleep(3000);
     ui->usernameLineEdit->setText(m_username);
     ui->passwordLineEdit->setText(m_password);
@@ -227,7 +228,8 @@ void systemDialog::on_systemApply_clicked()
     }
 
     ui->systemApply->setEnabled(false);
-    handle_write(UsernameAddress, UsernameEntries+PasswordEntries);
+    quint8 additionAddr = ui->sysPrivilegeComBox->currentIndex()*16;
+    handle_write(UsernameAddress + additionAddr, UsernameEntries+PasswordEntries);
     ui->systemApply->setEnabled(true);
 }
 
@@ -370,5 +372,46 @@ void systemDialog::on_pushButton_clicked()
         this->setFixedSize(395,175);
         ui->widget->setVisible(false);
         ui->pushButton->setText(">>>");
+    }
+}
+
+void systemDialog::on_systemTSApplyPushButton_clicked()
+{
+    MainWindow *w = (MainWindow*) parentWidget();
+    QModbusClient* modbusDevice = w->getModbusDevice();
+    if (!modbusDevice)
+        return;
+
+    QDateTime time = QDateTime::currentDateTime();
+    int timeT = time.toTime_t();
+
+    QString StrCurrentTime = time.toString("yyyy-MM-dd hh:mm:ss ddd");
+    ui->systemTSLineEdit->setText(StrCurrentTime);
+
+    quint32 timeoutStamp = timeT;
+    QVector<quint16> values;
+
+    for (int i = 1; i >= 0; i--) {
+        quint16 temp = 0;
+        temp = (timeoutStamp >> (i*2*8)) & 0x0000ffff;
+        values.push_back(temp);
+    }
+
+    QModbusDataUnit writeUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, SYSTS, SYSTSEntires);
+    writeUnit.setValues(values);
+    if (auto *reply = modbusDevice->sendWriteRequest(writeUnit, 1)) {
+        if (!reply->isFinished()) {
+            connect(reply, &QModbusReply::finished, this, [this, reply]() {
+                if (reply->error() == QModbusDevice::ProtocolError) {
+                } else if (reply->error() != QModbusDevice::NoError) {
+                }
+                reply->deleteLater();
+            });
+        } else {
+            // broadcast replies return immediately
+            QMessageBox::information(NULL, "", "Successed to Reset Timestamp.");
+            reply->deleteLater();
+        }
+    } else {
     }
 }

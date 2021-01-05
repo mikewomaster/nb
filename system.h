@@ -24,6 +24,8 @@ QT_END_NAMESPACE
 
 #define SNAddr2 (142 - 1)
 #define SNEntries2 8
+#define SYSTS (150 - 1)
+#define SYSTSEntires 2
 
 class systemDialog : public QDialog
 {
@@ -52,6 +54,8 @@ private slots:
 
     void SNReadReady();
     void on_pushButton_clicked();
+
+    void on_systemTSApplyPushButton_clicked();
 
 private:
     Ui::system *ui;
