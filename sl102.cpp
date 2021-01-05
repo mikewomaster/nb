@@ -85,3 +85,70 @@ void MainWindow::on_energyACApplyPushButton_clicked()
 {
     handle_write(ui->energyACLineEdit, ACFrequencyAddress);
 }
+
+/////////////////////////////////////////
+/// \brief led control test for slc102
+///////////////////////////////////////////
+void MainWindow::on_ledControlOn_clicked()
+{
+    prepareSendModbusUnit(controlTestOnAddress, EnergyOneEntry, 1);
+}
+
+void MainWindow::on_ledControlOff_clicked()
+{
+    prepareSendModbusUnit(controlTestOnAddress, EnergyOneEntry, 0);
+}
+
+void MainWindow::on_ledControlSlider_sliderReleased()
+{
+    uint16_t valueToSend = ui->ledControlSlider->value();
+    prepareSendModbusUnit(controlTestOnAddress, EnergyOneEntry, valueToSend);
+}
+
+////////////////////////////////////////////
+/// \brief CMS Check Page
+/////////////////////////////////////////////////
+void MainWindow::cmsTSReadReady()
+{
+
+}
+
+void MainWindow::on_cmsCheckPushButton_clicked()
+{
+    handle_read(cmsTSAddress, Entry2, &cmsTSReadReady);
+    _sleep(2000);
+
+
+
+
+}
+
+
+/*
+void MainWindow::mbusTimeStampReadReady()
+{
+
+}
+
+void MainWindow::on_mbusTSRead_clicked()
+{
+    if (!modbusDevice)
+        return;
+    statusBar()->clearMessage();
+
+    int multiplyTerm = ui->mbusRegister->currentIndex();
+    quint16 ADDR = mbusTimeStampBase + 20 * multiplyTerm;
+
+    QModbusDataUnit readUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, ADDR, mbusTimeStampMapEntries);
+
+    if (auto *reply = modbusDevice->sendReadRequest(readUnit, ui->serverEdit->value())) {
+        if (!reply->isFinished())
+            connect(reply, &QModbusReply::finished, this, &MainWindow::mbusTimeStampReadReady);
+        else
+            delete reply; // broadcast replies return immediately
+    } else {
+        statusBar()->showMessage(tr("Read error: ") + modbusDevice->errorString(), 5000);
+    }
+}
+
+*/

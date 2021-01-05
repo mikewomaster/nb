@@ -169,6 +169,7 @@ private:
     void handle_read(int addr, int entry, void (MainWindow::*fp)());
 
     void handle_read_ready(QLineEdit* );
+    void handle_read_ready(QLineEdit *, int);
     void handle_read_ready(QComboBox* );
     void handle_read_ready(QComboBox* ,QLineEdit* );
     void handle_read_ready(QComboBox* ,QComboBox* );
@@ -482,6 +483,13 @@ private slots:
     void energyACReadReady();
     void on_energyACCheckPushButton_clicked();
     void on_energyACApplyPushButton_clicked();
+    void on_ledControlOn_clicked();
+    void on_ledControlOff_clicked();
+    void on_ledControlSlider_sliderReleased();
+
+    void cmsTSReadReady();
+
+    void on_cmsCheckPushButton_clicked();
 
 private:
     QModbusReply *lastRequest;
