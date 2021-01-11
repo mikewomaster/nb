@@ -77,7 +77,7 @@
 #define ACTION
 #define ADMIN
 // #define LORA
-#define UtilityVersion "SL102 v0.1.0"
+#define UtilityVersion "SL102 v0.2.0"
 QT_BEGIN_NAMESPACE
 
 class QModbusClient;

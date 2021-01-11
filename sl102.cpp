@@ -86,25 +86,6 @@ void MainWindow::on_energyACApplyPushButton_clicked()
     handle_write(ui->energyACLineEdit, ACFrequencyAddress);
 }
 
-/////////////////////////////////////////
-/// \brief led control test for slc102
-///////////////////////////////////////////
-void MainWindow::on_ledControlOn_clicked()
-{
-    prepareSendModbusUnit(controlTestOnAddress, EnergyOneEntry, 1);
-}
-
-void MainWindow::on_ledControlOff_clicked()
-{
-    prepareSendModbusUnit(controlTestOnAddress, EnergyOneEntry, 0);
-}
-
-void MainWindow::on_ledControlSlider_sliderReleased()
-{
-    uint16_t valueToSend = ui->ledControlSlider->value();
-    prepareSendModbusUnit(controlTestOnAddress, EnergyOneEntry, valueToSend);
-}
-
 ////////////////////////////////////////////
 /// \brief CMS Check Page
 /////////////////////////////////////////////////
@@ -161,4 +142,23 @@ void MainWindow::on_cmsCheckPushButton_clicked()
     _sleep(2000);
 
     ui->cmsCheckPushButton->setEnabled(true);
+}
+
+/////////////////////////////////////////
+/// \brief led control test for slc102
+///////////////////////////////////////////
+void MainWindow::on_ledControlOn_clicked()
+{
+    prepareSendModbusUnit(controlTestOnAddress, EnergyOneEntry, 1);
+}
+
+void MainWindow::on_ledControlOff_clicked()
+{
+    prepareSendModbusUnit(controlTestOnAddress, EnergyOneEntry, 0);
+}
+
+void MainWindow::on_ledControlSlider_sliderReleased()
+{
+    uint16_t valueToSend = ui->ledControlSlider->value();
+    prepareSendModbusUnit(controlTestOnAddress, EnergyOneEntry, valueToSend);
 }

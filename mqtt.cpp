@@ -255,12 +255,11 @@ void MainWindow::on_mqttApply_clicked()
     nb_handle_write(ui->mqttPasswordLineEdit, mqttPassWordAddress, mqttPassWordEntries);
     _sleep(200);
 
-#if 0
-    if (ui->intervalLineEdit->text() != ""){
+    if (ui->intervalLineEdit->text() != "") {
         emit on_idWrite_2_clicked();
         _sleep(2000);
     }
-#endif
+
     ui->mqttApply->setEnabled(true);
 }
 
@@ -281,11 +280,8 @@ void MainWindow::on_mqttReload_clicked()
     handle_read(mqttUserAddress, mqttUserEntries, &mqttUserNameReadReady);
     _sleep(2000);
     handle_read(mqttPassWordAddress, mqttPassWordEntries, &mqttPassWordReadReady);
-#if 0
     _sleep(2000);
     on_intervalRead_clicked();
-#endif
-
 
     ui->mqttReload->setEnabled(true);
 }

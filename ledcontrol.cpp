@@ -19,7 +19,8 @@ void MainWindow::on_ledControlTypeCheck_clicked()
 
 void MainWindow::on_ledControlTypeApply_clicked()
 {
-    quint16 valueSet = (valueSet << 8) + ui->ledControlPercentLineEdit->text().toShort();
+    quint16 valueSet = ui->ledControlComboBox->currentIndex();
+    valueSet = (valueSet << 8) + ui->ledControlPercentLineEdit->text().toShort();
     prepareSendModbusUnit(LEDControlTypeAddress, LEDControlEntry, valueSet);
 }
 

@@ -56,6 +56,8 @@ private slots:
     void on_pushButton_clicked();
 
     void on_systemTSApplyPushButton_clicked();
+    void TSReadReady();
+    void on_systemTSCheckPushButton_clicked();
 
 private:
     Ui::system *ui;

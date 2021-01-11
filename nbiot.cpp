@@ -91,28 +91,28 @@ void MainWindow::on_nbApply_clicked()
 
     ui->nbApply->setEnabled(false);
 
-    emit on_nbModeWrite_clicked();
-        _sleep(2000);
+    // emit on_nbModeWrite_clicked();
+        // _sleep(2000);
 
     // if (ui->apnLineEdit->text() != "") {
         emit on_apnWrite_clicked();
         _sleep(2000);
-    //}
+    // }
 
-    //if (ui->userLineEdit->text() != "") {
+    // if (ui->userLineEdit->text() != "") {
         emit on_userWrite_clicked();
         _sleep(2000);
-    //}
+    // }
 
     // if (ui->passwordLineEdit->text() != "") {
         emit on_passwordWrite_clicked();
         _sleep(2000);
-    //}
+    // }
 
-    if (ui->ipLineEdit->text() != "") {
-        emit on_ipWrite_clicked();
-        _sleep(2000);
-    }
+    // if (ui->ipLineEdit->text() != "") {
+        // emit on_ipWrite_clicked();
+        // _sleep(2000);
+    // }
 
     emit on_plmnWrite_clicked();
     _sleep(2000);

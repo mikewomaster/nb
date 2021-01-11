@@ -11,7 +11,7 @@
 #define EnergyVRMSAddress (604 - 1)
 #define EnergyIRMSAddress (605 - 1)
 #define EnergyPFAddress (606 -1)
-#define ACFrequencyAddress (207 - 1)
+#define ACFrequencyAddress (307 - 1)
 
 #define controlTestOnAddress (803 - 1)
 #define controlTestOuputAddress (804 - 1)

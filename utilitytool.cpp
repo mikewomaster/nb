@@ -308,7 +308,7 @@ void MainWindow::nb_handle_write(QLineEdit* le, int addr, int entry)
         i++;
     }
 
-    if (addr != mqttTopicAddress) {
+    if (addr != mqttTopicAddress && addr != MQTTSubTopicAddress) {
         for (i = (i / 2); i < entry; i++) {
             values.push_back(0x0000);
         }

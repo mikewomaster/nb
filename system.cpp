@@ -154,7 +154,7 @@ void systemDialog::on_systemReload_clicked()
     ui->systemReload->setEnabled(false);
     ui->passwordLineEdit->clear();
     ui->usernameLineEdit->clear();
-    quint8 additionAddr = ui->sysPrivilegeComBox->currentIndex()*8;
+    quint8 additionAddr = ui->sysPrivilegeComBox->currentIndex()*16;
     handle_read(UsernameAddress + additionAddr, UsernameEntries, usernameReadReady);
     handle_read(PasswordAddress + additionAddr, PasswordEntries, passwordReadReady);
     CommanHelper::sleep(3000);
@@ -413,5 +413,51 @@ void systemDialog::on_systemTSApplyPushButton_clicked()
             reply->deleteLater();
         }
     } else {
+    }
+}
+
+void systemDialog::TSReadReady()
+{
+    auto reply = qobject_cast<QModbusReply *>(sender());
+    if (!reply)
+        return;
+
+    if (reply->error() == QModbusDevice::NoError) {
+        const QModbusDataUnit unit = reply->result();
+
+        quint64 data;
+        data = unit.value(0);
+        data = (data << 16) + unit.value(1);
+
+        QDateTime time = QDateTime::fromTime_t(data);
+        QString StrCurrentTime = time.toString("yyyy-MM-dd hh:mm:ss");
+        ui->systemTSLineEdit->setText(StrCurrentTime);
+
+    } else if (reply->error() == QModbusDevice::ProtocolError) {
+
+    } else {
+
+    }
+    reply->deleteLater();
+}
+
+void systemDialog::on_systemTSCheckPushButton_clicked()
+{
+    MainWindow *w = (MainWindow*) parentWidget();
+    QModbusClient* modbusDevice = w->getModbusDevice();
+
+    if (!modbusDevice)
+        return;
+
+    quint16 ADDR = SYSTS;
+    QModbusDataUnit readUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, ADDR, SYSTSEntires);
+
+    if (auto *reply = modbusDevice->sendReadRequest(readUnit, 1)) {
+        if (!reply->isFinished())
+            connect(reply, &QModbusReply::finished, this, &systemDialog::TSReadReady);
+        else
+            delete reply; // broadcast replies return immediately
+    } else {
+
     }
 }
