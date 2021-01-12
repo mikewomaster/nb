@@ -7,6 +7,22 @@
 #include "mainwindow.h"
 #include "mqtt.h"
 
+void MainWindow::simStatusFill(short res, QLineEdit *le)
+{
+    switch(res)
+    {
+     case 0:
+       le->setText("SIM_NOT_INSERTED");
+       break;
+    case 1:
+       le->setText("SIM_READY");
+       break;
+    case 2:
+       le->setText("SIM_NOT_READY");
+       break;
+    }
+}
+
 void MainWindow::nbStatusFill(short res, QLineEdit *le)
 {
    switch(res)
@@ -15,16 +31,16 @@ void MainWindow::nbStatusFill(short res, QLineEdit *le)
       le->setText("CEL_ERROR");
       break;
    case 0:
-      le->setText("CEL_NOT_READY");
+      le->setText("CEL_SIM_ERROR");
       break;
    case 1:
-      le->setText("CEL_PORT_READY");
+      le->setText("CEL_CONNECTED");
       break;
    case 2:
-      le->setText("CEL_MODULE_READY");
+      le->setText("CEL_SEARCHING");
       break;
    case 3:
-      le->setText("CEL_SIM_NOT_READY");
+      le->setText("CEL_DENIED");
       break;
    case 4:
       le->setText("CEL_PIN_REQUEST");
@@ -112,6 +128,30 @@ void MainWindow::handle_write(QModbusDataUnit writeUnit)
     }
 }
 
+void MainWindow::handle_read_ready_divide_ten(QLineEdit * le)
+{
+    auto reply = qobject_cast<QModbusReply *>(sender());
+    if (!reply)
+        return;
+
+    if (reply->error() == QModbusDevice::NoError) {
+        const QModbusDataUnit unit = reply->result();
+        double entry = unit.value(0) / 100.0;
+
+        le->setText(QString::number(entry, 'g', 3));
+        statusBar()->showMessage(tr("OK!"));
+    } else if (reply->error() == QModbusDevice::ProtocolError) {
+        statusBar()->showMessage(tr("Read response error: %1 (Mobus exception: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->rawResult().exceptionCode(), -1, 16), 5000);
+    } else {
+        statusBar()->showMessage(tr("Read response error: %1 (code: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->error(), -1, 16), 5000);
+    }
+    reply->deleteLater();
+}
+
 void MainWindow::handle_read_ready(QLineEdit* le)
 {
     auto reply = qobject_cast<QModbusReply *>(sender());
@@ -125,6 +165,8 @@ void MainWindow::handle_read_ready(QLineEdit* le)
             nbStatusFill(entry, ui->nbStatusLineEdit);
         } else if (le == ui->mqttStatusLineEdit){
             mqttStatusFill(entry, ui->mqttStatusLineEdit);
+        } else if (le == ui->nbStatusLineEdit) {
+            simStatusFill(entry, ui->simStatusLineEdit);
         } else {
               le->setText(QString::number(entry));
         }

@@ -13,7 +13,7 @@
 ///////////////////////////////////////////
 void MainWindow::energyVReadReady()
 {
-    handle_read_ready(ui->energyVLineEdit);
+    handle_read_ready_divide_ten(ui->energyVLineEdit);
 }
 
 void MainWindow::on_energyVPushButton_clicked()
@@ -23,7 +23,7 @@ void MainWindow::on_energyVPushButton_clicked()
 
 void MainWindow::energyCReadReady()
 {
-    handle_read_ready(ui->energyCLineEdit);
+    handle_read_ready_divide_ten(ui->energyCLineEdit);
 }
 
 void MainWindow::on_energyCPushButton_clicked()
@@ -33,7 +33,7 @@ void MainWindow::on_energyCPushButton_clicked()
 
 void MainWindow::energyPReadReady()
 {
-    handle_read_ready(ui->energyPLineEdit);
+    handle_read_ready_divide_ten(ui->energyPLineEdit);
 }
 
 void MainWindow::on_energyPPushButton_clicked()
@@ -43,7 +43,7 @@ void MainWindow::on_energyPPushButton_clicked()
 
 void MainWindow::energyVRMSPReadReady()
 {
-    handle_read_ready(ui->energyVRmsLineEdit);
+    handle_read_ready_divide_ten(ui->energyVRmsLineEdit);
 }
 
 void MainWindow::on_energyVRMSPushButton_clicked()
@@ -53,7 +53,7 @@ void MainWindow::on_energyVRMSPushButton_clicked()
 
 void MainWindow::energyCRMSReadReady()
 {
-    handle_read_ready(ui->energyCRmsLineEdit);
+    handle_read_ready_divide_ten(ui->energyCRmsLineEdit);
 }
 
 void MainWindow::on_energyCRMSPushButton_clicked()
@@ -63,7 +63,7 @@ void MainWindow::on_energyCRMSPushButton_clicked()
 
 void MainWindow::energyPFReadReady()
 {
-    handle_read_ready(ui->energyPFLineEdit);
+    handle_read_ready_divide_ten(ui->energyPFLineEdit);
 }
 
 void MainWindow::on_energyPFPushButton_clicked()

@@ -260,7 +260,7 @@ void MainWindow::on_ipRead_clicked()
 // hook function to deal with Modbus
 void MainWindow::registReadReady()
 {
-    nb_handle_read_ready(ui->regisLineEdit);
+    handle_read_ready(ui->regisLineEdit);
 }
 
 void MainWindow::providerReadReady()
@@ -290,13 +290,11 @@ void MainWindow::bandReadReady()
 
 void MainWindow::rssiReadReady()
 {
-    nb_handle_read_ready(ui->nbRssiLineEdit);
+    handle_read_ready(ui->nbRssiLineEdit);
 }
 
 void MainWindow::simStatusReadReady()
 {
-    // fix
-    // for parser Later
     handle_read_ready(ui->simStatusLineEdit);
 }
 

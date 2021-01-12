@@ -169,6 +169,7 @@ private:
     void handle_read(int addr, int entry, void (MainWindow::*fp)());
 
     void handle_read_ready(QLineEdit* );
+    void handle_read_ready_divide_ten(QLineEdit* );
     void handle_read_ready(QLineEdit *, int);
     void handle_read_ready(QComboBox* );
     void handle_read_ready(QComboBox* ,QLineEdit* );
@@ -179,6 +180,7 @@ private:
 
     void nbStatusFill(short, QLineEdit*);
     void mqttStatusFill(short, QLineEdit*);
+    void simStatusFill(short, QLineEdit*);
     void serialAlarmInit();
     void sensorAddModbus(sen, int);
     void sensor_view_model();
