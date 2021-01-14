@@ -3950,7 +3950,7 @@
      </sizepolicy>
     </property>
     <property name="currentIndex">
-     <number>15</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_7">
      <attribute name="title">
