@@ -5,9 +5,10 @@
 #define Entry2 2
 #define Entry16 16
 
-#define EnergyVoltageAddress (601 - 1)
-#define EnergyAmpAddress (602 - 1)
-#define EnergyPowerAddress (603 - 1)
+#define ApparentPowerAddress (601 - 1)
+#define ReactivePowerAddress (602 - 1)
+#define EffectivePowerAddress (603 - 1)
+
 #define EnergyVRMSAddress (604 - 1)
 #define EnergyIRMSAddress (605 - 1)
 #define EnergyPFAddress (606 -1)
@@ -22,5 +23,7 @@
 #define cmsDelayAddress (920 - 1)
 #define cmsPeriodAddress (921 - 1)
 #define cmsRVAddress (923 - 1)
+#define cmsUsernameAddress (939 - 1)
+#define cmsPasswordAddress (955 - 1)
 
 #endif // SL102_H

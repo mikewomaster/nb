@@ -18,7 +18,7 @@ void MainWindow::energyVReadReady()
 
 void MainWindow::on_energyVPushButton_clicked()
 {
-    handle_read(EnergyVoltageAddress, &energyVReadReady);
+    handle_read(EffectivePowerAddress, &energyVReadReady);
 }
 
 void MainWindow::energyCReadReady()
@@ -28,7 +28,7 @@ void MainWindow::energyCReadReady()
 
 void MainWindow::on_energyCPushButton_clicked()
 {
-    handle_read(EnergyAmpAddress, &energyCReadReady);
+    handle_read(ReactivePowerAddress, &energyCReadReady);
 }
 
 void MainWindow::energyPReadReady()
@@ -38,7 +38,7 @@ void MainWindow::energyPReadReady()
 
 void MainWindow::on_energyPPushButton_clicked()
 {
-    handle_read(EnergyPowerAddress, &energyPReadReady);
+    handle_read(ApparentPowerAddress, &energyPReadReady);
 }
 
 void MainWindow::energyVRMSPReadReady()
@@ -104,6 +104,16 @@ void MainWindow::cmsRVReadReady()
     nb_handle_read_ready(ui->cmsReturnLineEdit);
 }
 
+void MainWindow::cmsUsernameReadReady()
+{
+    nb_handle_read_ready(ui->cmsUsernameLineEdit);
+}
+
+void MainWindow::cmsPasswordReadReady()
+{
+    nb_handle_read_ready(ui->cmsPasswordLineEdit);
+}
+
 void MainWindow::cmsDimmingReadReady()
 {
     handle_read_ready(ui->cmsDimmingLineEdit);
@@ -130,6 +140,12 @@ void MainWindow::on_cmsCheckPushButton_clicked()
     _sleep(2000);
 
     handle_read(cmsRVAddress, Entry16, &cmsRVReadReady);
+    _sleep(2000);
+
+    handle_read(cmsUsernameAddress, Entry16, &cmsUsernameReadReady);
+    _sleep(2000);
+
+    handle_read(cmsPasswordAddress, Entry16, &cmsPasswordReadReady);
     _sleep(2000);
 
     handle_read(cmsDimmingAddress, &cmsDimmingReadReady);

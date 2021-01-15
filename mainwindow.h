@@ -181,6 +181,7 @@ private:
     void nbStatusFill(short, QLineEdit*);
     void mqttStatusFill(short, QLineEdit*);
     void simStatusFill(short, QLineEdit*);
+    void regStatusFille(short, QLineEdit*);
     void serialAlarmInit();
     void sensorAddModbus(sen, int);
     void sensor_view_model();
@@ -491,6 +492,8 @@ private slots:
     void cmsTSReadReady();
     void cmsACKReadReady();
     void cmsRVReadReady();
+    void cmsUsernameReadReady();
+    void cmsPasswordReadReady();
     void cmsDimmingReadReady();
     void cmsDelayReadReady();
     void cmsPeriodReadReady();

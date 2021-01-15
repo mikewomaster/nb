@@ -8891,7 +8891,7 @@
      <widget class="QGroupBox" name="groupBox_22">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>20</x>
         <y>10</y>
         <width>881</width>
         <height>511</height>
@@ -8910,74 +8910,7 @@
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_24">
-        <item row="2" column="1">
-         <spacer name="horizontalSpacer_40">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="2" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_35">
-          <item>
-           <widget class="QLabel" name="label_159">
-            <property name="minimumSize">
-             <size>
-              <width>130</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Power:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="energyPLineEdit"/>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_160">
-            <property name="text">
-             <string>W</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="3" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_33">
-          <item>
-           <widget class="QLabel" name="label_155">
-            <property name="minimumSize">
-             <size>
-              <width>130</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Voltage RMS:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="energyVRmsLineEdit"/>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_156">
-            <property name="text">
-             <string>V</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="3" column="1">
+        <item row="0" column="1">
          <spacer name="horizontalSpacer_41">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -8990,61 +8923,7 @@
           </property>
          </spacer>
         </item>
-        <item row="2" column="3">
-         <widget class="QPushButton" name="energyPPushButton">
-          <property name="text">
-           <string>Check</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="3">
-         <widget class="QPushButton" name="energyVRMSPushButton">
-          <property name="text">
-           <string>Check</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_34">
-          <item>
-           <widget class="QLabel" name="label_157">
-            <property name="minimumSize">
-             <size>
-              <width>130</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Current RMS:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="energyCRmsLineEdit"/>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_158">
-            <property name="text">
-             <string>A</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="4" column="1">
-         <spacer name="horizontalSpacer_421">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="5" column="1">
+        <item row="9" column="1">
          <spacer name="horizontalSpacer_43">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -9057,28 +8936,14 @@
           </property>
          </spacer>
         </item>
-        <item row="4" column="3">
-         <widget class="QPushButton" name="energyCRMSPushButton">
-          <property name="text">
-           <string>Check</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="3">
+        <item row="9" column="3">
          <widget class="QPushButton" name="energyPFPushButton">
           <property name="text">
            <string>Check</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="3">
-         <widget class="QPushButton" name="energyVPushButton">
-          <property name="text">
-           <string>Check</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
+        <item row="9" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_32">
           <item>
            <widget class="QLabel" name="label_153">
@@ -9105,7 +8970,7 @@
           </item>
          </layout>
         </item>
-        <item row="0" column="1">
+        <item row="3" column="1">
          <spacer name="horizontalSpacer_38">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -9118,34 +8983,14 @@
           </property>
          </spacer>
         </item>
-        <item row="0" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_26">
-          <item>
-           <widget class="QLabel" name="label_149">
-            <property name="minimumSize">
-             <size>
-              <width>130</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Voltage:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="energyVLineEdit"/>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_150">
-            <property name="text">
-             <string>V</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+        <item row="3" column="3">
+         <widget class="QPushButton" name="energyVPushButton">
+          <property name="text">
+           <string>Check</string>
+          </property>
+         </widget>
         </item>
-        <item row="1" column="1">
+        <item row="5" column="1">
          <spacer name="horizontalSpacer_39">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -9158,17 +9003,17 @@
           </property>
          </spacer>
         </item>
-        <item row="1" column="3">
+        <item row="5" column="3">
          <widget class="QPushButton" name="energyCPushButton">
           <property name="text">
            <string>Check</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_31">
+        <item row="3" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_26">
           <item>
-           <widget class="QLabel" name="label_151">
+           <widget class="QLabel" name="label_149">
             <property name="minimumSize">
              <size>
               <width>130</width>
@@ -9176,30 +9021,23 @@
              </size>
             </property>
             <property name="text">
-             <string>Current:</string>
+             <string>Effective Power:</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="energyCLineEdit"/>
+           <widget class="QLineEdit" name="energyVLineEdit"/>
           </item>
           <item>
-           <widget class="QLabel" name="label_152">
+           <widget class="QLabel" name="label_150">
             <property name="text">
-             <string>A</string>
+             <string>W</string>
             </property>
            </widget>
           </item>
          </layout>
         </item>
-        <item row="6" column="3">
-         <widget class="QPushButton" name="energyACCheckPushButton">
-          <property name="text">
-           <string>Check</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
+        <item row="10" column="1">
          <spacer name="horizontalSpacer_51">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -9212,7 +9050,41 @@
           </property>
          </spacer>
         </item>
-        <item row="6" column="0">
+        <item row="10" column="3">
+         <widget class="QPushButton" name="energyACCheckPushButton">
+          <property name="text">
+           <string>Check</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_31">
+          <item>
+           <widget class="QLabel" name="label_151">
+            <property name="minimumSize">
+             <size>
+              <width>130</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Reactive Power:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="energyCLineEdit"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_152">
+            <property name="text">
+             <string>W</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="10" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_7">
           <item>
            <widget class="QLabel" name="label_141">
@@ -9252,10 +9124,138 @@
           </item>
          </layout>
         </item>
-        <item row="6" column="2">
+        <item row="10" column="2">
          <widget class="QPushButton" name="energyACApplyPushButton">
           <property name="text">
            <string>  Apply</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_33">
+          <item>
+           <widget class="QLabel" name="label_155">
+            <property name="minimumSize">
+             <size>
+              <width>130</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Voltage RMS:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="energyVRmsLineEdit"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_156">
+            <property name="text">
+             <string>V</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="3">
+         <widget class="QPushButton" name="energyVRMSPushButton">
+          <property name="text">
+           <string>Check</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_34">
+          <item>
+           <widget class="QLabel" name="label_157">
+            <property name="minimumSize">
+             <size>
+              <width>130</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Current RMS:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="energyCRmsLineEdit"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_158">
+            <property name="text">
+             <string>A</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="1">
+         <spacer name="horizontalSpacer_421">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="3">
+         <widget class="QPushButton" name="energyCRMSPushButton">
+          <property name="text">
+           <string>Check</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_35">
+          <item>
+           <widget class="QLabel" name="label_159">
+            <property name="minimumSize">
+             <size>
+              <width>130</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Apparent Power:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="energyPLineEdit"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_160">
+            <property name="text">
+             <string>W</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="1">
+         <spacer name="horizontalSpacer_40">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="3">
+         <widget class="QPushButton" name="energyPPushButton">
+          <property name="text">
+           <string>Check</string>
           </property>
          </widget>
         </item>
@@ -9430,7 +9430,7 @@
         <x>10</x>
         <y>10</y>
         <width>961</width>
-        <height>491</height>
+        <height>501</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -9455,37 +9455,23 @@
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
       </property>
       <layout class="QGridLayout" name="gridLayout_20">
-       <item row="5" column="2">
-        <layout class="QHBoxLayout" name="horizontalLayout_42">
-         <item>
-          <widget class="QLineEdit" name="cmsDelayLineEdit">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_172">
-           <property name="text">
-            <string>s</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+       <item row="12" column="3">
+        <spacer name="verticalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Maximum</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
-       <item row="4" column="2">
+       <item row="5" column="2">
         <layout class="QHBoxLayout" name="horizontalLayout_41">
          <item>
           <widget class="QLineEdit" name="cmsDimmingLineEdit">
@@ -9522,6 +9508,80 @@
         </layout>
        </item>
        <item row="6" column="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_42">
+         <item>
+          <widget class="QLineEdit" name="cmsDelayLineEdit">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_172">
+           <property name="text">
+            <string>s</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="plmnlabel_4">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>123</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>TimeStamp:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLineEdit" name="cmsTSLineEdit">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>500</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>500</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="2">
         <layout class="QHBoxLayout" name="horizontalLayout_43">
          <item>
           <widget class="QLineEdit" name="cmsPeriodLineEdit">
@@ -9551,52 +9611,8 @@
          </item>
         </layout>
        </item>
-       <item row="0" column="2">
-        <widget class="QLineEdit" name="cmsTSLineEdit">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>500</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>500</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLabel" name="plmnlabel_4">
-         <property name="minimumSize">
-          <size>
-           <width>200</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>200</width>
-           <height>123</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>TimeStamp:</string>
-         </property>
-        </widget>
-       </item>
        <item row="5" column="1">
-        <widget class="QLabel" name="plmnlabel_3">
+        <widget class="QLabel" name="label_170">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -9610,30 +9626,11 @@
           </size>
          </property>
          <property name="text">
-          <string>Delay:</string>
+          <string>Dimming:</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QLabel" name="label_166">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>200</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>ACK:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
+       <item row="3" column="2">
         <widget class="QLineEdit" name="cmsACKLineEdit">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -9658,8 +9655,8 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
-        <widget class="QLabel" name="label_170">
+       <item row="6" column="1">
+        <widget class="QLabel" name="plmnlabel_3">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -9673,11 +9670,74 @@
           </size>
          </property>
          <property name="text">
-          <string>Dimming:</string>
+          <string>Delay:</string>
          </property>
         </widget>
        </item>
-       <item row="10" column="3">
+       <item row="3" column="1">
+        <widget class="QLabel" name="label_166">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>ACK:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLabel" name="label_175">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Return Value:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QLineEdit" name="cmsReturnLineEdit">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>300</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>500</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="3">
         <widget class="QPushButton" name="cmsCheckPushButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -9702,7 +9762,20 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="1">
+       <item row="0" column="3">
+        <spacer name="horizontalSpacer_36">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="7" column="1">
         <widget class="QLabel" name="plmnlabel_5">
          <property name="minimumSize">
           <size>
@@ -9721,34 +9794,8 @@
          </property>
         </widget>
        </item>
-       <item row="11" column="3">
-        <spacer name="verticalSpacer_6">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="3">
-        <spacer name="horizontalSpacer_36">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="3" column="1">
-        <widget class="QLabel" name="label_175">
+       <item row="1" column="1">
+        <widget class="QLabel" name="label_176">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -9762,12 +9809,56 @@
           </size>
          </property>
          <property name="text">
-          <string>Return Value:</string>
+          <string>User name:</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="2">
-        <widget class="QLineEdit" name="cmsReturnLineEdit">
+       <item row="2" column="1">
+        <widget class="QLabel" name="label_177">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Password:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLineEdit" name="cmsUsernameLineEdit">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>300</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>500</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLineEdit" name="cmsPasswordLineEdit">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>

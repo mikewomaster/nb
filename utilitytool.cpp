@@ -7,6 +7,18 @@
 #include "mainwindow.h"
 #include "mqtt.h"
 
+void MainWindow::regStatusFille(short res, QLineEdit *le)
+{
+    switch (res) {
+    case 1:
+        le->setText("Registered");
+        break;
+    default:
+        le->setText("Not_Registered");
+        break;
+    }
+}
+
 void MainWindow::simStatusFill(short res, QLineEdit *le)
 {
     switch(res)
@@ -165,11 +177,14 @@ void MainWindow::handle_read_ready(QLineEdit* le)
             nbStatusFill(entry, ui->nbStatusLineEdit);
         } else if (le == ui->mqttStatusLineEdit){
             mqttStatusFill(entry, ui->mqttStatusLineEdit);
-        } else if (le == ui->nbStatusLineEdit) {
+        } else if (le == ui->simStatusLineEdit) {
             simStatusFill(entry, ui->simStatusLineEdit);
+        } else if (le == ui->regisLineEdit) {
+            regStatusFille(entry, ui->regisLineEdit);
         } else {
               le->setText(QString::number(entry));
         }
+
         statusBar()->showMessage(tr("OK!"));
     } else if (reply->error() == QModbusDevice::ProtocolError) {
         statusBar()->showMessage(tr("Read response error: %1 (Mobus exception: 0x%2)").
