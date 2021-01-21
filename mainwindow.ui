@@ -5331,7 +5331,7 @@
        <item row="7" column="1">
         <widget class="QLabel" name="label_135">
          <property name="text">
-          <string>Publish Interval (Min):</string>
+          <string>Publish Interval (Sec):</string>
          </property>
         </widget>
        </item>

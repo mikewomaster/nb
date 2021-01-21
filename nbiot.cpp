@@ -285,7 +285,7 @@ void MainWindow::plmn2ReadReady()
 
 void MainWindow::bandReadReady()
 {
-    nb_handle_read_ready(ui->bandLineEdit);
+    handle_read_ready(ui->bandLineEdit);
 }
 
 void MainWindow::rssiReadReady()
@@ -317,7 +317,7 @@ void MainWindow::on_nbRefreshButton_clicked()
     handle_read(NBPLMNAddress2, EightEntries, &plmn2ReadReady);
     _sleep(2000);
 
-    handle_read(NBBANDAddress, EightEntries, &bandReadReady);
+    handle_read(NBBANDAddress, OneEntry, &bandReadReady);
     _sleep(2000);
 
     handle_read(NBRSSIAddress, EightEntries, &rssiReadReady);
