@@ -5818,7 +5818,7 @@
         <rect>
          <x>820</x>
          <y>50</y>
-         <width>498</width>
+         <width>508</width>
          <height>129</height>
         </rect>
        </property>
@@ -10139,7 +10139,7 @@
      <x>0</x>
      <y>0</y>
      <width>1027</width>
-     <height>23</height>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">

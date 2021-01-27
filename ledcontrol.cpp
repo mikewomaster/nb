@@ -14,7 +14,7 @@ void MainWindow::ledControlTypeReadReady()
 
 void MainWindow::on_ledControlTypeCheck_clicked()
 {
-    handle_read(LEDControlAutoAddress, LEDControlEntry, &ledControlTypeReadReady);
+    handle_read(LEDControlTypeAddress, LEDControlEntry, &ledControlTypeReadReady);
 }
 
 void MainWindow::on_ledControlTypeApply_clicked()
