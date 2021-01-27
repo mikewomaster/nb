@@ -2,6 +2,7 @@
 #include <QModbusTcpClient>
 #include <QModbusRtuSerialMaster>
 #include <QDebug>
+#include <QMessageBox>
 
 #include "ui_mainwindow.h"
 #include "mainwindow.h"
@@ -262,8 +263,15 @@ void MainWindow::handle_read_ready(QComboBox *cb, QLineEdit *le)
         const QModbusDataUnit unit = reply->result();
         ushort entry = unit.value(0);
         uchar valueOne = entry >> 8;
+/*
         uchar valueTwo = entry && 0x00ff;
-
+        QString strMsg = QString::number(entry);
+        QString strMsg2 = QString::number(valueTwo);
+        QString msg = strMsg + " : " + strMsg2;
+        QMessageBox::information(NULL, "Debug", msg, QMessageBox::Yes | QMessageBox::No);
+*/
+        int valueTwo = entry;
+        valueTwo > 100 ? valueTwo = (valueTwo - 256) : valueTwo = valueTwo;
         cb->setCurrentIndex(valueOne);
         le->setText(QString::number(valueTwo));
 
