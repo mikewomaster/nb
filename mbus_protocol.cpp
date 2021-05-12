@@ -2675,7 +2675,7 @@ mbus_frame_print(mbus_frame *frame)
 
     for (iter = frame; iter; iter = iter->next)
     {
-        if ((len = mbus_frame_pack(iter, data_buff, sizeof(data_buff))) == -1)
+        // if ((len = mbus_frame_pack(iter, data_buff, sizeof(data_buff))) == -1)
         {
             return -2;
         }
