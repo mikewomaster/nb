@@ -13,17 +13,19 @@ void MainWindow::on_serialBtn_2_clicked()
         return;
     statusBar()->clearMessage();
 
-    QModbusDataUnit writeUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, SerialStartAddr, (SerialEntries - 1));
+    QModbusDataUnit writeUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, SerialStartAddr, SerialEntries);
 
     int baudRate = ui->s_baudCombo_2->currentIndex();
     int dataBit = ui->s_dataBitsCombo_2->currentText().toInt();
     int stopBit = ui->s_stopBitsCombo_2->currentText().toInt();
     int parity = ui->s_parityCombo_2->currentIndex();
+    int intervalMeter = ui->s_intervalCombo->currentText().toInt();
 
     writeUnit.setValue(0, baudRate);
     writeUnit.setValue(1, dataBit);
     writeUnit.setValue(2, stopBit);
     writeUnit.setValue(3, parity);
+    writeUnit.setValue(4, intervalMeter);
 
     if (auto *reply = modbusDevice->sendWriteRequest(writeUnit, ui->serverEdit->value())) {
 
@@ -74,6 +76,9 @@ void MainWindow::serialReadReady2()
             quint32 parity = unit.value(3);
             ui->s_parityCombo_2->setCurrentIndex(parity);
 
+            quint32 intervalMeter = unit.value(4);
+            ui->s_intervalCombo->setCurrentText(QString::number(intervalMeter));
+
             statusBar()->showMessage(tr("OK!"));
     } else if (reply->error() == QModbusDevice::ProtocolError) {
         statusBar()->showMessage(tr("Read response error: %1 (Mobus exception: 0x%2)").
@@ -96,7 +101,7 @@ void MainWindow::on_serialBtnRead_2_clicked()
 
     quint16 ADDR = SerialStartAddr;
 
-    QModbusDataUnit readUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, ADDR, (SerialEntries - 1));
+    QModbusDataUnit readUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, ADDR, SerialEntries);
 
     if (auto *reply = modbusDevice->sendReadRequest(readUnit, ui->serverEdit->value())) {
         if (!reply->isFinished())

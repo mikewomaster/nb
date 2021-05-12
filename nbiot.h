@@ -25,4 +25,16 @@
 #define NBEnableAddress (821 - 1)
 #define NBEnableEntries 1
 
+#define EightEntries 8
+#define OneEntry 1
+
+#define NBRegistrationAddress (4042 -1)
+#define NBProviderAddress (4050 - 1)
+#define NBIMEIAddress (4058 -1)
+#define NBIMSIAddress (4064 - 1)
+#define NBPLMNAddress2 (4072 -1)
+#define NBBANDAddress (4080 - 1)
+#define NBRSSIAddress (4088 - 1)
+#define NBSIMStatus (4096 - 1)
+
 #endif // NBIOT_H

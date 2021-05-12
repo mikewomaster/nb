@@ -280,10 +280,10 @@ void MainWindow::on_nbReload_clicked()
     _sleep(2000);
     emit on_passwordRead_clicked();
     _sleep(2000);
-    emit on_ipRead_clicked();
-    _sleep(2000);
-    emit on_nbStatusRead_clicked();
-    _sleep(2000);
+    // emit on_ipRead_clicked();
+    // _sleep(2000);
+    // emit on_nbStatusRead_clicked();
+    // _sleep(2000);
     emit on_plmnRead_clicked();
     _sleep(2000);
 
@@ -376,4 +376,81 @@ void MainWindow::on_cellularEnableButton_clicked()
     }
 
     on_nbEnableRadioButton_clicked();
+}
+
+void MainWindow::registReadReady()
+{
+    handle_read_ready(ui->regisLineEdit);
+}
+
+void MainWindow::providerReadReady()
+{
+    nb_handle_read_ready(ui->providerLineEdit);
+}
+
+void MainWindow::imeiReadReady()
+{
+    nb_handle_read_ready(ui->imeiLineEdit);
+}
+
+void MainWindow::imsiReadReady()
+{
+    nb_handle_read_ready(ui->imsiLineEdit);
+}
+
+void MainWindow::plmn2ReadReady()
+{
+    nb_handle_read_ready(ui->plmnLineEdit_2);
+}
+
+void MainWindow::bandReadReady()
+{
+    handle_read_ready(ui->bandLineEdit);
+}
+
+void MainWindow::rssiReadReady()
+{
+    handle_read_ready(ui->nbRssiLineEdit);
+}
+
+void MainWindow::simStatusReadReady()
+{
+    handle_read_ready(ui->simStatusLineEdit);
+}
+
+void MainWindow::on_nbRefreshButton_clicked()
+{
+    ui->nbRefreshButton->setEnabled(false);
+
+    handle_read(NBRegistrationAddress, EightEntries, &registReadReady);
+    _sleep(2000);
+
+    handle_read(NBProviderAddress, EightEntries, &providerReadReady);
+    _sleep(2000);
+
+    handle_read(NBIMEIAddress, EightEntries, &imeiReadReady);
+    _sleep(2000);
+
+    handle_read(NBIMSIAddress, EightEntries, &imsiReadReady);
+    _sleep(2000);
+
+    handle_read(NBPLMNAddress2, EightEntries, &plmn2ReadReady);
+    _sleep(2000);
+
+    handle_read(NBBANDAddress, OneEntry, &bandReadReady);
+    _sleep(2000);
+
+    handle_read(NBRSSIAddress, EightEntries, &rssiReadReady);
+    _sleep(2000);
+
+    handle_read(NBSIMStatus, &simStatusReadReady);
+    _sleep(2000);
+
+    emit on_ipRead_clicked();
+    _sleep(2000);
+
+    emit on_nbStatusRead_clicked();
+    _sleep(2000);
+
+    ui->nbRefreshButton->setEnabled(true);
 }

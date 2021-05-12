@@ -439,8 +439,16 @@ private slots:
     void rtuTimeoutReadReady();
     void on_rtuTimeOutRead_clicked();
     void on_rtuTimeOutWrite_clicked();
-
     void on_cellularEnableButton_clicked();
+    void registReadReady();
+    void providerReadReady();
+    void imeiReadReady();
+    void imsiReadReady();
+    void plmn2ReadReady();
+    void bandReadReady();
+    void rssiReadReady();
+    void simStatusReadReady();
+    void on_nbRefreshButton_clicked();
 
 private:
     QModbusReply *lastRequest;

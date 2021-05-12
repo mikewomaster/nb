@@ -223,7 +223,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->nbmodelCombox->hide();
     ui->nbModelLabel->hide();
     ui->groupBox_22->hide();
-    ui->label_135->hide();
     ui->mqttPasswordLineEdit_2->hide();
     ui->label_105->hide();
     ui->label_107->hide();
@@ -704,10 +703,10 @@ void MainWindow::on_connectButton_clicked()
                 ui->nbModelLabel->setVisible(true);
                 ui->nbmodelCombox->setVisible(true);
 
-                ui->label_124->setVisible(true);
+                // ui->label_124->setVisible(true);
                 ui->ipLineEdit->setVisible(true);
 
-                ui->label_125->setVisible(true);
+                // ui->label_125->setVisible(true);
                 ui->nbStatusLineEdit->setVisible(true);
             } else if (s.contains("MB-NB")) {
                 ui->tabWidget_2->setTabEnabled(7, true);
