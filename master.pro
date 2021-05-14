@@ -43,7 +43,9 @@ SOURCES += main.cpp\
     bucket.cpp \
     ymodem.cpp \
     mbuslog.cpp \
-    ssl.cpp
+    ssl.cpp \
+    meter.cpp \
+    metermodelviewcontrol.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -75,7 +77,9 @@ HEADERS  += mainwindow.h \
     loginruledialog.h \
     bucket.h \
     ymodem.h \
-    ssl.h
+    ssl.h \
+    meter.h \
+    metermodelviewcontrol.h
 
 FORMS    += mainwindow.ui \
          settingsdialog.ui \

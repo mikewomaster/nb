@@ -419,6 +419,21 @@ void MainWindow::sensDelete()
     ui->sensorTableView->setRowHidden(term, true);
 }
 
+void MainWindow::meterViewModelInit()
+{
+    m_meterViewControl = new meterModelViewControl(this);
+
+    ui->meterTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->meterTableView->setShowGrid(true);
+    ui->meterTableView->setFrameShape(QFrame::Box);
+    ui->meterTableView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->meterTableView->setModel(m_meterViewControl);
+    ui->meterTableView->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->meterTableView->setColumnWidth(0, 160);
+    ui->meterTableView->setColumnWidth(1, 130);
+    ui->meterTableView->setColumnWidth(2, 130);
+}
+
 void MainWindow::sensor_view_model()
 {
     m_sensorModel = new sensor(this);

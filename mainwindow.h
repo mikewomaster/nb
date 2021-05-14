@@ -67,6 +67,7 @@
 #include "obis_edit.h"
 #include "logicalrulemodel.h"
 #include "ymodem.h"
+#include "metermodelviewcontrol.h"
 
 // MACRO CRONTROL Area
 // #define TEST_DATA
@@ -188,6 +189,7 @@ private:
     void sslFile();
     void sslImportFile(quint8);
     void sslFileRead(quint8);
+    void meterViewModelInit();
 public slots:
     void on_connectButton_clicked();
 
@@ -450,6 +452,10 @@ private slots:
     void simStatusReadReady();
     void on_nbRefreshButton_clicked();
 
+    void on_mqttTestPushButton_clicked();
+
+    void on_mqttCheckPushButton_clicked();
+
 private:
     QModbusReply *lastRequest;
     SettingsDialog *m_settingsDialog;
@@ -469,6 +475,7 @@ private:
     QMenu *senpopMenu;
     bool sensorFlag;
     sensor_edit* m_sensor_dialog;
+    meterModelViewControl *m_meterViewControl;
  public:
     Ui::MainWindow *ui;
     QModbusClient *modbusDevice;

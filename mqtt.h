@@ -34,4 +34,10 @@
 #define TCPPortAddress (677 - 1)
 #define TCPPortEntries 1
 
+#define MQTTTestAddress (4616 - 1)
+#define MQTTTestEntries 1
+
+#define MQTTStatusAddress (4617 - 1)
+#define MQTTStatusEntries 1
+
 #endif // MQTT_H

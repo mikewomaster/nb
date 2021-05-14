@@ -275,3 +275,18 @@ void MainWindow::on_mqttReload_clicked()
 
     ui->mqttReload->setEnabled(true);
 }
+
+void MainWindow::on_mqttTestPushButton_clicked()
+{
+    if (!modbusDevice)
+        return;
+
+    QModbusDataUnit writeUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, MQTTTestAddress, MQTTTestEntries);
+    writeUnit.setValue(0, 0);
+    handle_write(writeUnit);
+}
+
+void MainWindow::on_mqttCheckPushButton_clicked()
+{
+    handle_read(MQTTStatusAddress, &mqttStatuReadReady);
+}

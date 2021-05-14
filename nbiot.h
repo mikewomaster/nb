@@ -16,13 +16,16 @@
 #define NBPLMNAddress (4034 - 1)
 #define NBPLMNEntries 3
 
-#define NBStatusAddress (5001 - 1)
+// #define NBStatusAddress (5001 - 1)
+#define NBStatusAddress (4105 - 1)
 #define NBStatusEntries 1
 
-#define NBIPAddress (5002 - 1)
+// #define NBIPAddress (5002 - 1)
+#define NBIPAddress (4097 - 1)
 #define NBIPEntries 8
 
-#define NBEnableAddress (821 - 1)
+// #define NBEnableAddress (821 - 1)
+#define NBEnableAddress (4106 - 1)
 #define NBEnableEntries 1
 
 #define EightEntries 8

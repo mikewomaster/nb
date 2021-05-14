@@ -152,7 +152,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabWidget_2->setTabEnabled(8, false);
 */
     ui->tabWidget_2->setTabEnabled(3, false);
+    ui->tabWidget_2->setTabEnabled(4, false);
     ui->tabWidget_2->setTabEnabled(5, false);
+    ui->tabWidget_2->setTabEnabled(6, false);
     ui->tabWidget_2->setTabEnabled(7, false);
     ui->tabWidget_2->setTabEnabled(8, false);
     ui->tabWidget_2->setTabEnabled(9, false);
@@ -324,6 +326,7 @@ MainWindow::MainWindow(QWidget *parent)
     // sensor view and sensor model init
     sensor_view_model();
 
+    meterViewModelInit();
     // logical rule init
     // logicalRuleViewInit();
 
