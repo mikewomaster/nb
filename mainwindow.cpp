@@ -58,6 +58,7 @@
 #include "logindialog.h"
 #include "loginruledialog.h"
 #include "ymodem.h"
+#include "metermodelviewcontrol.h"
 
 #include <QModbusTcpClient>
 #include <QModbusRtuSerialMaster>

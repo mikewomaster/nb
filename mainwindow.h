@@ -161,6 +161,8 @@ private:
     void setIOChannel();
     void setWidget();
     void setWidgetLoRa();
+    void handle_write(QString, int, int);
+    void handle_write(int, quint16);
     void handle_write(QLineEdit* , quint16);
     void handle_write(QComboBox* , quint16);
     void handle_write(QRadioButton* ,quint16);
@@ -169,6 +171,7 @@ private:
     void handle_read(int addr, int entry, void (MainWindow::*fp)());
     void handle_read_ready(QLineEdit* );
     void handle_read_ready(QComboBox* );
+    void handle_read_ready(QList<meterProfile>, int, int mpCol = 0);
     void nb_handle_write(QLineEdit*, int, int);
     void nb_handle_read_ready(QLineEdit* );
     void nbStatusFill(short, QLineEdit*);
@@ -451,10 +454,21 @@ private slots:
     void rssiReadReady();
     void simStatusReadReady();
     void on_nbRefreshButton_clicked();
-
     void on_mqttTestPushButton_clicked();
-
     void on_mqttCheckPushButton_clicked();
+    void on_meterCreatePushButton_clicked();
+    void on_meterErasePushButton_clicked();
+    void on_meterApplyPushButton_clicked();
+
+    void meterModelReadReady();
+    void meterAddressModelReady();
+    void meterAddressReadReady();
+    void meterProfileTagReadReady();
+    void meterProfileIdReadReady();
+    void meterProfileMagnitudeReadReady();
+
+    void on_meterLoadPushButton_clicked();
+    void on_meterNextPushButton_clicked();
 
 private:
     QModbusReply *lastRequest;

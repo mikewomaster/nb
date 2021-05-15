@@ -9,6 +9,62 @@
 #include "nbiot.h"
 #include "mqtt.h"
 
+void MainWindow::handle_write(QString str, int addr, int entry)
+{
+    QVector<quint16> values;
+
+    int i = 0;
+    for (i = 0; i < str.size(); i++) {
+        if ((i+1) % 2 == 0) {
+            quint16 temp = str.at(i - 1).toLatin1();
+            temp = (temp << 8) + str.at(i).toLatin1();
+            values.push_back(temp);
+        }
+    }
+
+    if (i % 2 && i) {
+        quint16 temp = str.at(i-1).toLatin1();
+        temp = temp << 8;
+        values.push_back(temp);
+        i++;
+    }
+
+    if (addr != mqttTopicAddress) {
+        for (i = (i / 2); i < entry; i++) {
+            values.push_back(0x0000);
+        }
+    }
+
+    if (!modbusDevice)
+        return;
+    statusBar()->clearMessage();
+
+    QModbusDataUnit writeUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, addr, entry);
+
+    writeUnit.setValues(values);
+    if (auto *reply = modbusDevice->sendWriteRequest(writeUnit, ui->serverEdit->value())) {
+        if (!reply->isFinished()) {
+            connect(reply, &QModbusReply::finished, this, [this, reply]() {
+                if (reply->error() == QModbusDevice::ProtocolError) {
+                    statusBar()->showMessage(tr("Write response error: %1 (Mobus exception: 0x%2)")
+                        .arg(reply->errorString()).arg(reply->rawResult().exceptionCode(), -1, 16),
+                        5000);
+                } else if (reply->error() != QModbusDevice::NoError) {
+                    statusBar()->showMessage(tr("Write response error: %1 (code: 0x%2)").
+                        arg(reply->errorString()).arg(reply->error(), -1, 16), 5000);
+                }
+                statusBar()->showMessage(tr("OK!"));
+                reply->deleteLater();
+            });
+        } else {
+            // broadcast replies return immediately
+            reply->deleteLater();
+        }
+    } else {
+        statusBar()->showMessage(tr("Write error: ") + modbusDevice->errorString(), 5000);
+    }
+}
+
 void MainWindow::nb_handle_write(QLineEdit* le, int addr, int entry)
 {
     QString str = le->text();

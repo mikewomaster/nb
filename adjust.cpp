@@ -6,6 +6,17 @@
 #include "mainwindow.h"
 #include "adjust.h"
 
+void MainWindow::handle_write(int currentOutputValue, quint16 add)
+{
+    if (!modbusDevice)
+        return;
+    statusBar()->clearMessage();
+
+    QModbusDataUnit writeUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, add, 1);
+    writeUnit.setValue(0, currentOutputValue);
+    writeSingleHoldingRegister(writeUnit);
+}
+
 void MainWindow::handle_write(QLineEdit* l, quint16 add)
 {
     if (!modbusDevice)
@@ -111,7 +122,47 @@ void MainWindow::mqttStatusFill(short res, QLineEdit *le)
             break;
     }
 }
+void MainWindow::handle_read_ready(QList<meterProfile> mpList, int mpIndex, int mpCol)
+{
+    auto reply = qobject_cast<QModbusReply *>(sender());
+    if (!reply)
+        return;
 
+    if (reply->error() == QModbusDevice::NoError) {
+        const QModbusDataUnit unit = reply->result();
+        if (unit.valueCount() == 1) {
+            mpList[mpIndex].id = unit.value(0);
+        }
+        else {
+            QString s;
+            for (uint i = 0; i < unit.valueCount(); i++) {
+                if ((unit.value(i) >> 8) == 0x00)
+                    break;
+                s[2*i] = unit.value(i) >> 8;
+                if ((unit.value(i) & 0x00ff) == 0x00)
+                    break;
+                s[(2*i) +1] = unit.value(i) & 0x00ff;
+            }
+            s.remove('\"');
+
+            if (mpCol == 0)
+                mpList[mpIndex].tag = s;
+            else
+                mpList[mpIndex].magnitude = s;
+        }
+
+        statusBar()->showMessage(tr("OK!"));
+    } else if (reply->error() == QModbusDevice::ProtocolError) {
+        statusBar()->showMessage(tr("Read response error: %1 (Mobus exception: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->rawResult().exceptionCode(), -1, 16), 5000);
+    } else {
+        statusBar()->showMessage(tr("Read response error: %1 (code: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->error(), -1, 16), 5000);
+    }
+    reply->deleteLater();
+}
 void MainWindow::handle_read_ready(QLineEdit* le)
 {
     auto reply = qobject_cast<QModbusReply *>(sender());
