@@ -328,6 +328,7 @@ MainWindow::MainWindow(QWidget *parent)
     sensor_view_model();
 
     meterViewModelInit();
+    meterPollViewModelInit();
     // logical rule init
     // logicalRuleViewInit();
 
@@ -341,6 +342,32 @@ MainWindow::MainWindow(QWidget *parent)
         recordList.append(record);
     }
     m_pModel->updateData(recordList);
+
+    // meter table view
+    m_meterPollModel = new QStandardItemModel();
+    ui->meterPollHeadTableView->setModel(m_meterPollModel);
+    // ui->meterPollHeadTableView->horizontalHeader()->setR
+
+    m_meterPollModel->setColumnCount(2);
+    m_meterPollModel->setHeaderData(0, Qt::Horizontal, "Model");
+    m_meterPollModel->setHeaderData(1, Qt::Horizontal, "Hydrus");
+    ui->meterPollHeadTableView->setColumnWidth(0, 190);
+    ui->meterPollHeadTableView->setColumnWidth(1, 200);
+
+    m_meterPollModel->setItem(0, 0, new QStandardItem("Serial Number"));
+    m_meterPollModel->setItem(1, 0, new QStandardItem("Addressing Mode"));
+    m_meterPollModel->setItem(2, 0, new QStandardItem("Primary Address"));
+    m_meterPollModel->setItem(3, 0, new QStandardItem("Secondary Address"));
+    m_meterPollModel->setItem(4, 0, new QStandardItem("Status"));
+    m_meterPollModel->setItem(5, 0, new QStandardItem("Manufacture"));
+    m_meterPollModel->setItem(6, 0, new QStandardItem("Type"));
+    m_meterPollModel->setItem(7, 0, new QStandardItem("Version"));
+    m_meterPollModel->setItem(8, 0, new QStandardItem("Baudrate"));
+
+    for (int i = 0; i < 9; i++)
+    {
+        m_meterPollModel->setItem(i, 1, new QStandardItem(" "));
+    }
 
     serialAlarmInit();
 
@@ -896,4 +923,34 @@ void MainWindow::ymodemCancelButtonCliked()
 
     ui->eventLogEnableRadioButton->setChecked(false);
     on_eventLogEnableRadioButton_clicked();
+}
+
+void MainWindow::meterViewModelInit()
+{
+    m_meterViewControl = new meterModelViewControl(this);
+
+    ui->meterTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->meterTableView->setShowGrid(true);
+    ui->meterTableView->setFrameShape(QFrame::Box);
+    ui->meterTableView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->meterTableView->setModel(m_meterViewControl);
+    ui->meterTableView->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->meterTableView->setColumnWidth(0, 160);
+    ui->meterTableView->setColumnWidth(1, 130);
+    ui->meterTableView->setColumnWidth(2, 130);
+}
+
+void MainWindow::meterPollViewModelInit()
+{
+    m_meterPollModelBody = new meterPollTableModel(this);
+
+    ui->meterPollBodyTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->meterPollBodyTableView->setShowGrid(true);
+    ui->meterPollBodyTableView->setFrameShape(QFrame::Box);
+    ui->meterPollBodyTableView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->meterPollBodyTableView->setModel(m_meterPollModelBody);
+    ui->meterPollBodyTableView->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->meterPollBodyTableView->setColumnWidth(0, 160);
+    ui->meterPollBodyTableView->setColumnWidth(1, 160);
+    ui->meterPollBodyTableView->setColumnWidth(2, 130);
 }

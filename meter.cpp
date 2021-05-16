@@ -129,6 +129,8 @@ void MainWindow::on_meterLoadPushButton_clicked()
         handle_read(meterMagnitudeBaseAddress + (meterGap * times) + meterProfileListIndex * 4, meterFour, &meterProfileMagnitudeReadReady);
         _sleep(2000);
     }
+
+    m_meterViewControl->updateData(meterProfileList);
 }
 
 void MainWindow::on_meterNextPushButton_clicked()

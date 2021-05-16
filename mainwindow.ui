@@ -3958,7 +3958,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>13</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="LoraNet_3">
      <property name="enabled">
@@ -8387,6 +8387,84 @@
      <attribute name="title">
       <string>Meter Polling</string>
      </attribute>
+     <widget class="QTableView" name="meterPollHeadTableView">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>90</y>
+        <width>371</width>
+        <height>351</height>
+       </rect>
+      </property>
+      <attribute name="horizontalHeaderMinimumSectionSize">
+       <number>150</number>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+     </widget>
+     <widget class="QTableView" name="meterPollBodyTableView">
+      <property name="geometry">
+       <rect>
+        <x>470</x>
+        <y>30</y>
+        <width>451</width>
+        <height>411</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>450</y>
+        <width>236</width>
+        <height>33</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_24">
+       <item>
+        <widget class="QPushButton" name="meterPollPushButton">
+         <property name="text">
+          <string>Meter Polling</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="meterPollNextPushButton">
+         <property name="text">
+          <string>Show Next</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>40</y>
+        <width>316</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_251">
+       <item>
+        <widget class="QLabel" name="label_160">
+         <property name="text">
+          <string>Number: </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="meterPollNumLineEdit">
+         <property name="text">
+          <string>1</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </widget>
    <widget class="QWidget" name="layoutWidget">

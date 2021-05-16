@@ -45,7 +45,9 @@ SOURCES += main.cpp\
     mbuslog.cpp \
     ssl.cpp \
     meter.cpp \
-    metermodelviewcontrol.cpp
+    metermodelviewcontrol.cpp \
+    meterpoll.cpp \
+    meterpolltablemodel.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -79,7 +81,9 @@ HEADERS  += mainwindow.h \
     ymodem.h \
     ssl.h \
     meter.h \
-    metermodelviewcontrol.h
+    metermodelviewcontrol.h \
+    meterpoll.h \
+    meterpolltablemodel.h
 
 FORMS    += mainwindow.ui \
          settingsdialog.ui \

@@ -2,8 +2,10 @@
 #define METER_H
 
 #define meterOne 1
+#define meterTwo 2
 #define meterFour 4
 #define meterEight 8
+#define meterTWELVE 12
 
 #define meterGap 200
 

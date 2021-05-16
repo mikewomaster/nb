@@ -55,6 +55,7 @@
 #include <QFile>
 #include <QDebug>
 #include <QDialog>
+#include <QMessageBox>
 #include "logindialog.h"
 
 int main(int argc, char *argv[])
@@ -81,6 +82,19 @@ int main(int argc, char *argv[])
            QString style = QLatin1String(qss.readAll());
            w->setStyleSheet(style);
            qss.close();
+    }
+
+    QDateTime time = QDateTime::currentDateTime();
+    int timeT = time.toTime_t();
+    if (timeT <= 1621593042)
+    {
+        QString str = "You are using testing Version " + QString::number(1621593042 - timeT) + " seconds remained";
+        QMessageBox::information(NULL, "INFO", str, QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+    }
+    else
+    {
+        QMessageBox::information(NULL, "INFO",  "You are using testing Version. License Expired!", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+        return -1;
     }
 
 #ifdef LOGIN

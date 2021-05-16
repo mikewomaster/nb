@@ -58,6 +58,7 @@
 #include <QTime>
 #include <QTimer>
 #include <QPaintDevice>
+#include <QStandardItemModel>
 
 #include "sensor_edit.h"
 #include "ui_mainwindow.h"
@@ -68,6 +69,7 @@
 #include "logicalrulemodel.h"
 #include "ymodem.h"
 #include "metermodelviewcontrol.h"
+#include "meterpolltablemodel.h"
 
 // MACRO CRONTROL Area
 // #define TEST_DATA
@@ -78,7 +80,7 @@
 #define ACTION
 #define ADMIN
 // #define LORA
-#define UtilityVersion "SCB111-NB v1.7.9"
+#define UtilityVersion "SCB111-NB v1.8.0"
 QT_BEGIN_NAMESPACE
 
 class QModbusClient;
@@ -172,6 +174,8 @@ private:
     void handle_read_ready(QLineEdit* );
     void handle_read_ready(QComboBox* );
     void handle_read_ready(QList<meterProfile>, int, int mpCol = 0);
+    void handle_read_ready(QList<meterPoll>, int);
+    void handle_read_ready(QStandardItemModel* , int);
     void nb_handle_write(QLineEdit*, int, int);
     void nb_handle_read_ready(QLineEdit* );
     void nbStatusFill(short, QLineEdit*);
@@ -193,6 +197,7 @@ private:
     void sslImportFile(quint8);
     void sslFileRead(quint8);
     void meterViewModelInit();
+    void meterPollViewModelInit();
 public slots:
     void on_connectButton_clicked();
 
@@ -470,6 +475,20 @@ private slots:
     void on_meterLoadPushButton_clicked();
     void on_meterNextPushButton_clicked();
 
+    void on_meterPollPushButton_clicked();
+    void on_meterPollNextPushButton_clicked();
+
+    void meterPollSNHeadReadReady();
+    void meterPollAddHeadReadReady();
+    void meterPollPriHeadReadReady();
+    void meterPollSecHeadReadReady();
+    void meterPollStatusHeadReadReady();
+    void meterPollManuHeadReadReady();
+    void meterPollTypeHeadReadReady();
+    void meterPollVerHeadReadReady();
+    void meterPollBaudHeadReadReady();
+    void meterPollReadReady();
+
 private:
     QModbusReply *lastRequest;
     SettingsDialog *m_settingsDialog;
@@ -490,6 +509,8 @@ private:
     bool sensorFlag;
     sensor_edit* m_sensor_dialog;
     meterModelViewControl *m_meterViewControl;
+    meterPollTableModel *m_meterPollModelBody;
+    QStandardItemModel *m_meterPollModel;
  public:
     Ui::MainWindow *ui;
     QModbusClient *modbusDevice;

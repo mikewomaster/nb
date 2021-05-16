@@ -122,6 +122,97 @@ void MainWindow::mqttStatusFill(short res, QLineEdit *le)
             break;
     }
 }
+
+void MainWindow::handle_read_ready(QStandardItemModel *tbModel, int col)
+{
+    auto reply = qobject_cast<QModbusReply *>(sender());
+    if (!reply)
+        return;
+
+    if (reply->error() == QModbusDevice::NoError) {
+        const QModbusDataUnit unit = reply->result();
+        if (unit.valueCount() == 1)
+        {
+            tbModel->setItem(col, 1, new QStandardItem(QString::number(unit.value(0))));
+        }
+        else if (unit.valueCount() == 2)
+        {
+            int num = unit.value(0);
+            num = num << 8 + unit.value(1);
+            tbModel->setItem(col, 1, new QStandardItem(QString::number(num)));
+        }
+        else
+        {
+            QString s;
+            for (uint i = 0; i < unit.valueCount(); i++) {
+                if ((unit.value(i) >> 8) == 0x00)
+                    break;
+                s[2*i] = unit.value(i) >> 8;
+                if ((unit.value(i) & 0x00ff) == 0x00)
+                    break;
+                s[(2*i) +1] = unit.value(i) & 0x00ff;
+            }
+            s.remove('\"');
+            tbModel->setItem(col, 1, new QStandardItem(s));
+        }
+
+        statusBar()->showMessage(tr("OK!"));
+    } else if (reply->error() == QModbusDevice::ProtocolError) {
+        statusBar()->showMessage(tr("Read response error: %1 (Mobus exception: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->rawResult().exceptionCode(), -1, 16), 5000);
+    } else {
+        statusBar()->showMessage(tr("Read response error: %1 (code: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->error(), -1, 16), 5000);
+    }
+    reply->deleteLater();
+}
+
+void MainWindow::handle_read_ready(QList<meterPoll>mpList, int mpIndex)
+{
+    auto reply = qobject_cast<QModbusReply *>(sender());
+    if (!reply)
+        return;
+
+    if (reply->error() == QModbusDevice::NoError) {
+        const QModbusDataUnit unit = reply->result();
+        if (unit.valueCount() == 1) {
+            mpList[mpIndex].attribute = "AlmCode";
+            mpList[mpIndex].value = QString::number(unit.value(0));
+            mpList[mpIndex].magnitude = "Error Codes";
+        }
+        else {
+            QString s;
+            for (uint i = 0; i < unit.valueCount(); i++) {
+                if ((unit.value(i) >> 8) == 0x00)
+                    break;
+                s[2*i] = unit.value(i) >> 8;
+                if ((unit.value(i) & 0x00ff) == 0x00)
+                    break;
+                s[(2*i) +1] = unit.value(i) & 0x00ff;
+            }
+            s.remove('\"');
+
+            QStringList strList = s.split(' ');
+            mpList[mpIndex].attribute = strList[0];
+            mpList[mpIndex].value = strList[1];
+            mpList[mpIndex].magnitude = strList[2];
+        }
+
+        statusBar()->showMessage(tr("OK!"));
+    } else if (reply->error() == QModbusDevice::ProtocolError) {
+        statusBar()->showMessage(tr("Read response error: %1 (Mobus exception: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->rawResult().exceptionCode(), -1, 16), 5000);
+    } else {
+        statusBar()->showMessage(tr("Read response error: %1 (code: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->error(), -1, 16), 5000);
+    }
+    reply->deleteLater();
+}
+
 void MainWindow::handle_read_ready(QList<meterProfile> mpList, int mpIndex, int mpCol)
 {
     auto reply = qobject_cast<QModbusReply *>(sender());
