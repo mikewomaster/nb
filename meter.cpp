@@ -50,6 +50,8 @@ void MainWindow::on_meterCreatePushButton_clicked()
 void MainWindow::on_meterErasePushButton_clicked()
 {
     QModelIndex i = ui->meterTableView->currentIndex();
+    if (i.isValid() == false)
+        return;
 
     int index = i.row();
     int meterNumber = ui->meterNumberLineEdit->text().toInt();
@@ -141,7 +143,7 @@ void MainWindow::on_meterApplyPushButton_clicked()
     int meterNumber = ui->meterNumberLineEdit->text().toInt();
     int times = (meterNumber - 1);
 
-    QVector<quint16> values = meterHeadModbusUnit(ui->meterModelLineEdit->text(), 8, ui->meterAddressModelComboBox->currentIndex(), ui->meterAddressLineEdit->text(), 8);
+    QVector<quint16> values = meterHeadModbusUnit(ui->meterModelLineEdit->text(), 8, ui->meterAddressModelComboBox->currentIndex() + 1, ui->meterAddressLineEdit->text(), 8);
     int addr = meterModelBaseAddress + (times * meterGap);
     int entry = 17;
     QModbusDataUnit writeUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, addr, entry);
@@ -151,7 +153,7 @@ void MainWindow::on_meterApplyPushButton_clicked()
     for (int i = 0; i < meterProfileList.count(); i++)
     {
         QVector<quint16> valuesBody = meterHeadModbusUnit(meterProfileList[i].tag, 4, (int) meterProfileList[i].id, meterProfileList[i].magnitude, 4);
-        int addr2 = meterTagBaseAddress + (times * meterGap);
+        int addr2 = meterTagBaseAddress + (times * meterGap) + i * 9;
         int entry2 = 9;
         QModbusDataUnit writeUnit2 = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, addr2, entry2);
         writeUnit2.setValues(valuesBody);
@@ -291,7 +293,7 @@ void MainWindow::on_meterLoadPushButton_clicked()
     m_meterViewControl->updateData(meterProfileList);
 
     for (int i = 0; i < meterProfileList.size(); i++) {
-        if (meterProfileList[i].tag.isEmpty())
+        if (meterProfileList[i].tag.isEmpty() || meterProfileList[i].id > 20)
             ui->meterTableView->setRowHidden(i, true);
     }
 

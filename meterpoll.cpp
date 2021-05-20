@@ -60,7 +60,51 @@ static QList<meterPoll> meterPollList;
 
 void MainWindow::meterPollReadReady()
 {
-    handle_read_ready(meterPollList, meterPollIndex);
+    auto reply = qobject_cast<QModbusReply *>(sender());
+    if (!reply)
+        return;
+
+    if (reply->error() == QModbusDevice::NoError) {
+        const QModbusDataUnit unit = reply->result();
+        if (unit.valueCount() == 1) {
+            meterPoll mpTemp;
+            mpTemp.attribute = "AlmCode";
+            mpTemp.value = QString::number(unit.value(0));
+            mpTemp.magnitude = "Error Codes";
+            meterPollList.append(mpTemp);
+        }
+        else {
+            QString s;
+            for (uint i = 0; i < unit.valueCount(); i++) {
+                if ((unit.value(i) >> 8) == 0x00)
+                    break;
+                s[2*i] = unit.value(i) >> 8;
+                if ((unit.value(i) & 0x00ff) == 0x00)
+                    break;
+                s[(2*i) +1] = unit.value(i) & 0x00ff;
+            }
+            s.remove('\"');
+
+            QStringList strList = s.split(' ');
+
+            meterPoll mpTemp;
+            mpTemp.attribute = strList[0];
+            mpTemp.value = strList[1];
+            mpTemp.magnitude = strList[2];
+            meterPollList.append(mpTemp);
+        }
+
+        statusBar()->showMessage(tr("OK!"));
+    } else if (reply->error() == QModbusDevice::ProtocolError) {
+        statusBar()->showMessage(tr("Read response error: %1 (Mobus exception: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->rawResult().exceptionCode(), -1, 16), 5000);
+    } else {
+        statusBar()->showMessage(tr("Read response error: %1 (code: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->error(), -1, 16), 5000);
+    }
+    reply->deleteLater();
 }
 
 void MainWindow::on_meterPollPushButton_clicked()
@@ -102,18 +146,14 @@ void MainWindow::on_meterPollPushButton_clicked()
     _sleep(2000);
 
     meterPollList.clear();
-    for (meterPollIndex = 0; meterPollIndex < 10; meterPollIndex++)
+
+    handle_read(meterPollAlarmCode + (meterPollGap * times), &meterPollReadReady);
+    _sleep(2000);
+    // for (meterPollIndex = 0; meterPollIndex < 10; meterPollIndex++)
+    for (meterPollIndex = 0; meterPollIndex < 2; meterPollIndex++)
     {
-        if (meterPollIndex == 0)
-        {
-            handle_read(meterPollAlarmCode + (meterPollGap * times), &meterPollReadReady);
-            _sleep(2000);
-        }
-        else
-        {
-            handle_read(meterPollChannel + (meterPollGap * times) + meterTWELVE * meterPollIndex, meterTWELVE, &meterPollReadReady);
-            _sleep(2000);
-        }
+        handle_read(meterPollChannel + (meterPollGap * times) + meterTWELVE * meterPollIndex, meterTWELVE, &meterPollReadReady);
+        _sleep(2000);
     }
 
     m_meterPollModelBody->updateData(meterPollList);

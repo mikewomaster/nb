@@ -145,6 +145,66 @@ void MainWindow::mqttStatusFill(short res, QLineEdit *le)
     }
 }
 
+QString meterTypeUpdate(quint16 data)
+{
+    QString str;
+    switch (data)
+    {
+        case 0x00:
+            str = "Other";
+            break;
+        case 0x01:
+            str = "Oil";
+            break;
+        case 0x02:
+            str = "Electricity";
+            break;
+        case 0x03:
+            str = "Gas";
+            break;
+        case 0x04:
+            str = "Heat";
+            break;
+        case 0x05:
+            str = "Steam";
+            break;
+        case 0x06:
+            str= "Hot Water";
+            break;
+        case 0x07:
+            str = "Water";
+            break;
+        case 0x08:
+            str = "H.C.A.";
+            break;
+        case 0x09:
+            str = "Reserved";
+            break;
+        case 0x0A:
+            str = "Gas Mode 2";
+            break;
+        case 0x0B:
+            str = "Heat Mode 2";
+            break;
+        case 0x0C:
+            str = "Hot Water Mode 2";
+            break;
+        case 0x0D:
+            str = "Water Mode 2";
+            break;
+        case 0x0E:
+            str = "H.C.A. Mode 2";
+            break;
+        case 0x0F:
+            str = "Reserved";
+            break;
+        default:
+            str = "unknown";
+            break;
+    }
+
+    return str;
+}
 void MainWindow::handle_read_ready(QStandardItemModel *tbModel, int col)
 {
     auto reply = qobject_cast<QModbusReply *>(sender());
@@ -155,12 +215,15 @@ void MainWindow::handle_read_ready(QStandardItemModel *tbModel, int col)
         const QModbusDataUnit unit = reply->result();
         if (unit.valueCount() == 1)
         {
-            tbModel->setItem(col, 1, new QStandardItem(QString::number(unit.value(0))));
+            if (col == 6)
+                tbModel->setItem(col, 1, new QStandardItem(meterTypeUpdate(unit.value(0))));
+            else
+                tbModel->setItem(col, 1, new QStandardItem(QString::number(unit.value(0))));
         }
         else if (unit.valueCount() == 2)
         {
-            int num = unit.value(0);
-            num = num << 8 + unit.value(1);
+            int num = unit.value(1);
+            // num = num << 8 + unit.value(0);
             tbModel->setItem(col, 1, new QStandardItem(QString::number(num)));
         }
         else
@@ -200,9 +263,11 @@ void MainWindow::handle_read_ready(QList<meterPoll>mpList, int mpIndex)
     if (reply->error() == QModbusDevice::NoError) {
         const QModbusDataUnit unit = reply->result();
         if (unit.valueCount() == 1) {
-            mpList[mpIndex].attribute = "AlmCode";
-            mpList[mpIndex].value = QString::number(unit.value(0));
-            mpList[mpIndex].magnitude = "Error Codes";
+            meterPoll mpTemp;
+            mpTemp.attribute = "AlmCode";
+            mpTemp.value = QString::number(unit.value(0));
+            mpTemp.magnitude = "Error Codes";
+            mpList.append(mpTemp);
         }
         else {
             QString s;
@@ -217,9 +282,12 @@ void MainWindow::handle_read_ready(QList<meterPoll>mpList, int mpIndex)
             s.remove('\"');
 
             QStringList strList = s.split(' ');
-            mpList[mpIndex].attribute = strList[0];
-            mpList[mpIndex].value = strList[1];
-            mpList[mpIndex].magnitude = strList[2];
+
+            meterPoll mpTemp;
+            mpTemp.attribute = strList[0];
+            mpTemp.value = strList[1];
+            mpTemp.magnitude = strList[2];
+            mpList.append(mpTemp);
         }
 
         statusBar()->showMessage(tr("OK!"));
