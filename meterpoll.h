@@ -5,6 +5,7 @@
 #define meterPollEight 8
 #define meterPollTwelve 12
 
+#define meterPollStart (5000 - 1)
 #define meterPollSN (5001 - 1)
 #define meterPollAdressMode (5009 - 1)
 #define meterPollPriAddress (5010 - 1)

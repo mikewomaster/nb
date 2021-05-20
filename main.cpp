@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
     if (timeT <= 1621593042)
     {
         QString str = "You are using testing Version " + QString::number(1621593042 - timeT) + " seconds remained";
-        QMessageBox::information(NULL, "INFO", str, QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+        // QMessageBox::information(NULL, "INFO", str, QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
     }
     else
     {

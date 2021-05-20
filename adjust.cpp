@@ -84,19 +84,19 @@ void MainWindow::nbStatusFill(short res, QLineEdit *le)
       le->setText("CEL_ERROR");
       break;
    case 0:
-      le->setText("CEL_NOT_READY");
+      le->setText("ERROR");
       break;
    case 1:
-      le->setText("CEL_PORT_READY");
+      le->setText("CONNECTED");
       break;
    case 2:
-      le->setText("CEL_MODULE_READY");
+      le->setText("SEARCHING");
       break;
    case 3:
-      le->setText("CEL_SIM_NOT_READY");
+      le->setText("DENIED");
       break;
    case 4:
-      le->setText("CEL_PIN_REQUEST");
+      le->setText("UNKNOWN");
       break;
    case 5:
       le->setText("CEL_SIM_READY");
@@ -110,6 +110,19 @@ void MainWindow::nbStatusFill(short res, QLineEdit *le)
    }
 }
 
+void MainWindow::cellularStatusFill(short res, QLineEdit *le)
+{
+    switch(res)
+    {
+        case 0:
+            le->setText("DISCONNECTED");
+            break;
+        case 1:
+            le->setText("Registered");
+            break;
+    }
+}
+
 void MainWindow::mqttStatusFill(short res, QLineEdit *le)
 {
     switch(res)
@@ -118,7 +131,16 @@ void MainWindow::mqttStatusFill(short res, QLineEdit *le)
             le->setText("DISCONNECTED");
             break;
         case 1:
-            le->setText("CONNECTED");
+            le->setText("CONNECTIING");
+            break;
+        case 2:
+            le->setText("SUCCESSFUL");
+            break;
+        case 3:
+            le->setText("FAIL");
+            break;
+        case 4:
+            le->setText("TIMEOUT");
             break;
     }
 }
@@ -268,8 +290,10 @@ void MainWindow::handle_read_ready(QLineEdit* le)
             nbStatusFill(entry, ui->nbStatusLineEdit);
         } else if (le == ui->mqttStatusLineEdit){
             mqttStatusFill(entry, ui->mqttStatusLineEdit);
+        } else if (le == ui->regisLineEdit) {
+            cellularStatusFill(entry, ui->regisLineEdit);
         } else {
-              le->setText(QString::number(entry));
+            le->setText(QString::number(entry));
         }
         statusBar()->showMessage(tr("OK!"));
     } else if (reply->error() == QModbusDevice::ProtocolError) {

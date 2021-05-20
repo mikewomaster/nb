@@ -10,6 +10,9 @@
 #define mqttTopicAddress (4518 - 1)
 #define mqttTopicEntreis 32
 
+#define mqttSubTopicalAddress (4584 - 1)
+#define mqttSubTopicalEntries 32
+
 #define mqttClinetIDAddress (4550 - 1)
 #define mqttClinetIDEntries 16
 

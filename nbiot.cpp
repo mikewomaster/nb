@@ -121,9 +121,6 @@ void MainWindow::nb_handle_write(QLineEdit* le, int addr, int entry)
     } else {
         statusBar()->showMessage(tr("Write error: ") + modbusDevice->errorString(), 5000);
     }
-
-    if (le == ui->idLineEdit)
-        qDebug() << values.size();
 }
 
 void MainWindow::nb_handle_read_ready(QLineEdit *le)

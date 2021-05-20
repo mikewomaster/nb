@@ -11,6 +11,7 @@
 #include "metermodelviewcontrol.h"
 
 static QList<meterProfile> meterProfileList;
+static int meterProfileListIndex;
 
 void MainWindow::on_meterCreatePushButton_clicked()
 {
@@ -22,14 +23,106 @@ void MainWindow::on_meterCreatePushButton_clicked()
     mp.id = ui->meterDataIndexLineEdit->text().toInt();
     mp.magnitude = ui->meterMagnitudeLineEdit->text();
 
-    meterProfileList.append(mp);
+    int i = 0;
+    for (i = 0; i < meterProfileList.count(); i++) {
+
+        if (meterProfileList[i].tag.isEmpty()) {
+            meterProfileList[i].tag = mp.tag;
+            meterProfileList[i].id = mp.id;
+            meterProfileList[i].magnitude = mp.magnitude;
+            break;
+        }
+    }
+
+    if (i == meterProfileList.count())
+        meterProfileList.append(mp);
+
     m_meterViewControl->updateData(meterProfileList);
+
+    for (int i = 0; i < meterProfileList.size(); i++) {
+        if (meterProfileList[i].tag.isEmpty())
+            ui->meterTableView->setRowHidden(i, true);
+        else
+            ui->meterTableView->setRowHidden(i, false);
+    }
 }
 
 void MainWindow::on_meterErasePushButton_clicked()
 {
-    meterProfileList.clear();
+    QModelIndex i = ui->meterTableView->currentIndex();
+
+    int index = i.row();
+    int meterNumber = ui->meterNumberLineEdit->text().toInt();
+    int times = (meterNumber - 1);
+
+    meterProfileList[index].tag = "";
+    meterProfileList[index].id = 0;
+    meterProfileList[index].magnitude = "";
+
+    QVector<quint16> valuesBody = meterHeadModbusUnit(meterProfileList[index].tag, 4, (int) meterProfileList[index].id, meterProfileList[index].magnitude, 4);
+    int addr2 = meterTagBaseAddress + (times * meterGap);
+    int entry2 = 9;
+    QModbusDataUnit writeUnit2 = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, addr2, entry2);
+    writeUnit2.setValues(valuesBody);
+
+    handle_write(writeUnit2);
+
     m_meterViewControl->updateData(meterProfileList);
+    for (int i = 0; i < meterProfileList.size(); i++) {
+        if (meterProfileList[i].tag.isEmpty())
+            ui->meterTableView->setRowHidden(i, true);
+    }
+}
+
+QVector<quint16> MainWindow::meterHeadModbusUnit(QString str1, int entry1, quint16 number, QString str2, int entry2)
+{
+    QVector<quint16> values;
+    int i = 0;
+    for (i = 0; i < str1.size(); i++) {
+        if ((i+1) % 2 == 0) {
+            quint16 temp = str1.at(i - 1).toLatin1();
+            temp = (temp << 8) + str1.at(i).toLatin1();
+            values.push_back(temp);
+        }
+    }
+
+    if (i % 2 && i) {
+        quint16 temp = str1.at(i-1).toLatin1();
+        temp = temp << 8;
+        values.push_back(temp);
+        i++;
+    }
+
+    for (i = (i / 2); i < entry1; i++) {
+        values.push_back(0x0000);
+    }
+
+    // push back int
+    values.push_back(number);
+
+    // push back value2
+    i = 0;
+    for (i = 0; i < str2.size(); i++) {
+        if ((i+1) % 2 == 0) {
+            quint16 temp = str2.at(i - 1).toLatin1();
+            temp = (temp << 8) + str2.at(i).toLatin1();
+            values.push_back(temp);
+        }
+    }
+
+    if (i % 2 && i) {
+        quint16 temp = str2.at(i-1).toLatin1();
+        temp = temp << 8;
+        values.push_back(temp);
+        i++;
+    }
+
+    for (i = (i / 2); i < entry2; i++)
+    {
+        values.push_back(0x0000);
+    }
+
+    return values;
 }
 
 void MainWindow::on_meterApplyPushButton_clicked()
@@ -48,54 +141,128 @@ void MainWindow::on_meterApplyPushButton_clicked()
     int meterNumber = ui->meterNumberLineEdit->text().toInt();
     int times = (meterNumber - 1);
 
-    nb_handle_write(ui->meterModelLineEdit, meterModelBaseAddress + (meterGap * times), meterEight);
-    _sleep(2000);
-    handle_write(ui->meterAddressModelComboBox, addressModeBaseAddress + (meterGap * times));
-    _sleep(2000);
-    nb_handle_write(ui->meterAddressLineEdit, meterAddressBaseAddress + (meterGap * times), meterEight);
-    _sleep(2000);
+    QVector<quint16> values = meterHeadModbusUnit(ui->meterModelLineEdit->text(), 8, ui->meterAddressModelComboBox->currentIndex(), ui->meterAddressLineEdit->text(), 8);
+    int addr = meterModelBaseAddress + (times * meterGap);
+    int entry = 17;
+    QModbusDataUnit writeUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, addr, entry);
+    writeUnit.setValues(values);
+    handle_write(writeUnit);
 
     for (int i = 0; i < meterProfileList.count(); i++)
     {
-        handle_write(meterProfileList[i].tag, meterTagBaseAddress + (meterGap * times) + i * 4, meterFour);
-        _sleep(2000);
-        handle_write(meterProfileList[i].id, meterIdBaseAddress + (meterGap * times) + i);
-        _sleep(2000);
-        handle_write(meterProfileList[i].magnitude, meterMagnitudeBaseAddress + (meterGap * times) + i * 4, meterFour);
+        QVector<quint16> valuesBody = meterHeadModbusUnit(meterProfileList[i].tag, 4, (int) meterProfileList[i].id, meterProfileList[i].magnitude, 4);
+        int addr2 = meterTagBaseAddress + (times * meterGap);
+        int entry2 = 9;
+        QModbusDataUnit writeUnit2 = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, addr2, entry2);
+        writeUnit2.setValues(valuesBody);
+
+        handle_write(writeUnit2);
         _sleep(2000);
     }
 }
 
-void MainWindow::meterModelReadReady()
+void MainWindow::meterHeadReadReady()
 {
-   nb_handle_read_ready(ui->meterModelLineEdit);
+    auto reply = qobject_cast<QModbusReply *>(sender());
+    if (!reply)
+        return;
+
+    if (reply->error() == QModbusDevice::NoError) {
+        const QModbusDataUnit unit = reply->result();
+
+        QString s;
+        for (uint i = 0; i < 8; i++) {
+            if ((unit.value(i) >> 8) == 0x00)
+                break;
+            s[2*i] = unit.value(i) >> 8;
+            if ((unit.value(i) & 0x00ff) == 0x00)
+                break;
+            s[(2*i) +1] = unit.value(i) & 0x00ff;
+        }
+        s.remove('\"');
+        ui->meterModelLineEdit->setText(s);
+        s.clear();
+
+        ui->meterAddressModelComboBox->setCurrentIndex(unit.value(8) - 1);
+
+        for (uint i = 9; i < 16; i++) {
+            if ((unit.value(i) >> 8) == 0x00)
+                break;
+            s[2*i] = unit.value(i) >> 8;
+            if ((unit.value(i) & 0x00ff) == 0x00)
+                break;
+            s[(2*i) +1] = unit.value(i) & 0x00ff;
+        }
+        s.remove('\"');
+        ui->meterAddressLineEdit->setText(s);
+        s.clear();
+
+        statusBar()->showMessage(tr("OK!"));
+    } else if (reply->error() == QModbusDevice::ProtocolError) {
+        statusBar()->showMessage(tr("Read response error: %1 (Mobus exception: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->rawResult().exceptionCode(), -1, 16), 5000);
+    } else {
+        statusBar()->showMessage(tr("Read response error: %1 (code: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->error(), -1, 16), 5000);
+    }
+    reply->deleteLater();
 }
 
-void MainWindow::meterAddressModelReady()
+void MainWindow::meterBodyReadReady()
 {
-    handle_read_ready(ui->meterAddressModelComboBox);
-}
+    auto reply = qobject_cast<QModbusReply *>(sender());
+    if (!reply)
+        return;
 
-void MainWindow::meterAddressReadReady()
-{
-    nb_handle_read_ready(ui->meterAddressLineEdit);
-}
+    if (reply->error() == QModbusDevice::NoError) {
+        meterProfile mp;
+        const QModbusDataUnit unit = reply->result();
 
-static int meterProfileListIndex;
+        QString s;
+        for (uint i = 0; i < 4; i++) {
+            if ((unit.value(i) >> 8) == 0x00)
+                break;
+            s[2*i] = unit.value(i) >> 8;
+            if ((unit.value(i) & 0x00ff) == 0x00)
+                break;
+            s[(2*i) +1] = unit.value(i) & 0x00ff;
+        }
+        s.remove('\"');
 
-void MainWindow::meterProfileTagReadReady()
-{
-    handle_read_ready(meterProfileList, meterProfileListIndex);
-}
+        // meterProfileList[meterProfileListIndex].tag = s;
+        mp.tag = s;
+        s.clear();
 
-void MainWindow::meterProfileIdReadReady()
-{
-    handle_read_ready(meterProfileList, meterProfileListIndex, 1);
-}
+        // meterProfileList[meterProfileListIndex].id = unit.value(4);
+        mp.id = unit.value(4);
 
-void MainWindow::meterProfileMagnitudeReadReady()
-{
-    handle_read_ready(meterProfileList, meterProfileListIndex);
+        for (uint i = 5; i < 9; i++) {
+            if ((unit.value(i) >> 8) == 0x00)
+                break;
+            s[2*i] = unit.value(i) >> 8;
+            if ((unit.value(i) & 0x00ff) == 0x00)
+                break;
+            s[(2*i) +1] = unit.value(i) & 0x00ff;
+        }
+        s.remove('\"');
+        // meterProfileList[meterProfileListIndex].magnitude = s;
+        mp.magnitude = s;
+        s.clear();
+        meterProfileList.append(mp);
+
+        statusBar()->showMessage(tr("OK!"));
+    } else if (reply->error() == QModbusDevice::ProtocolError) {
+        statusBar()->showMessage(tr("Read response error: %1 (Mobus exception: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->rawResult().exceptionCode(), -1, 16), 5000);
+    } else {
+        statusBar()->showMessage(tr("Read response error: %1 (code: 0x%2)").
+                                    arg(reply->errorString()).
+                                    arg(reply->error(), -1, 16), 5000);
+    }
+    reply->deleteLater();
 }
 
 void MainWindow::on_meterLoadPushButton_clicked()
@@ -111,26 +278,23 @@ void MainWindow::on_meterLoadPushButton_clicked()
     int meterNumber = ui->meterNumberLineEdit->text().toInt();
     int times = (meterNumber - 1);
 
-    handle_read(meterModelBaseAddress + (meterGap * times), meterEight, &meterModelReadReady);
-    _sleep(2000);
-    handle_read(addressModeBaseAddress + (meterGap * times), &meterAddressModelReady);
-    _sleep(2000);
-    handle_read(meterAddressBaseAddress + (meterGap * times), meterEight, &meterAddressReadReady);
+    handle_read(meterModelBaseAddress + (meterGap * times), 19, &meterHeadReadReady);
     _sleep(2000);
 
+    meterProfileList.clear();
     for (meterProfileListIndex = 0; meterProfileListIndex < 15; meterProfileListIndex++)
     {
-        meterProfileList.clear();
-
-        handle_read(meterTagBaseAddress + (meterGap * times) + meterProfileListIndex * 4, meterFour, &meterProfileTagReadReady);
-        _sleep(2000);
-        handle_read(meterIdBaseAddress + (meterGap * times) + meterProfileListIndex * 4, &meterProfileIdReadReady);
-        _sleep(2000);
-        handle_read(meterMagnitudeBaseAddress + (meterGap * times) + meterProfileListIndex * 4, meterFour, &meterProfileMagnitudeReadReady);
+        handle_read(meterTagBaseAddress + (meterGap * times) + meterProfileListIndex * 9, 9, &meterBodyReadReady);
         _sleep(2000);
     }
 
     m_meterViewControl->updateData(meterProfileList);
+
+    for (int i = 0; i < meterProfileList.size(); i++) {
+        if (meterProfileList[i].tag.isEmpty())
+            ui->meterTableView->setRowHidden(i, true);
+    }
+
 }
 
 void MainWindow::on_meterNextPushButton_clicked()

@@ -73,6 +73,12 @@ void MainWindow::on_meterPollPushButton_clicked()
         return;
     }
 
+    QModbusDataUnit meterPollWriteUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, meterPollStart, meterPollOne);
+    meterPollWriteUnit.setValue(0, 1);
+    handle_write(meterPollWriteUnit);
+    QMessageBox::information(NULL,  "INFO",  "The meter starts reading data, wait a while please.", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+    _sleep(10000);
+
     int meterNumber = ui->meterPollNumLineEdit->text().toInt();
     int times = (meterNumber - 1);
 

@@ -80,7 +80,7 @@
 #define ACTION
 #define ADMIN
 // #define LORA
-#define UtilityVersion "SCB111-NB v1.8.0"
+#define UtilityVersion "SCB111-NB v1.8.1"
 QT_BEGIN_NAMESPACE
 
 class QModbusClient;
@@ -168,7 +168,11 @@ private:
     void handle_write(QLineEdit* , quint16);
     void handle_write(QComboBox* , quint16);
     void handle_write(QRadioButton* ,quint16);
+    void nb_handle_write(QLineEdit*, int, int);
+
+    QVector<quint16> meterHeadModbusUnit(QString str1, int entry1, quint16 number, QString str2, int entry2);
     void handle_write(QModbusDataUnit);
+
     void handle_read(int addr, void (MainWindow::*fp)());
     void handle_read(int addr, int entry, void (MainWindow::*fp)());
     void handle_read_ready(QLineEdit* );
@@ -176,10 +180,12 @@ private:
     void handle_read_ready(QList<meterProfile>, int, int mpCol = 0);
     void handle_read_ready(QList<meterPoll>, int);
     void handle_read_ready(QStandardItemModel* , int);
-    void nb_handle_write(QLineEdit*, int, int);
     void nb_handle_read_ready(QLineEdit* );
+
     void nbStatusFill(short, QLineEdit*);
     void mqttStatusFill(short, QLineEdit*);
+    void cellularStatusFill(short, QLineEdit*);
+
     void serialAlarmInit();
     void sensorAddModbus(sen, int);
     void sensor_view_model();
@@ -347,6 +353,7 @@ private slots:
     void on_srvRead_clicked();
     void on_topicWrite_clicked();
     void topicReadReady();
+    void subTopicalReadReady();
     void on_topicRead_clicked();
     void on_portWrite_clicked();
     void portReadReady();
@@ -465,12 +472,8 @@ private slots:
     void on_meterErasePushButton_clicked();
     void on_meterApplyPushButton_clicked();
 
-    void meterModelReadReady();
-    void meterAddressModelReady();
-    void meterAddressReadReady();
-    void meterProfileTagReadReady();
-    void meterProfileIdReadReady();
-    void meterProfileMagnitudeReadReady();
+    void meterHeadReadReady();
+    void meterBodyReadReady();
 
     void on_meterLoadPushButton_clicked();
     void on_meterNextPushButton_clicked();

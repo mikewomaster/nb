@@ -61,6 +61,11 @@ void MainWindow::topicReadReady()
     nb_handle_read_ready(ui->topicLineEdit);
 }
 
+void MainWindow::subTopicalReadReady()
+{
+    nb_handle_read_ready(ui->subTopicLineEdit);
+}
+
 void MainWindow::on_topicRead_clicked()
 {
     handle_read(mqttTopicAddress, mqttTopicEntreis, &topicReadReady);
@@ -237,6 +242,11 @@ void MainWindow::on_mqttApply_clicked()
         _sleep(2000);
     }
 
+    if (ui->subTopicLineEdit->text() != "") {
+        nb_handle_write(ui->subTopicLineEdit, mqttSubTopicalAddress, mqttSubTopicalEntries);
+        _sleep(2000);
+    }
+
     emit on_idWrite_clicked();
     _sleep(2000);
 
@@ -262,6 +272,8 @@ void MainWindow::on_mqttReload_clicked()
     on_portRead_clicked();
     _sleep(2000);
     on_topicRead_clicked();
+    _sleep(2000);
+    handle_read(mqttSubTopicalAddress, mqttSubTopicalEntries, &topicReadReady);
     _sleep(2000);
     on_idRead_clicked();
     _sleep(2000);
