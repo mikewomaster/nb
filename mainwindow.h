@@ -185,6 +185,7 @@ private:
     void nbStatusFill(short, QLineEdit*);
     void mqttStatusFill(short, QLineEdit*);
     void cellularStatusFill(short, QLineEdit*);
+    void simStausFill(short, QLineEdit*);
 
     void serialAlarmInit();
     void sensorAddModbus(sen, int);
@@ -204,6 +205,12 @@ private:
     void sslFileRead(quint8);
     void meterViewModelInit();
     void meterPollViewModelInit();
+
+    void serialMbusSwitch(int);
+    void datalogStart();
+    void datalogStop();
+    void eventlogStart();
+    void eventlogStop();
 public slots:
     void on_connectButton_clicked();
 
@@ -491,7 +498,10 @@ private slots:
     void meterPollVerHeadReadReady();
     void meterPollBaudHeadReadReady();
     void meterPollReadReady();
+    void on_meterPollClearPushButton_clicked();
 
+    void on_dataLogPushButton_clicked();
+    void on_eventLogPushButton_clicked();
 private:
     QModbusReply *lastRequest;
     SettingsDialog *m_settingsDialog;

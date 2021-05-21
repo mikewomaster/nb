@@ -196,6 +196,7 @@ void MainWindow::meterHeadReadReady()
             s[(2*i) +1] = unit.value(i) & 0x00ff;
         }
         s.remove('\"');
+        s.remove(' ');
         ui->meterAddressLineEdit->setText(s);
         s.clear();
 
@@ -249,6 +250,7 @@ void MainWindow::meterBodyReadReady()
             s[(2*i) +1] = unit.value(i) & 0x00ff;
         }
         s.remove('\"');
+        s.remove(' ');
         // meterProfileList[meterProfileListIndex].magnitude = s;
         mp.magnitude = s;
         s.clear();
@@ -296,7 +298,6 @@ void MainWindow::on_meterLoadPushButton_clicked()
         if (meterProfileList[i].tag.isEmpty() || meterProfileList[i].id > 20)
             ui->meterTableView->setRowHidden(i, true);
     }
-
 }
 
 void MainWindow::on_meterNextPushButton_clicked()

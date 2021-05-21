@@ -118,8 +118,25 @@ void MainWindow::cellularStatusFill(short res, QLineEdit *le)
             le->setText("DISCONNECTED");
             break;
         case 1:
-            le->setText("Registered");
+            le->setText("REGISTERED");
             break;
+    }
+}
+
+void MainWindow::simStausFill(short res, QLineEdit *le)
+{
+    switch(res)
+    {
+        case 0:
+            le->setText("NOT_INSERTED");
+            break;
+        case 1:
+            le->setText("READY");
+            break;
+        case 2:
+            le->setText("NOT_READY");
+            break;
+
     }
 }
 
@@ -360,7 +377,10 @@ void MainWindow::handle_read_ready(QLineEdit* le)
             mqttStatusFill(entry, ui->mqttStatusLineEdit);
         } else if (le == ui->regisLineEdit) {
             cellularStatusFill(entry, ui->regisLineEdit);
-        } else {
+        } else if (le == ui->simStatusLineEdit){
+            simStausFill(entry, ui->simStatusLineEdit);
+        }
+        else {
             le->setText(QString::number(entry));
         }
         statusBar()->showMessage(tr("OK!"));

@@ -251,10 +251,10 @@ void MainWindow::on_mqttApply_clicked()
     _sleep(2000);
 
     nb_handle_write(ui->mqttUserNameLineEdit, mqttUserAddress, mqttUserEntries);
-    _sleep(200);
+    _sleep(2000);
 
     nb_handle_write(ui->mqttPasswordLineEdit, mqttPassWordAddress, mqttPassWordEntries);
-    _sleep(200);
+    _sleep(2000);
 
     if (ui->intervalLineEdit->text() != ""){
         emit on_idWrite_2_clicked();
@@ -273,7 +273,7 @@ void MainWindow::on_mqttReload_clicked()
     _sleep(2000);
     on_topicRead_clicked();
     _sleep(2000);
-    handle_read(mqttSubTopicalAddress, mqttSubTopicalEntries, &topicReadReady);
+    handle_read(mqttSubTopicalAddress, mqttSubTopicalEntries, &subTopicalReadReady);
     _sleep(2000);
     on_idRead_clicked();
     _sleep(2000);

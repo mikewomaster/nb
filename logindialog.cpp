@@ -138,7 +138,7 @@ void logindialog::on_loginPushButton_clicked()
 }
 #endif
 
-#define LAUNCH
+// #define LAUNCH
 
 void logindialog::on_loginPushButton_clicked()
 {

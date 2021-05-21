@@ -10,6 +10,10 @@
 #define MODBUSUNITSIZE 20
 #define EVENTLOGENABLE (811 - 1)
 #define EVENTLOGERASE (812 - 1)
+#define DATALOGSTART (21  - 1)
+#define DATALOGSTOP (22 - 1)
+#define EVENTLOGSTART (23  - 1)
+#define EVENTLOGSTOP (24 - 1)
 
 void MainWindow::parseEventLog(QString fileName)
 {
@@ -238,4 +242,61 @@ void MainWindow::on_ELogChkPushButton_clicked()
             break;
         _sleep(3000);
     }
+}
+
+
+// download log
+void MainWindow::serialMbusSwitch(int addr)
+{
+    if (!modbusDevice)
+        return;
+
+    if(modbusDevice->state() == QModbusDevice::UnconnectedState) {
+        if (!m_ymodem->port)
+            m_ymodem->port->close();
+        modbusDevice->connectDevice();
+        m_ymodem->dwnFlagRdy = false;
+    }
+
+    QModbusDataUnit writeUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, addr, 1);
+    writeUnit.setValue(0, 1);
+    handle_write(writeUnit);
+}
+
+void MainWindow::datalogStart()
+{
+    serialMbusSwitch(DATALOGSTART);
+}
+
+void MainWindow::datalogStop()
+{
+    serialMbusSwitch(DATALOGSTOP);
+}
+
+void MainWindow::eventlogStart()
+{
+    serialMbusSwitch(EVENTLOGSTART);
+}
+
+void MainWindow::eventlogStop()
+{
+    serialMbusSwitch(EVENTLOGSTOP);
+}
+
+void MainWindow::on_dataLogPushButton_clicked()
+{
+    datalogStart();
+    _sleep(2000);
+    emit on_ELogChkPushButton_clicked();
+    _sleep(500);
+    datalogStop();
+}
+
+void MainWindow::on_eventLogPushButton_clicked()
+{
+    eventlogStart();
+    _sleep(2000);
+    emit on_ELogChkPushButton_clicked ();
+    _sleep(500);
+    eventlogStop();
 }

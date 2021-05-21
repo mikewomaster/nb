@@ -121,7 +121,8 @@ void MainWindow::on_meterPollPushButton_clicked()
     meterPollWriteUnit.setValue(0, 1);
     handle_write(meterPollWriteUnit);
     QMessageBox::information(NULL,  "INFO",  "The meter starts reading data, wait a while please.", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-    _sleep(10000);
+    _sleep(2000);
+    ui->meterPollNextPushButton->setEnabled(false);
 
     int meterNumber = ui->meterPollNumLineEdit->text().toInt();
     int times = (meterNumber - 1);
@@ -147,16 +148,22 @@ void MainWindow::on_meterPollPushButton_clicked()
 
     meterPollList.clear();
 
-    handle_read(meterPollAlarmCode + (meterPollGap * times), &meterPollReadReady);
-    _sleep(2000);
-    // for (meterPollIndex = 0; meterPollIndex < 10; meterPollIndex++)
-    for (meterPollIndex = 0; meterPollIndex < 2; meterPollIndex++)
+    // handle_read(meterPollAlarmCode + (meterPollGap * times), &meterPollReadReady);
+    // _sleep(2000);
+    for (meterPollIndex = 0; meterPollIndex < 10; meterPollIndex++)
     {
         handle_read(meterPollChannel + (meterPollGap * times) + meterTWELVE * meterPollIndex, meterTWELVE, &meterPollReadReady);
         _sleep(2000);
     }
 
     m_meterPollModelBody->updateData(meterPollList);
+    for (int i = 0; i < meterPollList.count(); i++){
+        if (meterPollList[i].attribute.isEmpty()){
+            ui->meterPollBodyTableView->setRowHidden(i, true);
+        }
+    }
+
+    ui->meterPollNextPushButton->setEnabled(true);
 }
 
 void MainWindow::on_meterPollNextPushButton_clicked()
@@ -171,4 +178,16 @@ void MainWindow::on_meterPollNextPushButton_clicked()
     ui->meterPollNumLineEdit->setText(QString::number(times));
 
     on_meterPollPushButton_clicked();
+}
+
+void MainWindow::on_meterPollClearPushButton_clicked()
+{    
+    meterPollList.clear();
+    m_meterPollModelBody->updateData(meterPollList);
+
+    for (int i = 0; i < meterPollList.count(); i++) {
+        if (meterPollList[i].attribute.isEmpty()) {
+            ui->meterPollBodyTableView->setRowHidden(i, true);
+        }
+    }
 }

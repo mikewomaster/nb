@@ -760,13 +760,13 @@ void MainWindow::on_connectButton_clicked()
             m_login_flag_2 = 0;
             sensorFlag = false;
      } else {
-#if 0
+#if 1
         logindialog log(this);
         log.show();
 
 
-        loginRuleDialog ruleDialog(this);
-        ruleDialog.show();
+        // loginRuleDialog ruleDialog(this);
+        // ruleDialog.show();
         // init
         m_login_flag_2 = 0;
 
