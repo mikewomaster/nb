@@ -3961,7 +3961,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>13</number>
     </property>
     <widget class="QWidget" name="LoraNet_3">
      <property name="enabled">

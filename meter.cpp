@@ -15,7 +15,16 @@ static int meterProfileListIndex;
 
 void MainWindow::on_meterCreatePushButton_clicked()
 {
-    if (meterProfileList.count() >= 15)
+    bool emptyOwn = false;
+    int emptyNum = 0;
+    for (emptyNum = 0; emptyNum < meterProfileList.count(); emptyNum++) {
+        if (meterProfileList[emptyNum].tag.isEmpty()) {
+            emptyOwn = true;
+            break;
+        }
+    }
+
+    if (meterProfileList.count() >= 15 && !emptyOwn)
         return;
 
     meterProfile mp;
@@ -23,19 +32,13 @@ void MainWindow::on_meterCreatePushButton_clicked()
     mp.id = ui->meterDataIndexLineEdit->text().toInt();
     mp.magnitude = ui->meterMagnitudeLineEdit->text();
 
-    int i = 0;
-    for (i = 0; i < meterProfileList.count(); i++) {
-
-        if (meterProfileList[i].tag.isEmpty()) {
-            meterProfileList[i].tag = mp.tag;
-            meterProfileList[i].id = mp.id;
-            meterProfileList[i].magnitude = mp.magnitude;
-            break;
-        }
-    }
-
-    if (i == meterProfileList.count())
+    if (emptyOwn) {
+        meterProfileList[emptyNum].tag = mp.tag;
+        meterProfileList[emptyNum].id = mp.id;
+        meterProfileList[emptyNum].magnitude = mp.magnitude;
+    }else {
         meterProfileList.append(mp);
+    }
 
     m_meterViewControl->updateData(meterProfileList);
 

@@ -197,8 +197,8 @@ void MainWindow::on_logErasePushButton_clicked()
 
 void MainWindow::on_ELogChkPushButton_clicked()
 {
-    if (!ui->eventLogEnableRadioButton->isChecked())
-        return;
+    // if (!ui->eventLogEnableRadioButton->isChecked())
+        // return;
 
     if (modbusDevice->state() == QModbusDevice::ConnectedState)
         modbusDevice->disconnectDevice();

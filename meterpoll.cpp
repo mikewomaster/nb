@@ -190,4 +190,8 @@ void MainWindow::on_meterPollClearPushButton_clicked()
             ui->meterPollBodyTableView->setRowHidden(i, true);
         }
     }
+    ui->meterPollNumLineEdit->setText("1");
+
+    for (int i = 0; i < 10; i++)
+        m_meterPollModel->setItem(i, 2, new QStandardItem(""));
 }
