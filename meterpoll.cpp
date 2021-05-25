@@ -10,6 +10,11 @@
 #include "commanhelper.h"
 #include "meterpoll.h"
 
+void MainWindow::meterPollModelReadReady()
+{
+    handle_read_ready(m_meterPollModel, 99);
+}
+
 void MainWindow::meterPollSNHeadReadReady()
 {
     handle_read_ready(m_meterPollModel, 0);
@@ -85,7 +90,7 @@ void MainWindow::meterPollReadReady()
             }
             s.remove('\"');
 
-            QStringList strList = s.split(' ');
+            QStringList strList = s.split('#');
 
             meterPoll mpTemp;
             mpTemp.attribute = strList[0];
@@ -121,12 +126,14 @@ void MainWindow::on_meterPollPushButton_clicked()
     meterPollWriteUnit.setValue(0, 1);
     handle_write(meterPollWriteUnit);
     QMessageBox::information(NULL,  "INFO",  "The meter starts reading data, wait a while please.", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-    _sleep(2000);
+    _sleep(5000);
     ui->meterPollNextPushButton->setEnabled(false);
 
     int meterNumber = ui->meterPollNumLineEdit->text().toInt();
     int times = (meterNumber - 1);
 
+    handle_read(meterModelBaseAddress + (meterPollGap * times), meterEight, &meterPollModelReadReady);
+    _sleep(2000);
     handle_read(meterPollSN + (meterPollGap * times), meterEight, &meterPollSNHeadReadReady);
     _sleep(2000);
     handle_read(meterPollAdressMode + (meterPollGap * times), &meterPollAddHeadReadReady);
@@ -193,5 +200,5 @@ void MainWindow::on_meterPollClearPushButton_clicked()
     ui->meterPollNumLineEdit->setText("1");
 
     for (int i = 0; i < 10; i++)
-        m_meterPollModel->setItem(i, 2, new QStandardItem(""));
+        m_meterPollModel->setItem(i, 1, new QStandardItem(""));
 }

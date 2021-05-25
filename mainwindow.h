@@ -59,6 +59,7 @@
 #include <QTimer>
 #include <QPaintDevice>
 #include <QStandardItemModel>
+#include <QCloseEvent>
 
 #include "sensor_edit.h"
 #include "ui_mainwindow.h"
@@ -211,6 +212,8 @@ private:
     void datalogStop();
     void eventlogStart();
     void eventlogStop();
+
+    void closeEvent(QCloseEvent *e);
 public slots:
     void on_connectButton_clicked();
 
@@ -488,6 +491,7 @@ private slots:
     void on_meterPollPushButton_clicked();
     void on_meterPollNextPushButton_clicked();
 
+    void meterPollModelReadReady();
     void meterPollSNHeadReadReady();
     void meterPollAddHeadReadReady();
     void meterPollPriHeadReadReady();

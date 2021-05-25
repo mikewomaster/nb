@@ -283,7 +283,7 @@ void MainWindow::on_mqttReload_clicked()
     _sleep(2000);
     on_intervalRead_clicked();
     _sleep(2000);
-    on_mqttStatusRead_clicked();
+    // on_mqttStatusRead_clicked();
 
     ui->mqttReload->setEnabled(true);
 }

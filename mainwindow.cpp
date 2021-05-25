@@ -350,7 +350,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_meterPollModel->setColumnCount(2);
     m_meterPollModel->setHeaderData(0, Qt::Horizontal, "Model");
-    m_meterPollModel->setHeaderData(1, Qt::Horizontal, "Hydrus");
+    m_meterPollModel->setHeaderData(1, Qt::Horizontal, " ");
     ui->meterPollHeadTableView->setColumnWidth(0, 190);
     ui->meterPollHeadTableView->setColumnWidth(1, 200);
 
@@ -723,6 +723,12 @@ void MainWindow::on_connectButton_clicked()
 
             QString s = ui->portEdit_3->text();
 
+            for (int x = 3; x <= 12; x++)
+            {
+                ui->tabWidget_2->setTabEnabled(x, false);
+            }
+
+            /*
             if (s.contains("485")) {
                 // ui->tabWidget_2->setTabEnabled(2, true);
                 ui->tabWidget_2->setTabEnabled(4, true);
@@ -750,6 +756,7 @@ void MainWindow::on_connectButton_clicked()
                 // ui->tabWidget_2->setTabEnabled(5, true);
                 // ui->tabWidget_2->setTabEnabled(6, true);
             }
+            */
 
             ui->tabWidget->setStyleSheet("QTabBar::tab:disabled {width: 0; color: transparent;}");
             ui->tabWidget_2->setStyleSheet("QTabBar::tab:disabled {width: 0; color: transparent;}");
@@ -923,7 +930,7 @@ void MainWindow::ymodemCancelButtonCliked()
     modbusDevice->connectDevice();
 
     ui->eventLogEnableRadioButton->setChecked(false);
-    on_eventLogEnableRadioButton_clicked();
+    // on_eventLogEnableRadioButton_clicked();
 }
 
 void MainWindow::meterViewModelInit()
@@ -954,4 +961,10 @@ void MainWindow::meterPollViewModelInit()
     ui->meterPollBodyTableView->setColumnWidth(0, 160);
     ui->meterPollBodyTableView->setColumnWidth(1, 160);
     ui->meterPollBodyTableView->setColumnWidth(2, 130);
+}
+
+void MainWindow::closeEvent(QCloseEvent *e)
+{
+    m_ymodem->dwnFlagRdy = false;
+    e->accept();
 }

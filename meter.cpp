@@ -155,6 +155,9 @@ void MainWindow::on_meterApplyPushButton_clicked()
 
     for (int i = 0; i < meterProfileList.count(); i++)
     {
+        if (meterProfileList[i].tag.isEmpty())
+            break;
+
         QVector<quint16> valuesBody = meterHeadModbusUnit(meterProfileList[i].tag, 4, (int) meterProfileList[i].id, meterProfileList[i].magnitude, 4);
         int addr2 = meterTagBaseAddress + (times * meterGap) + i * 9;
         int entry2 = 9;

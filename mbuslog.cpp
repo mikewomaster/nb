@@ -151,8 +151,8 @@ void MainWindow::parseEventLog(QString fileName)
     delete(filep);
     delete(fileStore);
 
-    ui->eventLogEnableRadioButton->setChecked(false);
-    on_eventLogEnableRadioButton_clicked();
+    // ui->eventLogEnableRadioButton->setChecked(false);
+    // on_eventLogEnableRadioButton_clicked();
 }
 
 void MainWindow::on_eventLogEnableRadioButton_clicked()
@@ -206,7 +206,7 @@ void MainWindow::on_ELogChkPushButton_clicked()
     if (m_serial == nullptr) {
         m_serial = new QSerialPort();
         m_serial->setPortName(ui->portComboBox->currentText());
-        m_serial->setBaudRate(QSerialPort::Baud9600);
+        m_serial->setBaudRate(QSerialPort::Baud115200);
         m_serial->setDataBits(QSerialPort::Data8);
         m_serial->setParity(QSerialPort::NoParity);
         m_serial->setStopBits(QSerialPort::OneStop);
@@ -214,7 +214,7 @@ void MainWindow::on_ELogChkPushButton_clicked()
         m_serial->open(QIODevice::ReadWrite);
     } else {
         m_serial->setPortName(ui->portComboBox->currentText());
-        m_serial->setBaudRate(QSerialPort::Baud9600);
+        m_serial->setBaudRate(QSerialPort::Baud115200);
         m_serial->setDataBits(QSerialPort::Data8);
         m_serial->setParity(QSerialPort::NoParity);
         m_serial->setStopBits(QSerialPort::OneStop);

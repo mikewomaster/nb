@@ -3961,7 +3961,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>13</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="LoraNet_3">
      <property name="enabled">
@@ -4493,12 +4493,20 @@
            <height>29</height>
           </size>
          </property>
+         <property name="editable">
+          <bool>true</bool>
+         </property>
          <property name="currentText">
           <string>15</string>
          </property>
          <item>
           <property name="text">
            <string>15</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>20</string>
           </property>
          </item>
          <item>
@@ -5584,22 +5592,6 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="2">
-        <widget class="QLineEdit" name="intervalLineEdit">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="placeholderText">
-          <string/>
-         </property>
-        </widget>
-       </item>
        <item row="9" column="2">
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
@@ -5648,6 +5640,29 @@
          </property>
          <property name="text">
           <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="2">
+        <widget class="QLineEdit" name="intervalLineEdit">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="5">
+        <widget class="QLabel" name="label_162">
+         <property name="text">
+          <string>(Multiple times of Mbus Interval)  </string>
          </property>
         </widget>
        </item>

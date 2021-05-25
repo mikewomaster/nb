@@ -1,6 +1,7 @@
 #include <QModbusDataUnit>
 #include <QModbusTcpClient>
 #include <QModbusRtuSerialMaster>
+#include <QMessageBox>
 
 #include "ui_mainwindow.h"
 #include "mainwindow.h"
@@ -162,6 +163,23 @@ void MainWindow::mqttStatusFill(short res, QLineEdit *le)
     }
 }
 
+QString meterAddressModeUpdate (quint16 data)
+{
+    QString str;
+    switch (data)
+    {
+        case 0x01:
+            str = "primary";
+            break;
+
+        case 0x02:
+            str = "secondary";
+            break;
+    }
+
+    return str;
+}
+
 QString meterTypeUpdate(quint16 data)
 {
     QString str;
@@ -232,8 +250,13 @@ void MainWindow::handle_read_ready(QStandardItemModel *tbModel, int col)
         const QModbusDataUnit unit = reply->result();
         if (unit.valueCount() == 1)
         {
+            QString test = "col: " + QString::number(col) + " value: " + QString::number(unit.value(0));
+            QMessageBox::information(NULL, "Reset", test, QMessageBox::Yes | QMessageBox::No);
+
             if (col == 6)
                 tbModel->setItem(col, 1, new QStandardItem(meterTypeUpdate(unit.value(0))));
+            else if (col == 1)
+                tbModel->setItem(col, 1, new QStandardItem(meterAddressModeUpdate(unit.value(0))));
             else
                 tbModel->setItem(col, 1, new QStandardItem(QString::number(unit.value(0))));
         }
@@ -255,7 +278,11 @@ void MainWindow::handle_read_ready(QStandardItemModel *tbModel, int col)
                 s[(2*i) +1] = unit.value(i) & 0x00ff;
             }
             s.remove('\"');
-            tbModel->setItem(col, 1, new QStandardItem(s));
+
+            if (col == 99)
+                tbModel->setHeaderData(1, Qt::Horizontal, s);
+            else
+                tbModel->setItem(col, 1, new QStandardItem(s));
         }
 
         statusBar()->showMessage(tr("OK!"));

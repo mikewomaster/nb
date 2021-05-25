@@ -61,7 +61,7 @@ void ymodem::downloadToSlave()
 
     switch (receiveStatus) {
         case waitFirstCRC: {
-            if (total.length() != SOHLENGTH + RCVHEADFIRST)
+            if (total.length() != SOHLENGTH + RCVHEADFIRST && total.length() != 2 * (SOHLENGTH + RCVHEADFIRST))
                 break;
 
             dwnFlagRdy = true;
@@ -76,7 +76,7 @@ void ymodem::downloadToSlave()
         }
 
         case rcvAckCRCFirst: {
-            if (total.length() != 2 * (STXLENGTH + RCVHEADFIRST) && total.length() != (STXLENGTH + RCVHEADFIRST))
+            if (total.length() != 2 * (STXLENGTH + RCVHEADFIRST) && total.length() != (STXLENGTH + RCVHEADFIRST) )
                 break;
 
             // writeToFile(STXLENGTH);
@@ -92,7 +92,7 @@ void ymodem::downloadToSlave()
         }
 
         case rcvACK: {
-            if (total.length() != STXLENGTH + RCVHEADFIRST && total.length() != SOHLENGTH + RCVHEADFIRST)
+            if (total.length() != STXLENGTH + RCVHEADFIRST && total.length() != SOHLENGTH + RCVHEADFIRST && total.length() != (STXLENGTH + RCVHEADFIRST) + 1 && total.length() != (STXLENGTH + RCVHEADFIRST) + 2)
                 break;
 
             if (total.length() == STXLENGTH + RCVHEADFIRST) {
