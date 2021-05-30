@@ -250,8 +250,8 @@ void MainWindow::handle_read_ready(QStandardItemModel *tbModel, int col)
         const QModbusDataUnit unit = reply->result();
         if (unit.valueCount() == 1)
         {
-            QString test = "col: " + QString::number(col) + " value: " + QString::number(unit.value(0));
-            QMessageBox::information(NULL, "Reset", test, QMessageBox::Yes | QMessageBox::No);
+            // QString test = "col: " + QString::number(col) + " value: " + QString::number(unit.value(0));
+            // QMessageBox::information(NULL, "Reset", test, QMessageBox::Yes | QMessageBox::No);
 
             if (col == 6)
                 tbModel->setItem(col, 1, new QStandardItem(meterTypeUpdate(unit.value(0))));

@@ -65,7 +65,7 @@ void MainWindow::on_meterErasePushButton_clicked()
     meterProfileList[index].magnitude = "";
 
     QVector<quint16> valuesBody = meterHeadModbusUnit(meterProfileList[index].tag, 4, (int) meterProfileList[index].id, meterProfileList[index].magnitude, 4);
-    int addr2 = meterTagBaseAddress + (times * meterGap);
+    int addr2 = meterTagBaseAddress + (times * meterGap) + (index * 9);
     int entry2 = 9;
     QModbusDataUnit writeUnit2 = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, addr2, entry2);
     writeUnit2.setValues(valuesBody);
@@ -288,15 +288,28 @@ void MainWindow::on_meterLoadPushButton_clicked()
     int meterNumber = ui->meterNumberLineEdit->text().toInt();
     int times = (meterNumber - 1);
 
-    handle_read(meterModelBaseAddress + (meterGap * times), 19, &meterHeadReadReady);
+    handle_read(meterModelBaseAddress + (meterGap * times), 19, &meterHeadReadReady); // FIX ME : Check Number
     _sleep(2000);
 
     meterProfileList.clear();
+
+    if (!m_ymodem->pro)
+        m_ymodem->pro = new QProgressDialog();
+    connect(m_ymodem->pro, SIGNAL(canceled()), this, SLOT(ymodemCancelButtonCliked()));
+
+    m_ymodem->pro->setLabelText(tr("Processing... Please wait..."));
+    m_ymodem->pro->setRange(0, 100);
+    m_ymodem->pro->setModal(true);
+    m_ymodem->pro->setCancelButtonText(tr("Cancel"));
+    m_ymodem->pro->setValue(0);
+
     for (meterProfileListIndex = 0; meterProfileListIndex < 15; meterProfileListIndex++)
     {
         handle_read(meterTagBaseAddress + (meterGap * times) + meterProfileListIndex * 9, 9, &meterBodyReadReady);
-        _sleep(2000);
+        _sleep(3000);
+        m_ymodem->pro->setValue(meterProfileListIndex * 6);
     }
+    m_ymodem->pro->setValue(100);
 
     m_meterViewControl->updateData(meterProfileList);
 

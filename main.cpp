@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
 
     QDateTime time = QDateTime::currentDateTime();
     int timeT = time.toTime_t();
-    if (timeT <= 1622429839)
+    if (timeT <= 1624198378)
     {
         QString str = "You are using testing Version " + QString::number(1621593042 - timeT) + " seconds remained";
         // QMessageBox::information(NULL, "INFO", str, QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);

@@ -163,7 +163,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabWidget_2->setTabEnabled(11, false);
     ui->tabWidget_2->setTabEnabled(12, false);
 #endif
-
     ui->groupBox_13->hide();
     ui->mbusRegister->hide();
     ui->mbusPrimaryEdit->setText("1");

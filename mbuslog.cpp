@@ -233,6 +233,7 @@ void MainWindow::on_ELogChkPushButton_clicked()
     m_ymodem->pro->setRange(0, 100);
     m_ymodem->pro->setModal(true);
     m_ymodem->pro->setCancelButtonText(tr("Cancel"));
+    m_ymodem->pro->setValue(0);
 
     int i = 20;
     while(!m_ymodem->dwnFlagRdy && i--) {

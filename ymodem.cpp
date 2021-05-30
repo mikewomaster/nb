@@ -50,7 +50,19 @@ void ymodem::writeToFile(int len)
     QFile file;
     file.setFileName(fileName);
     file.open(QIODevice::Append);
-    file.write(total.mid(3, len));
+
+    const char* ch;
+    ch = total.mid(3,len).data();
+    /*
+        QString string;
+        string = QString(total.mid(3,len));
+
+        for (int i = 800; i < len; i++) {
+        }
+        file.write(total.mid(3, len));
+    */
+
+    file.write(ch);
     file.close();
 }
 

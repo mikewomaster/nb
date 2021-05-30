@@ -81,7 +81,7 @@ QVariant meterModelViewControl::data(const QModelIndex &index, int role) const
                     if (record.id < 20)
                         return record.id;
                     else
-                        return '-';
+                        return "-";
                 if (nColumn == 2)
                     return record.magnitude;
 

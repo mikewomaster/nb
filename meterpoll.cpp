@@ -157,6 +157,83 @@ void MainWindow::on_meterPollPushButton_clicked()
 
     // handle_read(meterPollAlarmCode + (meterPollGap * times), &meterPollReadReady);
     // _sleep(2000);
+
+    if (!m_ymodem->pro)
+        m_ymodem->pro = new QProgressDialog();
+    connect(m_ymodem->pro, SIGNAL(canceled()), this, SLOT(ymodemCancelButtonCliked()));
+
+    m_ymodem->pro->setLabelText(tr("Processing... Please wait..."));
+    m_ymodem->pro->setRange(0, 100);
+    m_ymodem->pro->setModal(true);
+    m_ymodem->pro->setCancelButtonText(tr("Cancel"));
+    m_ymodem->pro->setValue(0);
+    for (meterPollIndex = 0; meterPollIndex < 10; meterPollIndex++)
+    {
+        handle_read(meterPollChannel + (meterPollGap * times) + meterTWELVE * meterPollIndex, meterTWELVE, &meterPollReadReady);
+        _sleep(2000);
+        m_ymodem->pro->setValue(meterPollIndex*10);
+    }
+    m_ymodem->pro->setValue(100);
+
+    m_meterPollModelBody->updateData(meterPollList);
+    for (int i = 0; i < meterPollList.count(); i++){
+        if (meterPollList[i].attribute.isEmpty()){
+            ui->meterPollBodyTableView->setRowHidden(i, true);
+        }
+    }
+
+    ui->meterPollNextPushButton->setEnabled(true);
+}
+
+void MainWindow::on_meterPollNextPushButton_clicked()
+{
+    int Numtimes = ui->meterPollNumLineEdit->text().toInt();
+
+    if (Numtimes == 10)
+        Numtimes = 1;
+    else
+        Numtimes ++;
+
+    ui->meterPollNumLineEdit->setText(QString::number(Numtimes));
+
+    if (!modbusDevice)
+        return;
+
+    if (modbusDevice->state() != QModbusDevice::ConnectedState ) {
+        statusBar()->showMessage(tr("Read error: Device not Connected.") ,1000);
+        return;
+    }
+
+    ui->meterPollNextPushButton->setEnabled(false);
+
+    int meterNumber = ui->meterPollNumLineEdit->text().toInt();
+    int times = (meterNumber - 1);
+
+    handle_read(meterModelBaseAddress + (meterPollGap * times), meterEight, &meterPollModelReadReady);
+    _sleep(2000);
+    handle_read(meterPollSN + (meterPollGap * times), meterEight, &meterPollSNHeadReadReady);
+    _sleep(2000);
+    handle_read(meterPollAdressMode + (meterPollGap * times), &meterPollAddHeadReadReady);
+    _sleep(2000);
+    handle_read(meterPollPriAddress + (meterPollGap * times), &meterPollPriHeadReadReady);
+    _sleep(2000);
+    handle_read(meterPollSecAddress + (meterPollGap * times), meterEight, &meterPollSecHeadReadReady);
+    _sleep(2000);
+    handle_read(meterPollStatus + (meterPollGap * times), &meterPollStatusHeadReadReady);
+    _sleep(2000);
+    handle_read(meterPollManu + (meterPollGap * times), meterEight, &meterPollManuHeadReadReady);
+    _sleep(2000);
+    handle_read(meterPollType + (meterPollGap * times), &meterPollTypeHeadReadReady);
+    _sleep(2000);
+    handle_read(meterPollVersion + (meterPollGap * times), &meterPollVerHeadReadReady);
+    _sleep(2000);
+    handle_read(meterPollBaudRate + (meterPollGap * times), meterTwo, &meterPollBaudHeadReadReady);
+    _sleep(2000);
+
+    meterPollList.clear();
+
+    // handle_read(meterPollAlarmCode + (meterPollGap * times), &meterPollReadReady);
+    // _sleep(2000);
     for (meterPollIndex = 0; meterPollIndex < 10; meterPollIndex++)
     {
         handle_read(meterPollChannel + (meterPollGap * times) + meterTWELVE * meterPollIndex, meterTWELVE, &meterPollReadReady);
@@ -171,20 +248,6 @@ void MainWindow::on_meterPollPushButton_clicked()
     }
 
     ui->meterPollNextPushButton->setEnabled(true);
-}
-
-void MainWindow::on_meterPollNextPushButton_clicked()
-{
-    int times = ui->meterPollNumLineEdit->text().toInt();
-
-    if (times == 10)
-        times = 1;
-    else
-        times ++;
-
-    ui->meterPollNumLineEdit->setText(QString::number(times));
-
-    on_meterPollPushButton_clicked();
 }
 
 void MainWindow::on_meterPollClearPushButton_clicked()
