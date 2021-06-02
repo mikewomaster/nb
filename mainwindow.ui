@@ -3961,7 +3961,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>14</number>
     </property>
     <widget class="QWidget" name="LoraNet_3">
      <property name="enabled">
@@ -8124,7 +8124,7 @@
        <rect>
         <x>540</x>
         <y>10</y>
-        <width>431</width>
+        <width>441</width>
         <height>441</height>
        </rect>
       </property>
@@ -8383,9 +8383,9 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>650</x>
+        <x>540</x>
         <y>460</y>
-        <width>320</width>
+        <width>437</width>
         <height>33</height>
        </rect>
       </property>
@@ -8415,6 +8415,13 @@
         <widget class="QPushButton" name="meterNextPushButton">
          <property name="text">
           <string>Next</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="meterClearPushButton">
+         <property name="text">
+          <string>Clear</string>
          </property>
         </widget>
        </item>

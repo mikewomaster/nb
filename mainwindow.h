@@ -81,7 +81,7 @@
 #define ACTION
 #define ADMIN
 // #define LORA
-#define UtilityVersion "SCB111-NB v1.8.2"
+#define UtilityVersion "SCB111MB Utility"
 QT_BEGIN_NAMESPACE
 
 class QModbusClient;
@@ -506,6 +506,10 @@ private slots:
 
     void on_dataLogPushButton_clicked();
     void on_eventLogPushButton_clicked();
+    void on_meterClearPushButton_clicked();
+
+    void on_meterNumberLineEdit_textChanged(const QString &arg1);
+
 private:
     QModbusReply *lastRequest;
     SettingsDialog *m_settingsDialog;

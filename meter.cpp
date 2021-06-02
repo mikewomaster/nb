@@ -24,8 +24,10 @@ void MainWindow::on_meterCreatePushButton_clicked()
         }
     }
 
-    if (meterProfileList.count() >= 15 && !emptyOwn)
+    if (meterProfileList.count() >= 7 && !emptyOwn) {
+        QMessageBox::information(NULL,  "INFO",  "Maximum 7 channels supported.", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
         return;
+    }
 
     meterProfile mp;
     mp.tag = ui->meterAttributeNameLineEdit->text();
@@ -153,6 +155,11 @@ void MainWindow::on_meterApplyPushButton_clicked()
     writeUnit.setValues(values);
     handle_write(writeUnit);
 
+    if (ui->meterModelLineEdit->text().isEmpty())
+    {
+        return;
+    }
+
     for (int i = 0; i < meterProfileList.count(); i++)
     {
         if (meterProfileList[i].tag.isEmpty())
@@ -167,6 +174,8 @@ void MainWindow::on_meterApplyPushButton_clicked()
         handle_write(writeUnit2);
         _sleep(2000);
     }
+
+    QMessageBox::information(NULL,  "INFO",  "Upload Meter Parameters Done.", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
 }
 
 void MainWindow::meterHeadReadReady()
@@ -293,23 +302,20 @@ void MainWindow::on_meterLoadPushButton_clicked()
 
     meterProfileList.clear();
 
-    if (!m_ymodem->pro)
-        m_ymodem->pro = new QProgressDialog();
-    connect(m_ymodem->pro, SIGNAL(canceled()), this, SLOT(ymodemCancelButtonCliked()));
+    QProgressDialog pro;
+    pro.setLabelText(tr("Processing... Please wait..."));
+    pro.setRange(0, 100);
+    pro.setModal(true);
+    pro.setCancelButtonText(tr("Cancel"));
+    pro.setValue(0);
 
-    m_ymodem->pro->setLabelText(tr("Processing... Please wait..."));
-    m_ymodem->pro->setRange(0, 100);
-    m_ymodem->pro->setModal(true);
-    m_ymodem->pro->setCancelButtonText(tr("Cancel"));
-    m_ymodem->pro->setValue(0);
-
-    for (meterProfileListIndex = 0; meterProfileListIndex < 15; meterProfileListIndex++)
+    for (meterProfileListIndex = 0; meterProfileListIndex < 7; meterProfileListIndex++)
     {
         handle_read(meterTagBaseAddress + (meterGap * times) + meterProfileListIndex * 9, 9, &meterBodyReadReady);
         _sleep(3000);
-        m_ymodem->pro->setValue(meterProfileListIndex * 6);
+        pro.setValue(meterProfileListIndex * 16);
     }
-    m_ymodem->pro->setValue(100);
+    pro.setValue(100);
 
     m_meterViewControl->updateData(meterProfileList);
 
@@ -330,5 +336,20 @@ void MainWindow::on_meterNextPushButton_clicked()
 
     ui->meterNumberLineEdit->setText(QString::number(times));
 
-    on_meterLoadPushButton_clicked();
+    // on_meterLoadPushButton_clicked();
+}
+
+void MainWindow::on_meterClearPushButton_clicked()
+{
+    meterProfileList.clear();
+    m_meterViewControl->updateData(meterProfileList);
+}
+
+void MainWindow::on_meterNumberLineEdit_textChanged(const QString &arg1)
+{
+    int num = arg1.toInt();
+    if (num > 10) {
+        QMessageBox::information(NULL,  "INFO",  "Maximum 10 Meters supported.", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+        ui->meterNumberLineEdit->setText("1");
+    }
 }

@@ -155,6 +155,7 @@ void systemDialog::on_systemReload_clicked()
     ui->passwordLineEdit->clear();
     ui->usernameLineEdit->clear();
     handle_read(UsernameAddress, UsernameEntries, usernameReadReady);
+    CommanHelper::sleep(3000);
     handle_read(PasswordAddress, PasswordEntries, passwordReadReady);
     CommanHelper::sleep(3000);
     ui->usernameLineEdit->setText(m_username);

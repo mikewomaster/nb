@@ -791,6 +791,7 @@ void MainWindow::on_connectButton_clicked()
         modbusDevice->setConnectionParameter(QModbusDevice::SerialDataBitsParameter,QSerialPort::Data8);
         modbusDevice->setConnectionParameter(QModbusDevice::SerialParityParameter,QSerialPort::NoParity);
         modbusDevice->setConnectionParameter(QModbusDevice::SerialStopBitsParameter,QSerialPort::OneStop);
+        modbusDevice->setTimeout(5000);
         modbusDevice->setNumberOfRetries(0);
         modbusDevice->connectDevice();
 

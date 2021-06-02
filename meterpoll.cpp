@@ -114,6 +114,7 @@ void MainWindow::meterPollReadReady()
 
 void MainWindow::on_meterPollPushButton_clicked()
 {
+    /*
     if (!modbusDevice)
         return;
 
@@ -121,6 +122,7 @@ void MainWindow::on_meterPollPushButton_clicked()
         statusBar()->showMessage(tr("Read error: Device not Connected.") ,1000);
         return;
     }
+    */
 
     QModbusDataUnit meterPollWriteUnit = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, meterPollStart, meterPollOne);
     meterPollWriteUnit.setValue(0, 1);
@@ -158,22 +160,19 @@ void MainWindow::on_meterPollPushButton_clicked()
     // handle_read(meterPollAlarmCode + (meterPollGap * times), &meterPollReadReady);
     // _sleep(2000);
 
-    if (!m_ymodem->pro)
-        m_ymodem->pro = new QProgressDialog();
-    connect(m_ymodem->pro, SIGNAL(canceled()), this, SLOT(ymodemCancelButtonCliked()));
-
-    m_ymodem->pro->setLabelText(tr("Processing... Please wait..."));
-    m_ymodem->pro->setRange(0, 100);
-    m_ymodem->pro->setModal(true);
-    m_ymodem->pro->setCancelButtonText(tr("Cancel"));
-    m_ymodem->pro->setValue(0);
+    QProgressDialog pro;
+    pro.setLabelText(tr("Processing... Please wait..."));
+    pro.setRange(0, 100);
+    pro.setModal(true);
+    pro.setCancelButtonText(tr("Cancel"));
+    pro.setValue(0);
     for (meterPollIndex = 0; meterPollIndex < 10; meterPollIndex++)
     {
         handle_read(meterPollChannel + (meterPollGap * times) + meterTWELVE * meterPollIndex, meterTWELVE, &meterPollReadReady);
         _sleep(2000);
-        m_ymodem->pro->setValue(meterPollIndex*10);
+        pro.setValue(meterPollIndex*10);
     }
-    m_ymodem->pro->setValue(100);
+    pro.setValue(100);
 
     m_meterPollModelBody->updateData(meterPollList);
     for (int i = 0; i < meterPollList.count(); i++){
@@ -210,9 +209,9 @@ void MainWindow::on_meterPollNextPushButton_clicked()
     int times = (meterNumber - 1);
 
     handle_read(meterModelBaseAddress + (meterPollGap * times), meterEight, &meterPollModelReadReady);
-    _sleep(2000);
+    _sleep(3000);
     handle_read(meterPollSN + (meterPollGap * times), meterEight, &meterPollSNHeadReadReady);
-    _sleep(2000);
+    _sleep(3000);
     handle_read(meterPollAdressMode + (meterPollGap * times), &meterPollAddHeadReadReady);
     _sleep(2000);
     handle_read(meterPollPriAddress + (meterPollGap * times), &meterPollPriHeadReadReady);
@@ -234,11 +233,19 @@ void MainWindow::on_meterPollNextPushButton_clicked()
 
     // handle_read(meterPollAlarmCode + (meterPollGap * times), &meterPollReadReady);
     // _sleep(2000);
+    QProgressDialog pro;
+    pro.setLabelText(tr("Processing... Please wait..."));
+    pro.setRange(0, 100);
+    pro.setModal(true);
+    pro.setCancelButtonText(tr("Cancel"));
+    pro.setValue(0);
     for (meterPollIndex = 0; meterPollIndex < 10; meterPollIndex++)
     {
         handle_read(meterPollChannel + (meterPollGap * times) + meterTWELVE * meterPollIndex, meterTWELVE, &meterPollReadReady);
         _sleep(2000);
+        pro.setValue(meterPollIndex * 10);
     }
+    pro.setValue(100);
 
     m_meterPollModelBody->updateData(meterPollList);
     for (int i = 0; i < meterPollList.count(); i++){
