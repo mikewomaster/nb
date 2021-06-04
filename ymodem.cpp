@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QString>
 #include <QTime>
+#include <QMessageBox>
 
 ymodem::ymodem():status(waitCRC), receiveStatus(waitFirstCRC), dwnFlagRdy(false), rcvContent(0), pro(nullptr), rcvTimes4Bar(0)
 {
@@ -115,7 +116,7 @@ void ymodem::downloadToSlave()
                 writeToFile(SOHLENGTH);
             }
 
-            if (rcvContent >= data.totalSize) {
+            if (rcvTimes4Bar >= data.transTimes - 2 || rcvContent >= data.totalSize - 50) {
                 rcvContent = 0;
                 receiveStatus = rcvNAK;
             }
@@ -130,9 +131,10 @@ void ymodem::downloadToSlave()
             break;
         }
 
-        case rcvNAK: {
+        case rcvNAK: {           
             rcvTimes4Bar = 0;
-            if (total.length() == 1 && total[0] == EOT) {
+            // if ((total.length() == 1 && total[0] == EOT)) {
+            if (total.contains(EOT) || rcvData.contains(EOT)) {
                 total.clear();
                 data.rcvEOTFirstContent();
                 pro->setValue(85);

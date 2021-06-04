@@ -81,7 +81,7 @@
 #define ACTION
 #define ADMIN
 // #define LORA
-#define UtilityVersion "SCB111MB Utility"
+#define UtilityVersion "SCB111MB Utility V1.0"
 QT_BEGIN_NAMESPACE
 
 class QModbusClient;

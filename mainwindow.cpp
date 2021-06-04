@@ -352,6 +352,13 @@ MainWindow::MainWindow(QWidget *parent)
     m_meterPollModel->setHeaderData(1, Qt::Horizontal, " ");
     ui->meterPollHeadTableView->setColumnWidth(0, 190);
     ui->meterPollHeadTableView->setColumnWidth(1, 200);
+    QHeaderView *pTableHeaderView = ui->meterPollHeadTableView->horizontalHeader ();
+    if (pTableHeaderView)
+    {
+        pTableHeaderView->setDefaultAlignment (Qt::AlignLeft | Qt::AlignVCenter);
+        pTableHeaderView->setTextElideMode (Qt::ElideRight);
+        pTableHeaderView->setStretchLastSection (true);
+    }
 
     m_meterPollModel->setItem(0, 0, new QStandardItem("Serial Number"));
     m_meterPollModel->setItem(1, 0, new QStandardItem("Addressing Mode"));
