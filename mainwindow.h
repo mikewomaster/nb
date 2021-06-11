@@ -214,6 +214,7 @@ private:
     void eventlogStop();
 
     void closeEvent(QCloseEvent *e);
+    bool meterExist;
 public slots:
     void on_connectButton_clicked();
 

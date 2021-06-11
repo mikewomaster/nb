@@ -279,8 +279,15 @@ void MainWindow::handle_read_ready(QStandardItemModel *tbModel, int col)
             }
             s.remove('\"');
 
-            if (col == 99)
+            if (col == 99) {
+
+                if (s.isEmpty()) {
+                    meterExist = false;
+                    return;
+                }
+
                 tbModel->setHeaderData(1, Qt::Horizontal, s);
+            }
             else
                 tbModel->setItem(col, 1, new QStandardItem(s));
         }
@@ -396,8 +403,8 @@ void MainWindow::handle_read_ready(QLineEdit* le)
 
     if (reply->error() == QModbusDevice::NoError) {
         const QModbusDataUnit unit = reply->result();
-        short entry = unit.value(0);
-        qDebug() << entry;
+        unsigned short entry = unit.value(0);
+
         if (le == ui->nbStatusLineEdit) {
             nbStatusFill(entry, ui->nbStatusLineEdit);
         } else if (le == ui->mqttStatusLineEdit){
@@ -406,6 +413,9 @@ void MainWindow::handle_read_ready(QLineEdit* le)
             cellularStatusFill(entry, ui->regisLineEdit);
         } else if (le == ui->simStatusLineEdit){
             simStausFill(entry, ui->simStatusLineEdit);
+        } else if (le == ui->nbRssiLineEdit) {
+            short entryRssi = unit.value(0);
+            le->setText(QString::number(entryRssi));
         }
         else {
             le->setText(QString::number(entry));

@@ -87,6 +87,7 @@ MainWindow::MainWindow(QWidget *parent)
     , m_login_flag(0)
     , m_login_flag_2(0)
     , m_ymodem(new ymodem())
+    , meterExist(true)
 {
     ui->setupUi(this);
 

@@ -134,8 +134,10 @@ QVector<quint16> MainWindow::meterHeadModbusUnit(QString str1, int entry1, quint
 
 void MainWindow::on_meterApplyPushButton_clicked()
 {
-    if (!meterProfileList.count())
+    if (!meterProfileList.count()) {
         QMessageBox::information(NULL,  "INFO",  "Profile Empty, Please Add Meter Profile Firstly!", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+        return;
+    }
 
     if (!modbusDevice)
         return;

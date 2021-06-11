@@ -208,8 +208,15 @@ void MainWindow::on_meterPollNextPushButton_clicked()
     int meterNumber = ui->meterPollNumLineEdit->text().toInt();
     int times = (meterNumber - 1);
 
-    handle_read(meterModelBaseAddress + (meterPollGap * times), meterEight, &meterPollModelReadReady);
+    handle_read(meterModelBaseAddress + (meterGap * times), meterEight, &meterPollModelReadReady);
     _sleep(3000);
+    if (!meterExist) {
+        meterExist = true;
+        QMessageBox::information(NULL,  "INFO",  + "Meters " + QString::number(meterNumber) + " settings no exists!", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+        ui->meterPollNextPushButton->setEnabled(true);
+        return;
+    }
+
     handle_read(meterPollSN + (meterPollGap * times), meterEight, &meterPollSNHeadReadReady);
     _sleep(3000);
     handle_read(meterPollAdressMode + (meterPollGap * times), &meterPollAddHeadReadReady);
@@ -233,7 +240,7 @@ void MainWindow::on_meterPollNextPushButton_clicked()
 
     // handle_read(meterPollAlarmCode + (meterPollGap * times), &meterPollReadReady);
     // _sleep(2000);
-    QProgressDialog pro;
+    QProgressDialog pro(this);
     pro.setLabelText(tr("Processing... Please wait..."));
     pro.setRange(0, 100);
     pro.setModal(true);

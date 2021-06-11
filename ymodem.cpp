@@ -52,8 +52,11 @@ void ymodem::writeToFile(int len)
     file.setFileName(fileName);
     file.open(QIODevice::Append);
 
-    const char* ch;
-    ch = total.mid(3,len).data();
+    int i = 0;
+    while (total[i] != 0x7B)
+        i ++;
+
+    const char* ch = total.mid(i, len - i).data();
     /*
         QString string;
         string = QString(total.mid(3,len));
@@ -64,6 +67,7 @@ void ymodem::writeToFile(int len)
     */
 
     file.write(ch);
+    file.write("\r\n");
     file.close();
 }
 

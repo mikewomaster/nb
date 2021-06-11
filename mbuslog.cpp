@@ -17,6 +17,8 @@
 
 void MainWindow::parseEventLog(QString fileName)
 {
+    return;
+
     if(modbusDevice->state() == QModbusDevice::UnconnectedState) {
         m_ymodem->port->close();
         m_ymodem->dwnFlagRdy = false;
@@ -288,8 +290,10 @@ void MainWindow::on_dataLogPushButton_clicked()
 {
     datalogStart();
     _sleep(2000);
+    ui->dataLogPushButton->setEnabled(false);
     emit on_ELogChkPushButton_clicked();
     _sleep(500);
+    ui->dataLogPushButton->setEnabled(true);
     datalogStop();
 }
 
