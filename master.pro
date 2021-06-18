@@ -47,7 +47,8 @@ SOURCES += main.cpp\
     meter.cpp \
     metermodelviewcontrol.cpp \
     meterpoll.cpp \
-    meterpolltablemodel.cpp
+    meterpolltablemodel.cpp \
+    meteraction.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -83,7 +84,8 @@ HEADERS  += mainwindow.h \
     meter.h \
     metermodelviewcontrol.h \
     meterpoll.h \
-    meterpolltablemodel.h
+    meterpolltablemodel.h \
+    meteraction.h
 
 FORMS    += mainwindow.ui \
          settingsdialog.ui \
@@ -92,7 +94,8 @@ FORMS    += mainwindow.ui \
     system.ui \
     sensor_edit.ui \
     obis_edit.ui \
-    loginruledialog.ui
+    loginruledialog.ui \
+    meteraction.ui
 
 RESOURCES += \
     master.qrc

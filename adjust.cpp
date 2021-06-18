@@ -269,6 +269,16 @@ void MainWindow::handle_read_ready(QStandardItemModel *tbModel, int col)
         else
         {
             QString s;
+
+            if (col == 3)
+            {
+                if (unit.value(0) == 0xff && unit.value(7) == 0xff)
+                {
+                    tbModel->setItem(col, 1, new QStandardItem(""));
+                    return;
+                }
+            }
+
             for (uint i = 0; i < unit.valueCount(); i++) {
                 if ((unit.value(i) >> 8) == 0x00)
                     break;
@@ -278,6 +288,7 @@ void MainWindow::handle_read_ready(QStandardItemModel *tbModel, int col)
                 s[(2*i) +1] = unit.value(i) & 0x00ff;
             }
             s.remove('\"');
+
 
             if (col == 99) {
 

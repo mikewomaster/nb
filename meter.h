@@ -17,4 +17,5 @@
 #define meterIdBaseAddress (398 - 1)
 #define meterMagnitudeBaseAddress (418 - 1)
 
+#define meterDelete (17 - 1)
 #endif // METER_H

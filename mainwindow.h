@@ -71,6 +71,7 @@
 #include "ymodem.h"
 #include "metermodelviewcontrol.h"
 #include "meterpolltablemodel.h"
+#include "meteraction.h"
 
 // MACRO CRONTROL Area
 // #define TEST_DATA
@@ -92,6 +93,7 @@ class MainWindow;
 class SettingsDialog;
 class logdialog;
 class systemDialog;
+class meterAction;
 }
 
 QT_END_NAMESPACE
@@ -99,6 +101,7 @@ QT_END_NAMESPACE
 class SettingsDialog;
 class logdialog;
 class systemDialog;
+class meterAction;
 class WriteRegisterModel;
 
 #define LoraModbusStartAddr 21
@@ -420,6 +423,9 @@ private slots:
     void sensMensu(QPoint pos);
     void sensEdit();
     void sensDelete();
+    void meterMenu(QPoint pos);
+    void meterEdit();
+    void meterErase();
     void on_obisReload_clicked();
     void on_obisAdd_clicked();
     void obisUpdatReadReady();
@@ -511,6 +517,8 @@ private slots:
 
     void on_meterNumberLineEdit_textChanged(const QString &arg1);
 
+    void on_mubsDeletePushButton_clicked();
+    void meterActionEdit();
 private:
     QModbusReply *lastRequest;
     SettingsDialog *m_settingsDialog;
@@ -528,11 +536,13 @@ private:
     QVector<QString> serialInfoVector;
     QMenu *popMenu;
     QMenu *senpopMenu;
+    QMenu *waterMeterMenu;
     bool sensorFlag;
     sensor_edit* m_sensor_dialog;
     meterModelViewControl *m_meterViewControl;
     meterPollTableModel *m_meterPollModelBody;
     QStandardItemModel *m_meterPollModel;
+    meterAction *meterActionMenu;
  public:
     Ui::MainWindow *ui;
     QModbusClient *modbusDevice;

@@ -5,10 +5,12 @@
 #include <QMessageBox>
 
 #include "ui_mainwindow.h"
+#include "ui_meteraction.h"
 #include "mainwindow.h"
 #include "meter.h"
 #include "commanhelper.h"
 #include "metermodelviewcontrol.h"
+#include "meteraction.h"
 
 static QList<meterProfile> meterProfileList;
 static int meterProfileListIndex;
@@ -354,4 +356,71 @@ void MainWindow::on_meterNumberLineEdit_textChanged(const QString &arg1)
         QMessageBox::information(NULL,  "INFO",  "Maximum 10 Meters supported.", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
         ui->meterNumberLineEdit->setText("1");
     }
+}
+
+void MainWindow::on_mubsDeletePushButton_clicked()
+{
+    handle_write(ui->meterNumberLineEdit, meterDelete);
+    _sleep(2000);
+
+    ui->meterModelLineEdit->clear();
+    ui->meterAddressModelComboBox->setCurrentIndex(0);
+    ui->meterAddressLineEdit->clear();
+    ui->meterAttributeNameLineEdit->clear();
+    ui->meterMagnitudeLineEdit->clear();
+    ui->meterAttributeNameLineEdit->clear();
+
+    on_meterClearPushButton_clicked();
+}
+
+void MainWindow::meterErase()
+{
+    on_meterErasePushButton_clicked();
+}
+
+
+static int meterEditIndex;
+
+void MainWindow::meterActionEdit()
+{
+    int meterNumber = ui->meterNumberLineEdit->text().toInt();
+    int times = (meterNumber - 1);
+
+    Ui::meterAction* meterUi = meterActionMenu->ui;
+    meterProfileList[meterEditIndex].tag = meterUi->meterActionAN->text();
+    meterProfileList[meterEditIndex].id = meterUi->meterActionDI->text().toInt();
+    meterProfileList[meterEditIndex].magnitude = meterUi->meterActionMag->text();
+
+    QVector<quint16> valuesBody = meterHeadModbusUnit(meterProfileList[meterEditIndex].tag, 4, (int) meterProfileList[meterEditIndex].id, meterProfileList[meterEditIndex].magnitude, 4);
+    int addr2 = meterTagBaseAddress + (times * meterGap) + (meterEditIndex * 9);
+    int entry2 = 9;
+    QModbusDataUnit writeUnit2 = QModbusDataUnit(QModbusDataUnit::HoldingRegisters, addr2, entry2);
+    writeUnit2.setValues(valuesBody);
+
+    handle_write(writeUnit2);
+
+    m_meterViewControl->updateData(meterProfileList);
+    for (int i = 0; i < meterProfileList.size(); i++) {
+        if (meterProfileList[i].tag.isEmpty())
+            ui->meterTableView->setRowHidden(i, true);
+    }
+
+    meterActionMenu->close();
+    delete meterActionMenu;
+}
+
+void MainWindow::meterEdit()
+{
+   int row = ui->meterTableView->currentIndex().row();
+   meterEditIndex = row;
+
+   meterActionMenu = new meterAction;
+   meterActionMenu->show();
+
+   Ui::meterAction* meterUi = meterActionMenu->ui;
+   meterActionMenu->ui->meterActionAN->setText(meterProfileList[row].tag);
+   meterActionMenu->ui->meterActionDI->setText(QString::number(meterProfileList[row].id));
+   meterActionMenu->ui->meterActionMag->setText(meterProfileList[row].magnitude);
+
+   connect(meterActionMenu->ui->meterEditPushButton, SIGNAL(clicked()), this, SLOT(meterActionEdit()));
 }

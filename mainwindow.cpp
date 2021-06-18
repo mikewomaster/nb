@@ -941,6 +941,13 @@ void MainWindow::ymodemCancelButtonCliked()
     // on_eventLogEnableRadioButton_clicked();
 }
 
+void MainWindow::meterMenu(QPoint pos)
+{
+    QModelIndex index = ui->meterTableView->indexAt(pos);
+    if (index.isValid()) {
+        waterMeterMenu->exec(QCursor::pos());
+    }
+}
 void MainWindow::meterViewModelInit()
 {
     m_meterViewControl = new meterModelViewControl(this);
@@ -954,6 +961,21 @@ void MainWindow::meterViewModelInit()
     ui->meterTableView->setColumnWidth(0, 160);
     ui->meterTableView->setColumnWidth(1, 130);
     ui->meterTableView->setColumnWidth(2, 130);
+
+    waterMeterMenu = new QMenu(ui->meterTableView);
+
+    QAction *actionUpdateSensInfo = new QAction();
+    actionUpdateSensInfo ->setText(QString("Edit"));
+
+    QAction *deleteMeterAction = new QAction();
+    deleteMeterAction->setText(QString("Erase"));
+
+    waterMeterMenu->addAction(actionUpdateSensInfo);
+    waterMeterMenu->addAction(deleteMeterAction);
+
+    connect(ui->meterTableView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(meterMenu(QPoint)));
+    connect(actionUpdateSensInfo, &QAction::triggered, this, &MainWindow::meterEdit);
+    connect(deleteMeterAction, &QAction::triggered, this, &MainWindow::meterErase);
 }
 
 void MainWindow::meterPollViewModelInit()
