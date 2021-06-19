@@ -272,7 +272,7 @@ void MainWindow::handle_read_ready(QStandardItemModel *tbModel, int col)
 
             if (col == 3)
             {
-                if (unit.value(0) == 0xff && unit.value(7) == 0xff)
+                if (unit.value(0) == 0x00 && unit.value(7) == 0x00)
                 {
                     tbModel->setItem(col, 1, new QStandardItem(""));
                     return;
