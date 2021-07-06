@@ -33,7 +33,7 @@ enum rcvStatus {
 #define ABORT1                  (0x41)  /* 'A' == 0x41, abort by user */
 #define ABORT2                  (0x61)  /* 'a' == 0x61, abort by user */
 
-#define RCVHEADFIRST 5
+#define RCVHEADFIRST 3
 #define SOHLENGTH 128
 #define STXLENGTH 1024
 

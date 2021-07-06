@@ -14,6 +14,7 @@
 
 static QList<meterProfile> meterProfileList;
 static int meterProfileListIndex;
+static bool checkMeterParaFlag = true;
 
 void MainWindow::on_meterCreatePushButton_clicked()
 {
@@ -253,6 +254,11 @@ void MainWindow::meterBodyReadReady()
         }
         s.remove('\"');
 
+        if (s.isEmpty())
+        {
+            checkMeterParaFlag = false;
+            return;
+        }
         // meterProfileList[meterProfileListIndex].tag = s;
         mp.tag = s;
         s.clear();
@@ -315,8 +321,13 @@ void MainWindow::on_meterLoadPushButton_clicked()
 
     for (meterProfileListIndex = 0; meterProfileListIndex < 7; meterProfileListIndex++)
     {
+        if (!checkMeterParaFlag) {
+            checkMeterParaFlag = true;
+            break;
+        }
+
         handle_read(meterTagBaseAddress + (meterGap * times) + meterProfileListIndex * 9, 9, &meterBodyReadReady);
-        _sleep(3000);
+        _sleep(1000);
         pro.setValue(meterProfileListIndex * 16);
     }
     pro.setValue(100);

@@ -62,6 +62,7 @@ void MainWindow::meterPollBaudHeadReadReady()
 
 static int meterPollIndex;
 static QList<meterPoll> meterPollList;
+static bool meterPollFlag = true;
 
 void MainWindow::meterPollReadReady()
 {
@@ -89,6 +90,11 @@ void MainWindow::meterPollReadReady()
                 s[(2*i) +1] = unit.value(i) & 0x00ff;
             }
             s.remove('\"');
+            if (s.isEmpty())
+            {
+                meterPollFlag = false;
+                return;
+            }
 
             QStringList strList = s.split('#');
 
@@ -135,25 +141,25 @@ void MainWindow::on_meterPollPushButton_clicked()
     int times = (meterNumber - 1);
 
     handle_read(meterModelBaseAddress + (meterPollGap * times), meterEight, &meterPollModelReadReady);
-    _sleep(2000);
+    _sleep(1000);
     handle_read(meterPollSN + (meterPollGap * times), meterEight, &meterPollSNHeadReadReady);
-    _sleep(2000);
+    _sleep(1000);
     handle_read(meterPollAdressMode + (meterPollGap * times), &meterPollAddHeadReadReady);
-    _sleep(2000);
+    _sleep(1000);
     handle_read(meterPollPriAddress + (meterPollGap * times), &meterPollPriHeadReadReady);
-    _sleep(2000);
+    _sleep(1000);
     handle_read(meterPollSecAddress + (meterPollGap * times), meterEight, &meterPollSecHeadReadReady);
-    _sleep(2000);
+    _sleep(1000);
     handle_read(meterPollStatus + (meterPollGap * times), &meterPollStatusHeadReadReady);
-    _sleep(2000);
+    _sleep(1000);
     handle_read(meterPollManu + (meterPollGap * times), meterEight, &meterPollManuHeadReadReady);
-    _sleep(2000);
+    _sleep(1000);
     handle_read(meterPollType + (meterPollGap * times), &meterPollTypeHeadReadReady);
-    _sleep(2000);
+    _sleep(1000);
     handle_read(meterPollVersion + (meterPollGap * times), &meterPollVerHeadReadReady);
-    _sleep(2000);
+    _sleep(1000);
     handle_read(meterPollBaudRate + (meterPollGap * times), meterTwo, &meterPollBaudHeadReadReady);
-    _sleep(2000);
+    _sleep(1000);
 
     meterPollList.clear();
 
@@ -168,8 +174,14 @@ void MainWindow::on_meterPollPushButton_clicked()
     pro.setValue(0);
     for (meterPollIndex = 0; meterPollIndex < 10; meterPollIndex++)
     {
+        if (!meterPollFlag)
+        {
+            meterPollFlag = true;
+            break;
+        }
+
         handle_read(meterPollChannel + (meterPollGap * times) + meterTWELVE * meterPollIndex, meterTWELVE, &meterPollReadReady);
-        _sleep(2000);
+        _sleep(1000);
         pro.setValue(meterPollIndex*10);
     }
     pro.setValue(100);

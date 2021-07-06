@@ -4780,7 +4780,7 @@
        <rect>
         <x>440</x>
         <y>0</y>
-        <width>164</width>
+        <width>174</width>
         <height>255</height>
        </rect>
       </property>
@@ -6870,7 +6870,7 @@
        <rect>
         <x>10</x>
         <y>480</y>
-        <width>304</width>
+        <width>311</width>
         <height>41</height>
        </rect>
       </property>
@@ -7434,7 +7434,7 @@
          <x>20</x>
          <y>41</y>
          <width>411</width>
-         <height>141</height>
+         <height>146</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -8385,7 +8385,7 @@
        <rect>
         <x>646</x>
         <y>460</y>
-        <width>331</width>
+        <width>346</width>
         <height>33</height>
        </rect>
       </property>
@@ -8516,7 +8516,7 @@
         <x>80</x>
         <y>40</y>
         <width>316</width>
-        <height>31</height>
+        <height>33</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_25">
@@ -8575,7 +8575,7 @@
       <x>9</x>
       <y>9</y>
       <width>1001</width>
-      <height>68</height>
+      <height>71</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
@@ -8727,7 +8727,7 @@
      <x>0</x>
      <y>0</y>
      <width>1027</width>
-     <height>24</height>
+     <height>23</height>
     </rect>
    </property>
    <property name="font">

@@ -24,10 +24,10 @@
   </property>
   <property name="font">
    <font>
-    <family>Arial Black</family>
-    <pointsize>12</pointsize>
-    <weight>75</weight>
-    <bold>true</bold>
+    <family>Arial</family>
+    <pointsize>10</pointsize>
+    <weight>50</weight>
+    <bold>false</bold>
    </font>
   </property>
   <property name="windowTitle">

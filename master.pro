@@ -1,6 +1,6 @@
 QT += serialbus serialport widgets
 
-TARGET = NBUtility
+TARGET = Utility
 TEMPLATE = app
 CONFIG += c++11
 CONFIG += resources_big

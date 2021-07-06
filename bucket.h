@@ -25,7 +25,7 @@ public:
     void rcvFinContent();
     QString filePath;
     QByteArray TxDataAll;
-    quint8 transTimes;
+    long transTimes;
     int totalSize;
     QByteArray content;
     int index;

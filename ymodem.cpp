@@ -52,6 +52,50 @@ void ymodem::writeToFile(int len)
     file.setFileName(fileName);
     file.open(QIODevice::Append);
 
+    if (fileName.contains("Event"))
+    {
+        /*
+            int i = 0, l = 0;
+            while (total[i] != 0x5B)
+                i++;
+
+            while (total[i+l] != 0x2E)
+                l++;
+
+            const char* ch = total.mid(i, l).data();
+            file.write(ch);
+            file.write("\r\n");
+        */
+
+        for (int j = 0; j < (len/128); j++) {
+            if (total[3+j*128] != 0x5B)
+                continue;
+
+            int length = 0;
+            while (total[3+j*128+length] != 0x2E)
+            {
+                length ++;
+            }
+
+            file.write(total.mid(3+j*128, length).data());
+            file.write("\r\n");
+        }
+
+        file.close();
+
+        /*
+        for (int i = 0; i < 8; i++)
+        {
+            const char *ch = (totalFun + i*128 + 5).data();
+            file.write(ch);
+            file.write("\r\n");
+        }
+        file.close();
+        */
+
+        return;
+    }
+
     int i = 0;
     while (total[i] != 0x7B)
         i ++;
